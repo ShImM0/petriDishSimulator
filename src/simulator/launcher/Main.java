@@ -6,6 +6,7 @@ import javax.swing.UIManager;
 import simulator.control.Controller;
 import simulator.model.Simulator;
 import simulator.view.DishViewer;
+import simulator.view.MainWindow;
 
 public class Main {
 	private static Simulator simulator;
@@ -29,7 +30,7 @@ public class Main {
 		simulator = new Simulator();
 		controller = new Controller(simulator);
 
-		SwingUtilities.invokeAndWait(() -> new DishViewer(controller));
+		SwingUtilities.invokeAndWait(() -> new MainWindow(controller));
 
 	}
 }
