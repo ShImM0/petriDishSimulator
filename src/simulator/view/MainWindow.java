@@ -27,7 +27,9 @@ public class MainWindow extends JFrame {
 		
 		// TODO add DishViewer and other information
 		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
+		setResizable(true);
 		setVisible(true);
 	}
 
