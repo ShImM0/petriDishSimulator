@@ -8,9 +8,19 @@ public class Organism implements OrganismInfo {
 		HEALTHY, HUNGRY, RECOVERING
 	}
 
+	public static final String INVALID_GENETIC_CODE = "Invalid or empty genetic code";
+	public static final String INVALID_POSITION = "Invalid position";
+	public static final String INVALID_SPEED = "Invalid speed";
+	public static final String INVALID_SIZE = "Invalid size";
+	public static final String INVALID_SIGHT = "Invalid sight";
+	public static final String INVALID_STRENGTH = "Invalid strength";
+	
+	
 	private final String id;
+	private final String geneticCode; 
 	private State state;
 	private Vector2D pos;
+	private Vector2D velocity;
 	private final Color color;
 	private long age;
 	private double speed;
@@ -19,6 +29,34 @@ public class Organism implements OrganismInfo {
 	private double strength;
 	private double energy;
 	private boolean alive;
+	
+	public Organism(String geneticCode, Vector2D pos, Color color, double speed, double size, double sight, double strength) {
+		
+		if(geneticCode == null || geneticCode.isBlank()) throw new IllegalArgumentException(INVALID_GENETIC_CODE);
+		if(pos == null) throw new IllegalArgumentException(INVALID_POSITION);
+		if(speed <=0) throw new IllegalArgumentException(INVALID_SPEED);
+		if(size <= 0) throw new IllegalArgumentException(INVALID_SIZE);
+		if(sight <= 0) throw new IllegalArgumentException(INVALID_SIGHT);
+		if(strength <=0) throw new IllegalArgumentException(INVALID_STRENGTH);
+		
+		//this.id; TODO randomize
+		this.geneticCode = geneticCode;
+		this.state = State.HEALTHY;
+		this.pos = pos;
+		//this.velocity TODO with angle and 
+		this.color = color;
+		this.age = 0;
+		this.speed = speed;
+		this.size = size;
+		this.sight = sight;
+		this.strength = strength;
+		// this.energy = TODO randomize
+		this.alive = true;
+	}
+	
+	/*
+	 * OrganismInfo interface
+	 */
 
 	@Override
 	public State getState() {

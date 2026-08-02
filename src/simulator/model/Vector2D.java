@@ -56,6 +56,11 @@ public class Vector2D {
 		} else
 			return new Vector2D(this);
 	}
+	
+	public boolean outOfBounds() {
+		// TODO
+		return false;
+	}
 
 	@Override
 	public String toString() {
@@ -89,5 +94,6 @@ public class Vector2D {
 			return false;
 		return true;
 	}
+	
 
 }
