@@ -8,10 +8,10 @@ public class Organism implements OrganismInfo {
 		HEALTHY, HUNGRY, RECOVERING
 	}
 
-	private String id;
+	private final String id;
 	private State state;
 	private Vector2D pos;
-	private Color color;
+	private final Color color;
 	private long age;
 	private double speed;
 	private double size;

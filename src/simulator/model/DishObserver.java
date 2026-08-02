@@ -1,9 +1,13 @@
 package simulator.model;
 
+import java.util.List;
+
 public interface DishObserver {
-	void onRegister();
+	void onRegister(double time, List<OrganismInfo> organisms);
 
-	void onReset();
+	void onReset(double time, List<OrganismInfo> organisms);
+	
+	void onOrganismAdded(double time, List<OrganismInfo> organisms, OrganismInfo o);
 
-	void onAdvance();
+	void onAdvance(double time, List<OrganismInfo> organisms, double dt);
 }

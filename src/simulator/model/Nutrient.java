@@ -2,6 +2,8 @@ package simulator.model;
 
 public class Nutrient implements Entity {
 	
+	public static final double ENERGY_VALUE = 30.0;
+	
 	private Vector2D pos;
 	private boolean consumed;
 	
@@ -14,17 +16,21 @@ public class Nutrient implements Entity {
 		return pos;
 	}
 	
-	@Override
-	public void update() {
-
-	}
-	
 	boolean isConsumed() {
 		return consumed;
 	}
 	
 	void consume() {
 		consumed = true;
+	}
+
+	/*
+	 * Entity interface 
+	 */
+	
+	@Override
+	public void update(double dt) {
+		
 	}
 
 }
