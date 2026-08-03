@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.security.SecureRandom;
 import java.util.Random;
 
-public class Organism implements OrganismInfo {
+public class Organism implements OrganismInfo, Entity{
 
 	public enum State {
 		HEALTHY, HUNGRY, RECOVERING
@@ -145,6 +145,16 @@ public class Organism implements OrganismInfo {
 	@Override
 	public boolean isAlive() {
 		return this.alive;
+	}
+	
+	/*
+	 * Entity interface
+	 */
+
+	@Override
+	public void update(double dt) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

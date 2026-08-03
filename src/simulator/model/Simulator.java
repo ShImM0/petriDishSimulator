@@ -1,5 +1,6 @@
 package simulator.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Simulator implements Observable<DishObserver> {
@@ -8,9 +9,18 @@ public class Simulator implements Observable<DishObserver> {
 	
 	private List<DishObserver> observers;
 	private Dish dish;
+	private double time;
 	
 	public Simulator() {
-		dish = new Dish(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+		this.dish = new Dish(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+		this.observers = new ArrayList<>();
+		this.time = 0.0;
+	}
+	
+	public Simulator(int width, int height) {
+		this.dish = new Dish(width, height);
+		this.observers = new ArrayList<>();
+		this.time = 0.0;
 	}
 	
 	public void addOrganism(Organism o) {
@@ -21,18 +31,7 @@ public class Simulator implements Observable<DishObserver> {
 		dish.registerNutrient(n);
 	}
 	
-	@Override
-	public void addObserver(DishObserver t) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void removeObserver(DishObserver t) {
-		// TODO Auto-generated method stub
-
-	}
-
+	
 	public void advance() {
 
 	}
@@ -40,5 +39,23 @@ public class Simulator implements Observable<DishObserver> {
 	public void reset() {
 		
 	}
+	
+	/*
+	 * Observable interface
+	 */
+	
+	@Override
+	public void addObserver(DishObserver obs) {
+		if (!observers.contains(obs) && obs != null) {
+			observers.add(obs);
+			obs.onRegister(time, dish.getOrganisms());
+		}
+	}
+
+	@Override
+	public void removeObserver(DishObserver obs) {
+		observers.remove(obs);
+	}
+
 
 }

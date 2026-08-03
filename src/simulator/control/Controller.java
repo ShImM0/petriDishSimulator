@@ -18,7 +18,7 @@ public class Controller {
 	}
 
 	public void reset() {
-		// TODO
+		this.sim.reset();
 	}
 
 	public void advance() {

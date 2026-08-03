@@ -1,5 +1,7 @@
 package simulator.model;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Dish implements DishInfo{
@@ -15,12 +17,16 @@ public class Dish implements DishInfo{
 		this.height = height;
 	}
 	
-	void registerOrganism(Organism o) {
+	public void registerOrganism(Organism o) {
 		organisms.add(o);
 	}
 	
-	void registerNutrient(Nutrient n) {
+	public void registerNutrient(Nutrient n) {
 		nutrients.add(n);
+	}
+	
+	public List<OrganismInfo> getOrganisms() {
+		return Collections.unmodifiableList(new ArrayList<OrganismInfo>(organisms));
 	}
 	
 	/*
