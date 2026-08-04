@@ -25,8 +25,6 @@ public class MainWindow extends JFrame {
 
 		this.setMinimumSize(new Dimension(800, 600));
 
-		// TODO add DishViewer and other information
-
 		JPanel headerPanel = new HeaderPanel(ctrl);
 		mainPanel.add(headerPanel,BorderLayout.PAGE_START); 
 		

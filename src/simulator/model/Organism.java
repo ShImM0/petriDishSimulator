@@ -31,14 +31,14 @@ public class Organism implements OrganismInfo, Entity {
 	private Vector2D velocity;
 	private final Color color;
 	private long age;
+	private int size;
 	private double speed;
-	private double size;
 	private double sight;
 	private double strength;
 	private double energy;
 	private boolean alive;
 
-	public Organism(String geneticCode, Vector2D pos, Color color, double speed, double size, double sight,
+	public Organism(String geneticCode, Vector2D pos, Color color, int size, double speed, double sight,
 			double strength) {
 
 		if (geneticCode == null || geneticCode.isBlank())
@@ -117,15 +117,15 @@ public class Organism implements OrganismInfo, Entity {
 	public long getAge() {
 		return this.age;
 	}
+	
+	@Override
+	public int getSize() {
+		return this.size;
+	}
 
 	@Override
 	public double getSpeed() {
 		return this.speed;
-	}
-
-	@Override
-	public double getSize() {
-		return this.size;
 	}
 
 	@Override

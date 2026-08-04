@@ -2,6 +2,7 @@ package simulator.control;
 
 import java.util.Timer;
 
+import simulator.model.DishInfo;
 import simulator.model.DishObserver;
 import simulator.model.OrganismInfo;
 import simulator.model.Simulator;
@@ -38,5 +39,9 @@ public class Controller {
 
 	public void removeObserver(DishObserver obs) {
 		this.sim.removeObserver(obs);
+	}
+	
+	public DishInfo getDishInfo() {
+		return sim.getDishInfo();
 	}
 }

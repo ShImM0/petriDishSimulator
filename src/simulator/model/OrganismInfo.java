@@ -18,10 +18,10 @@ public interface OrganismInfo {
 	public Color getColor();
 
 	public long getAge();
+	
+	public int getSize();
 
 	public double getSpeed();
-
-	public double getSize();
 
 	public double getSight();
 
