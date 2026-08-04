@@ -2,6 +2,7 @@ package simulator.view;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -31,13 +32,13 @@ public class HeaderPanel extends JPanel {
 		// Run button
 		this.runStopButton = new JButton();
 		this.runStopButton.setToolTipText("Run simulation");
-		this.runStopButton.setIcon(loadIcon("run.png"));
+		this.runStopButton.setIcon(loadIconScaledDefault("run.png"));
 		this.runStopButton.addActionListener((e) -> runStop());
 		
 		// Reset button
 		this.resetButton = new JButton();
 		this.resetButton.setToolTipText("Reset simulation");
-		this.resetButton.setIcon(loadIcon("reset.png"));
+		this.resetButton.setIcon(loadIconScaledDefault("reset.png"));
 		this.resetButton.addActionListener((e) -> reset());
 		
 		buttons.add(runStopButton);
@@ -47,19 +48,29 @@ public class HeaderPanel extends JPanel {
 		this.setVisible(true);
 	}
 	
-	private ImageIcon loadIcon(String name) {
-		return new ImageIcon(ICONS.class.getResource(name));
+	private ImageIcon loadIconScaledDefault(String name) {
+		return loadIconScaled(name, 25,25);
+	}
+	private ImageIcon loadIconScaled(String name, int width, int height) {
+		try {
+			ImageIcon icon = new ImageIcon(ICONS.class.getResource(name));
+			return new ImageIcon(icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH));
+		}
+		catch (NullPointerException npe) {
+			npe.printStackTrace(); // TODO;
+		}
+		return null;
 	}
 	
 	private void runStop() {
 		stopped = !stopped;
 		if(stopped) {
 			this.runStopButton.setToolTipText("Run simulation");
-			this.runStopButton.setIcon(loadIcon("run.png"));
+			this.runStopButton.setIcon(loadIconScaledDefault("run.png"));
 		}
 		else {
 			this.runStopButton.setToolTipText("Pause simulation");
-			this.runStopButton.setIcon(loadIcon("pause.png"));
+			this.runStopButton.setIcon(loadIconScaledDefault("pause.png"));
 			try {
 			double dt = Double.parseDouble(deltaTimeField.getText());
 			if (dt <= 0) {
