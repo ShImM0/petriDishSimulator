@@ -17,8 +17,8 @@ public class Controller {
 		// TODO
 	}
 
-	public void reset() {
-		this.sim.reset();
+	public void reset(int width, int height) {
+		this.sim.reset(width, height);
 	}
 
 	public void advance() {
