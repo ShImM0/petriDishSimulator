@@ -1,6 +1,7 @@
 package simulator.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Simulator implements Observable<DishObserver> {
@@ -34,11 +35,35 @@ public class Simulator implements Observable<DishObserver> {
 	
 	public void advance() {
 
+		//TODO
+		//notifyOnAdvance();
 	}
 	
-	public void reset() {
+	private void notifyOnAdvance(double dt) {
+		List<OrganismInfo> organisms = this.dish.getOrganisms();
+		
+		for(DishObserver o: this.observers) {
+			o.onAdvance(dt, organisms, dt);
+		}
+	}
+	
+	public void reset(int width, int height) {
+		// TODO
 		
 	}
+	
+	public DishInfo getDishInfo() {
+		return this.dish;
+	}
+	
+	public List<OrganismInfo> getOrganisms(){
+		return Collections.unmodifiableList(dish.getOrganisms());
+	}
+	
+	public double getTime() {
+		return this.time;
+	}
+	
 	
 	/*
 	 * Observable interface
@@ -56,6 +81,7 @@ public class Simulator implements Observable<DishObserver> {
 	public void removeObserver(DishObserver obs) {
 		observers.remove(obs);
 	}
+	
 
 
 }
