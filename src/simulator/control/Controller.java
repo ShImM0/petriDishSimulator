@@ -21,8 +21,8 @@ public class Controller {
 		this.sim.reset(width, height);
 	}
 
-	public void advance() {
-		this.sim.advance();
+	public void advance(double dt) {
+		this.sim.advance(dt);
 	}
 
 	public void addObserver(DishObserver obs) {

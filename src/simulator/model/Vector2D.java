@@ -56,7 +56,7 @@ public class Vector2D {
 		} else
 			return new Vector2D(this);
 	}
-	
+
 	public boolean outOfBounds() {
 		// TODO
 		return false;
@@ -94,6 +94,5 @@ public class Vector2D {
 			return false;
 		return true;
 	}
-	
 
 }

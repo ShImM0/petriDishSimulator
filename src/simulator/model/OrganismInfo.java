@@ -8,11 +8,11 @@ public interface OrganismInfo {
 	public State getState();
 
 	public Vector2D getPosition();
-	
+
 	public Vector2D getVelocity();
 
 	public String getId();
-	
+
 	public String getGeneticCode();
 
 	public Color getColor();

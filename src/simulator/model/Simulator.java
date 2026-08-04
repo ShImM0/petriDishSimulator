@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class Simulator implements Observable<DishObserver> {
+	public static final String INVALID_SIMULATOR_WIDTH = "Invalid simulator width: %";
+	public static final String INVALID_SIMULATOR_HEIGHT = "Invalid simulator height: %";
+
 	public static final int DEFAULT_WIDTH = 800;
 	public static final int DEFAULT_HEIGHT = 600;
 
@@ -19,6 +22,11 @@ public class Simulator implements Observable<DishObserver> {
 	}
 
 	public Simulator(int width, int height) {
+		if (width <= 0)
+			throw new IllegalArgumentException(INVALID_SIMULATOR_WIDTH.formatted(width));
+		if (height <= 0)
+			throw new IllegalArgumentException(INVALID_SIMULATOR_HEIGHT.formatted(height));
+
 		this.dish = new Dish(width, height);
 		this.observers = new ArrayList<>();
 		this.time = 0.0;
@@ -32,25 +40,30 @@ public class Simulator implements Observable<DishObserver> {
 		dish.registerNutrient(n);
 	}
 
-	public void advance() {
+	public void advance(double dt) {
 
 		// TODO
-		// notifyOnAdvance();
+		notifyOnAdvance(dt);
 	}
 
 	private void notifyOnAdvance(double dt) {
 		List<OrganismInfo> organisms = this.dish.getOrganisms();
 
 		for (DishObserver o : this.observers) {
-			o.onAdvance(dt, dish, organisms, dt);
+			o.onAdvance(time, dish, dt);
 		}
 	}
 
 	public void reset(int width, int height) {
+		if (width <= 0)
+			throw new IllegalArgumentException(INVALID_SIMULATOR_WIDTH.formatted(width));
+		if (height <= 0)
+			throw new IllegalArgumentException(INVALID_SIMULATOR_HEIGHT.formatted(height));
+
 		this.dish = new Dish(width, height);
 		this.time = 0.0;
-		for(DishObserver o: this.observers) {
-			o.onReset(time, dish, new ArrayList<>());
+		for (DishObserver o : this.observers) {
+			o.onReset(time, dish);
 		}
 
 	}
@@ -75,7 +88,7 @@ public class Simulator implements Observable<DishObserver> {
 	public void addObserver(DishObserver obs) {
 		if (!observers.contains(obs) && obs != null) {
 			observers.add(obs);
-			obs.onRegister(time, dish, dish.getOrganisms());
+			obs.onRegister(time, dish);
 		}
 	}
 
