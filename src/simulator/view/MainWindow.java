@@ -32,13 +32,14 @@ public class MainWindow extends JFrame {
 		
 		JPanel contentPanel = new JPanel();
 		JPanel environmentPanel = new EnvironmentPanel(ctrl);
+		JPanel infoPanel = new InformationPanel(ctrl);
 		contentPanel.add(environmentPanel, BorderLayout.CENTER);
+		contentPanel.add(infoPanel, BorderLayout.EAST);
 		
 		mainPanel.add(contentPanel, BorderLayout.CENTER);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
-		//setResizable(true);
 		setVisible(true);
 	}
 

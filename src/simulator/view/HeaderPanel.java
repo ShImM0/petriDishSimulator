@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
 
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -29,22 +30,24 @@ public class HeaderPanel extends JPanel {
 	}
 
 	private void initGUI() {
+		this.setPreferredSize(new Dimension(800,50));
 		setLayout(new BorderLayout());
 		setBackground(Color.DARK_GRAY);
 
 		JPanel left = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JPanel titlePanel = new JPanel();
+		titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.X_AXIS));
+		
 		JLabel title = new JLabel("Petri Dish Simulator");
 		titlePanel.add(title);
 		left.add(titlePanel);
 
 		JPanel right = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		JPanel time = new JPanel(new BorderLayout());
+		JPanel time = new JPanel(new FlowLayout());
 
-		time.add(new JLabel("Delta-time:"), BorderLayout.WEST);
+		time.add(new JLabel("Delta-time:"));
 		this.deltaTimeField = new JTextField();
 		this.deltaTimeField.setPreferredSize(new Dimension(80, 30));
-		this.deltaTimeField.setMaximumSize(new Dimension(100, 30));
 		this.deltaTimeField.setText(String.valueOf(0.03));
 
 		time.add(deltaTimeField);
