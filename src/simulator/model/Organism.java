@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.security.SecureRandom;
 import java.util.Random;
 
+import simulator.misc.Utils;
+
 public class Organism implements OrganismInfo, Entity {
 
 	public enum State {
@@ -20,7 +22,6 @@ public class Organism implements OrganismInfo, Entity {
 	private static final int ID_LENGTH = 6;
 
 	private static final String ALPHANUMERIC_CHARACTERS_ID = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-	private static final Random Rand = new Random();
 	private static final SecureRandom SecRand = new SecureRandom();
 
 	private final String id;
@@ -57,7 +58,7 @@ public class Organism implements OrganismInfo, Entity {
 		this.geneticCode = geneticCode;
 		this.state = State.HEALTHY;
 		this.pos = pos;
-		double angle = Rand.nextDouble() * Math.PI * 2; // Math.PI * 2 is 360º
+		double angle = Utils.Rand.nextDouble() * Math.PI * 2; // Math.PI * 2 is 360º
 		this.velocity = new Vector2D(Math.cos(angle), Math.sin(angle));
 		this.color = color;
 		this.age = 0;
@@ -65,7 +66,7 @@ public class Organism implements OrganismInfo, Entity {
 		this.size = size;
 		this.sight = sight;
 		this.strength = strength;
-		this.energy = 50.0 + Rand.nextDouble() * 50;
+		this.energy = 50.0 + Utils.Rand.nextDouble() * 50;
 		this.alive = true;
 	}
 

@@ -1,11 +1,18 @@
 package simulator.control;
 
+import java.util.Timer;
+
 import simulator.model.DishObserver;
+import simulator.model.OrganismInfo;
 import simulator.model.Simulator;
 
 public class Controller {
 	final static String CONTROLLER_NULL_SIMULATOR = "Simulator cannot be null in Controller constructor";
+	
 	private Simulator sim;
+	private Timer timer;
+	
+	private boolean running;
 
 	public Controller(Simulator sim) {
 		if (sim == null)

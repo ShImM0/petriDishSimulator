@@ -104,6 +104,7 @@ public class HeaderPanel extends JPanel {
 				}
 				this.runSimulation(dt);
 			} catch (Exception e) {
+				// TODO
 				e.printStackTrace();
 			}
 		}

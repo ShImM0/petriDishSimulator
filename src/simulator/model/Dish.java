@@ -38,6 +38,10 @@ public class Dish implements DishInfo {
 		return Collections.unmodifiableList(new ArrayList<OrganismInfo>(organisms));
 	}
 	
+	public List<Nutrient> getNutrients(){
+		return Collections.unmodifiableList(nutrients);
+	}
+	
 	public void advance(double dt) {
 		for(Organism o: organisms) {
 			o.update(dt);

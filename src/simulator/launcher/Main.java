@@ -4,6 +4,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import simulator.control.Controller;
+import simulator.misc.Utils;
 import simulator.model.Simulator;
 import simulator.view.MainWindow;
 
@@ -20,6 +21,7 @@ public class Main {
 	}
 
 	private static void startGUIMode() throws Exception {
+		Utils.Rand.setSeed(2147483617l);
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {

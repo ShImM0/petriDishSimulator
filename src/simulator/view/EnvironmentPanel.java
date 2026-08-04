@@ -1,5 +1,7 @@
 package simulator.view;
 
+import java.awt.Dimension;
+
 import javax.swing.JPanel;
 
 import simulator.control.Controller;
@@ -9,15 +11,17 @@ import simulator.model.OrganismInfo;
 
 public class EnvironmentPanel extends JPanel implements DishObserver {
 	
+	private Controller ctrl;
 	private DishViewer dishViewer;
 	
 	public EnvironmentPanel(Controller ctrl) {
+		this.ctrl = ctrl;
 		initGUI();
 		ctrl.addObserver((DishObserver) this);
 	}
 
 	private void initGUI() {
-		
+		//this.setPreferredSize(new Dimension(320, 550));
 	}
 	
 	@Override

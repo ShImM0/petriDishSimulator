@@ -1,5 +1,8 @@
 package simulator.view;
 
+import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JPanel;
 
 import simulator.control.Controller;
@@ -10,6 +13,7 @@ import simulator.model.OrganismInfo;
 public class InformationPanel extends JPanel implements DishObserver {
 
 	private Controller ctrl;
+	
 	private OrganismInfo organism;
 	
 	public InformationPanel(Controller ctrl) {
@@ -19,7 +23,8 @@ public class InformationPanel extends JPanel implements DishObserver {
 	}
 	
 	private void initGUI() {
-		// TODO
+		//this.setPreferredSize(new Dimension(320, 550));
+		this.setBackground(Color.BLACK);
 	}
 
 	@Override

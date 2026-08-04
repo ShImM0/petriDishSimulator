@@ -39,6 +39,7 @@ public class MainWindow extends JFrame {
 		mainPanel.add(contentPanel, BorderLayout.CENTER);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
 	}
