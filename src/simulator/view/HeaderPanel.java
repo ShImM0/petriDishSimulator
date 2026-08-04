@@ -1,6 +1,8 @@
 package simulator.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
 
@@ -14,81 +16,101 @@ import icons.ICONS;
 import simulator.control.Controller;
 
 public class HeaderPanel extends JPanel {
-	
+
 	private Controller ctrl;
 	private JButton runStopButton, resetButton;
 	private JTextField deltaTimeField;
 	private boolean stopped;
-	
+
 	public HeaderPanel(Controller ctrl) {
 		this.ctrl = ctrl;
 		stopped = true;
 		initGUI();
 	}
-	
+
 	private void initGUI() {
+		setLayout(new BorderLayout());
 		setBackground(Color.DARK_GRAY);
+
+		JPanel left = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JPanel titlePanel = new JPanel();
+		JLabel title = new JLabel("Petri Dish Simulator");
+		titlePanel.add(title);
+		left.add(titlePanel);
+
+		JPanel right = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		JPanel time = new JPanel(new BorderLayout());
+
+		time.add(new JLabel("Delta-time:"), BorderLayout.WEST);
+		this.deltaTimeField = new JTextField();
+		this.deltaTimeField.setPreferredSize(new Dimension(80, 30));
+		this.deltaTimeField.setMaximumSize(new Dimension(100, 30));
+		this.deltaTimeField.setText(String.valueOf(0.03));
+
+		time.add(deltaTimeField);
+		right.add(time);
+
 		JPanel buttons = new JPanel(new FlowLayout());
 		// Run button
 		this.runStopButton = new JButton();
 		this.runStopButton.setToolTipText("Run simulation");
 		this.runStopButton.setIcon(loadIconScaledDefault("run.png"));
 		this.runStopButton.addActionListener((e) -> runStop());
-		
+
 		// Reset button
 		this.resetButton = new JButton();
 		this.resetButton.setToolTipText("Reset simulation");
 		this.resetButton.setIcon(loadIconScaledDefault("reset.png"));
 		this.resetButton.addActionListener((e) -> reset());
-		
+
 		buttons.add(runStopButton);
 		buttons.add(resetButton);
-		
-		this.add(buttons);
+
+		right.add(buttons);
+		this.add(left, BorderLayout.WEST);
+		this.add(right, BorderLayout.EAST);
 		this.setVisible(true);
 	}
-	
+
 	private ImageIcon loadIconScaledDefault(String name) {
-		return loadIconScaled(name, 25,25);
+		return loadIconScaled(name, 25, 25);
 	}
+
 	private ImageIcon loadIconScaled(String name, int width, int height) {
 		try {
 			ImageIcon icon = new ImageIcon(ICONS.class.getResource(name));
 			return new ImageIcon(icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH));
-		}
-		catch (NullPointerException npe) {
+		} catch (NullPointerException npe) {
 			npe.printStackTrace(); // TODO;
 		}
 		return null;
 	}
-	
+
 	private void runStop() {
 		stopped = !stopped;
-		if(stopped) {
+		if (stopped) {
 			this.runStopButton.setToolTipText("Run simulation");
 			this.runStopButton.setIcon(loadIconScaledDefault("run.png"));
-		}
-		else {
+		} else {
 			this.runStopButton.setToolTipText("Pause simulation");
 			this.runStopButton.setIcon(loadIconScaledDefault("pause.png"));
 			try {
-			double dt = Double.parseDouble(deltaTimeField.getText());
-			if (dt <= 0) {
-				throw new IllegalArgumentException("Invalid Negative value");
-			}
-			this.runSimulation(dt);
-			}
-			catch(Exception e) {
+				double dt = Double.parseDouble(deltaTimeField.getText());
+				if (dt <= 0) {
+					throw new IllegalArgumentException("Invalid Negative value");
+				}
+				this.runSimulation(dt);
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 	}
-	
+
 	private void runSimulation(double dt) {
 		this.ctrl.advance(dt);
 	}
-	
+
 	private void reset() {
-		this.ctrl.reset(WIDTH, HEIGHT); // TODO
+		this.ctrl.reset();
 	}
 }

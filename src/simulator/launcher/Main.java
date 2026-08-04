@@ -5,7 +5,6 @@ import javax.swing.UIManager;
 
 import simulator.control.Controller;
 import simulator.model.Simulator;
-import simulator.view.DishViewer;
 import simulator.view.MainWindow;
 
 public class Main {
