@@ -1,5 +1,7 @@
 package simulator.view;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JPanel;
@@ -21,7 +23,9 @@ public class EnvironmentPanel extends JPanel implements DishObserver {
 	}
 
 	private void initGUI() {
-		//this.setPreferredSize(new Dimension(320, 550));
+		this.setLayout(new BorderLayout());
+		dishViewer = new DishViewer(ctrl);
+		this.setBackground(Color.blue);
 	}
 	
 	@Override

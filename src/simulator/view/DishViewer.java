@@ -1,5 +1,6 @@
 package simulator.view;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.List;
@@ -19,8 +20,8 @@ public class DishViewer extends AbstractDishViewer implements DishObserver{
 	private List<Nutrient> nutrients;
 
 	public DishViewer(Controller ctrl) {
-		ctrl.addObserver((DishObserver) this);
 		initGUI();
+		ctrl.addObserver((DishObserver) this);
 	}
 
 	private void initGUI() {
@@ -28,19 +29,24 @@ public class DishViewer extends AbstractDishViewer implements DishObserver{
 	}
 
 	@Override
-	public void update() {
+	public void update(List<OrganismInfo> organisms, List<Nutrient> nutrients) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void reset() {
+	public void reset(DishInfo dish, List<OrganismInfo> organisms, List<Nutrient> nutrients) {
 		// TODO Auto-generated method stub
 
 	}
 
 	public void paintComponent(Graphics g) {
 		Graphics2D gr = (Graphics2D) g;
+		
+	}
+	
+	private void drawOrganisms(Graphics2D g, List<OrganismInfo> organisms, double time) {
+		g.setColor(Color.LIGHT_GRAY);
 	}
 
 	/*
