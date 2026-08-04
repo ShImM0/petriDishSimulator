@@ -154,7 +154,8 @@ public class Organism implements OrganismInfo, Entity {
 	@Override
 	public void update(double dt) {
 		// TODO Auto-generated method stub
-
+		if (this.energy <= 0)
+			alive = false;
 	}
 
 }

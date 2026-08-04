@@ -23,13 +23,22 @@ public class MainWindow extends JFrame {
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		setContentPane(mainPanel);
 
-		this.setMinimumSize(new Dimension(800, 600)); // TODO
+		this.setMinimumSize(new Dimension(800, 600));
 
 		// TODO add DishViewer and other information
 
+		JPanel headerPanel = new HeaderPanel(ctrl);
+		mainPanel.add(headerPanel,BorderLayout.PAGE_START); 
+		
+		JPanel contentPanel = new JPanel();
+		JPanel environmentPanel = new EnvironmentPanel(ctrl);
+		contentPanel.add(environmentPanel, BorderLayout.CENTER);
+		
+		mainPanel.add(contentPanel, BorderLayout.CENTER);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
-		setResizable(true);
+		//setResizable(true);
 		setVisible(true);
 	}
 

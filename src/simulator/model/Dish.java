@@ -37,6 +37,12 @@ public class Dish implements DishInfo {
 	public List<OrganismInfo> getOrganisms() {
 		return Collections.unmodifiableList(new ArrayList<OrganismInfo>(organisms));
 	}
+	
+	public void advance(double dt) {
+		for(Organism o: organisms) {
+			o.update(dt);
+		}
+	}
 
 	/*
 	 * DishInfo interface

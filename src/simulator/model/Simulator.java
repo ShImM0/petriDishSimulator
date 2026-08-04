@@ -41,14 +41,8 @@ public class Simulator implements Observable<DishObserver> {
 	}
 
 	public void advance(double dt) {
-
-		// TODO
-		notifyOnAdvance(dt);
-	}
-
-	private void notifyOnAdvance(double dt) {
-		List<OrganismInfo> organisms = this.dish.getOrganisms();
-
+		this.time += dt;
+		dish.advance(dt);
 		for (DishObserver o : this.observers) {
 			o.onAdvance(time, dish, dt);
 		}
@@ -61,6 +55,7 @@ public class Simulator implements Observable<DishObserver> {
 			throw new IllegalArgumentException(INVALID_SIMULATOR_HEIGHT.formatted(height));
 
 		this.dish = new Dish(width, height);
+		// TODO
 		this.time = 0.0;
 		for (DishObserver o : this.observers) {
 			o.onReset(time, dish);
