@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.util.List;
 
 import simulator.control.Controller;
+import simulator.model.DishObserver;
 import simulator.model.Nutrient;
 import simulator.model.OrganismInfo;
 
@@ -16,6 +17,7 @@ public class DishViewer extends AbstractDishViewer {
 	private List<Nutrient> nutrients;
 
 	public DishViewer(Controller ctrl) {
+		ctrl.addObserver((DishObserver)this);
 		initGUI();
 	}
 

@@ -15,6 +15,7 @@ public class InformationPanel extends JPanel implements DishObserver {
 	public InformationPanel(Controller ctrl) {
 		this.ctrl = ctrl;
 		initGUI();
+		ctrl.addObserver((DishObserver) this);
 	}
 	
 	private void initGUI() {

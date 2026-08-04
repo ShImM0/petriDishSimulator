@@ -13,6 +13,7 @@ public class EnvironmentPanel extends JPanel implements DishObserver {
 	
 	public EnvironmentPanel(Controller ctrl) {
 		initGUI();
+		ctrl.addObserver((DishObserver) this);
 	}
 
 	private void initGUI() {
