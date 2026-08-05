@@ -21,7 +21,9 @@ public class Organism implements OrganismInfo, Entity {
 
 	private static final String ALPHANUMERIC_CHARACTERS_ID = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 	private static final SecureRandom SecRand = new SecureRandom();
-
+	
+	private static final double PIXELS_PER_SPEED_UNIT = 25.0;
+	
 	private static final int ID_LENGTH = 6;
 
 	public static final double MIN_SPEED = 0.5;
@@ -166,17 +168,11 @@ public class Organism implements OrganismInfo, Entity {
 	 * Entity interface
 	 */
 
-	/*
-	 * @Override public void update(double dt) { // TODO Auto-generated method stub
-	 * if (this.energy <= 0) alive = false; }
-	 */
-
 	@Override
 	public void update(double dt) {
 		if (!alive)
 			return;
 		age += dt;
-		moveNormally(dt, 500, 500);
 		energy -= speed * dt * 0.5;
 		if (energy <= 0) {
 			alive = false;
@@ -195,9 +191,7 @@ public class Organism implements OrganismInfo, Entity {
 		}
 	}
 
-	private static final double PIXELS_PER_SPEED_UNIT = 25.0;
-
-	private void moveNormally(double dt, double width, double height) {
+	void moveWithin(double dt, double width, double height) {
 		/*if (Utils.Rand.nextDouble() < 0.02) {
 			double angle = (Utils.Rand.nextDouble() - 0.5) * (Math.PI / 4.0); // ±22.5°
 

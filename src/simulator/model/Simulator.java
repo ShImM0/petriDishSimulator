@@ -8,8 +8,8 @@ public class Simulator implements Observable<DishObserver> {
 	public static final String INVALID_SIMULATOR_WIDTH = "Invalid simulator width: %";
 	public static final String INVALID_SIMULATOR_HEIGHT = "Invalid simulator height: %";
 
-	public static final int DEFAULT_WIDTH = 800;
-	public static final int DEFAULT_HEIGHT = 600;
+	public static final int DEFAULT_WIDTH = 500;
+	public static final int DEFAULT_HEIGHT = 500;
 
 	private List<DishObserver> observers;
 	private Dish dish;

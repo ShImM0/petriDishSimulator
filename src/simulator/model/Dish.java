@@ -11,7 +11,7 @@ public class Dish implements DishInfo {
 	public static final String INVALID_DISH_WIDTH = "Invalid dish width: %";
 	public static final String INVALID_DISH_HEIGHT = "Invalid dish height: %";
 
-	private static final int INITIAL_ORGANISMS = 20;
+	private static final int INITIAL_ORGANISMS = 100;
 	private static final int INITIAL_NUTRIENTS = 30;
 	
 	private int width;
@@ -81,6 +81,7 @@ public class Dish implements DishInfo {
 	public void advance(double dt) {
 		for(Organism o: organisms) {
 			o.update(dt);
+			o.moveWithin(dt, width, height);
 		}
 	}
 

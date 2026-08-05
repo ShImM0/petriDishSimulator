@@ -35,7 +35,7 @@ public class MainWindow extends JFrame {
 		JPanel environmentPanel = new EnvironmentPanel(ctrl);
 		JPanel infoPanel = new InformationPanel(ctrl);
 		
-		infoPanel.setPreferredSize(new Dimension(320, 10));
+		infoPanel.setPreferredSize(new Dimension(250, 500));
 		
 		contentPanel.add(environmentPanel, BorderLayout.CENTER);
 		contentPanel.add(infoPanel, BorderLayout.EAST);
