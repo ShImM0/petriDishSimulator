@@ -1,7 +1,8 @@
 package simulator.control;
 
 import java.util.List;
-import java.util.Timer;
+
+import javax.swing.Timer;
 
 import simulator.model.DishInfo;
 import simulator.model.DishObserver;
@@ -12,6 +13,8 @@ import simulator.model.Simulator;
 public class Controller {
 	final static String CONTROLLER_NULL_SIMULATOR = "Simulator cannot be null in Controller constructor";
 	
+	private static final int TICK_MS = 30;
+	
 	private Simulator sim;
 	private Timer timer;
 	
@@ -21,13 +24,31 @@ public class Controller {
 		if (sim == null)
 			throw new IllegalArgumentException(CONTROLLER_NULL_SIMULATOR);
 		this.sim = sim;
+		running = false;
 	}
 
-	public void run() {
-		// TODO
+	public void run(double dt) {
+		if (timer != null) {
+			timer.stop();
+		}
+		timer = new Timer(TICK_MS, e -> advance(dt));
+		timer.start();
+		running = true;
+	}
+	
+	public void pause() {
+		if (timer != null) {
+			timer.stop();
+		}
+		running = false;
 	}
 
+	public boolean isRunning() {
+		return running;
+	}
+	
 	public void reset() {
+		pause();
 		this.sim.reset();
 	}
 

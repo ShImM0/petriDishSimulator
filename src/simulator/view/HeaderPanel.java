@@ -94,6 +94,7 @@ public class HeaderPanel extends JPanel {
 		if (stopped) {
 			this.runStopButton.setToolTipText("Run simulation");
 			this.runStopButton.setIcon(loadIconScaledDefault("run.png"));
+			ctrl.pause();
 		} else {
 			this.runStopButton.setToolTipText("Pause simulation");
 			this.runStopButton.setIcon(loadIconScaledDefault("pause.png"));
@@ -102,7 +103,7 @@ public class HeaderPanel extends JPanel {
 				if (dt <= 0) {
 					throw new IllegalArgumentException("Invalid Negative value");
 				}
-				this.runSimulation(dt);
+				ctrl.run(dt);
 			} catch (Exception e) {
 				// TODO
 				e.printStackTrace();
@@ -110,9 +111,6 @@ public class HeaderPanel extends JPanel {
 		}
 	}
 
-	private void runSimulation(double dt) {
-		this.ctrl.advance(dt);
-	}
 
 	private void reset() {
 		this.ctrl.reset();
