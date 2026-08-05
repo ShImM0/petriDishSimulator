@@ -90,7 +90,7 @@ public class Organism implements OrganismInfo, Entity {
 	}
 
 	static String randomGeneticCode() {
-		return randomId(7); // TODO
+		return randomId(7); 
 	}
 
 	/*
@@ -176,7 +176,7 @@ public class Organism implements OrganismInfo, Entity {
 		if (!alive)
 			return;
 		age += dt;
-		moveNormally(dt);
+		moveNormally(dt, 500, 500);
 		energy -= speed * dt * 0.5;
 		if (energy <= 0) {
 			alive = false;
@@ -195,8 +195,43 @@ public class Organism implements OrganismInfo, Entity {
 		}
 	}
 
-	private void moveNormally(double dt) {
-		
-	}
+	private static final double PIXELS_PER_SPEED_UNIT = 25.0;
 
+	private void moveNormally(double dt, double width, double height) {
+		/*if (Utils.Rand.nextDouble() < 0.02) {
+			double angle = (Utils.Rand.nextDouble() - 0.5) * (Math.PI / 4.0); // ±22.5°
+
+			double cos = Math.cos(angle);
+			double sin = Math.sin(angle);
+
+			velocity = new Vector2D(velocity.getX() * cos - velocity.getY() * sin,
+					velocity.getX() * sin + velocity.getY() * cos);
+		}*/
+
+		double pxPerTick = speed * PIXELS_PER_SPEED_UNIT * dt;
+		double newX = pos.getX() + velocity.getX() * pxPerTick;
+		double newY = pos.getY() + velocity.getY() * pxPerTick;
+
+		double vx = velocity.getX();
+		double vy = velocity.getY();
+
+		// Bounce off the dish walls instead of drifting out of view.
+		if (newX - size < 0) {
+			newX = size;
+			vx = Math.abs(vx);
+		} else if (newX + size > width) {
+			newX = width - size;
+			vx = -Math.abs(vx);
+		}
+		if (newY - size < 0) {
+			newY = size;
+			vy = Math.abs(vy);
+		} else if (newY + size > height) {
+			newY = height - size;
+			vy = -Math.abs(vy);
+		}
+
+		velocity = new Vector2D(vx, vy);
+		pos = new Vector2D(newX, newY);
+	}
 }
