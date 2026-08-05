@@ -74,6 +74,10 @@ public class Simulator implements Observable<DishObserver> {
 	public List<OrganismInfo> getOrganisms() {
 		return Collections.unmodifiableList(dish.getOrganisms());
 	}
+	
+	public List<Nutrient> getNutrients() {
+		return Collections.unmodifiableList(dish.getNutrients());
+	}
 
 	public double getTime() {
 		return this.time;

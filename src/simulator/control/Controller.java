@@ -1,9 +1,11 @@
 package simulator.control;
 
+import java.util.List;
 import java.util.Timer;
 
 import simulator.model.DishInfo;
 import simulator.model.DishObserver;
+import simulator.model.Nutrient;
 import simulator.model.OrganismInfo;
 import simulator.model.Simulator;
 
@@ -43,5 +45,17 @@ public class Controller {
 	
 	public DishInfo getDishInfo() {
 		return sim.getDishInfo();
+	}
+	
+	public List<OrganismInfo> getOrganisms() {
+		return sim.getOrganisms();
+	}
+
+	public List<Nutrient> getNutrients() {
+		return sim.getNutrients();
+	}
+	
+	public double getTime() {
+		return sim.getTime();
 	}
 }

@@ -17,13 +17,9 @@ import simulator.model.OrganismInfo;
 
 public class DishViewer extends AbstractDishViewer implements DishObserver{
 
-	private int width;
-	private int height;
 	private double time;
 	
 	private Controller ctrl;
-	private List<OrganismInfo> organisms;
-	private List<Nutrient> nutrients;
 	
 	private Font textFont = new Font("Arial", Font.BOLD, 12);
 	
@@ -55,17 +51,27 @@ public class DishViewer extends AbstractDishViewer implements DishObserver{
 		gr.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		// gr.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON); TODO
 
+		int w = getWidth();
+		int h = getHeight();
 		g.setColor(Color.gray);
 		g.setFont(textFont);
 		gr.setBackground(Color.WHITE);
-		gr.fillRect(0, 0, width, height); // fill vs clear
+		gr.fillRect(0, 0, w, h); // fill vs clear
 		
-		if (organisms != null)
-			drawOrganisms(gr, ctrl.getDishInfo());
+		DishInfo dish = ctrl.getDishInfo();
+		if (w > 0 && h > 0 && dish.getWidth() > 0 && dish.getHeight() > 0) {
+			double sx = w / (double) dish.getWidth();
+			double sy = h / (double) dish.getHeight();
+			Graphics2D cg = (Graphics2D) g.create();
+			cg.scale(sx, sy);
+			paintDish(cg, dish);
+			cg.dispose();
+		}
+		g.dispose();
 	}
 	
-	private void drawOrganisms(Graphics2D g, DishInfo dish) {
-		for(OrganismInfo o: organisms) {
+	private void paintDish(Graphics2D g, DishInfo dish) {
+		for(OrganismInfo o: ctrl.getOrganisms()) {
 			g.setColor(o.getColor());
 			int size = o.getSize();
 			int x = (int) o.getPosition().getX();
@@ -73,6 +79,13 @@ public class DishViewer extends AbstractDishViewer implements DishObserver{
 			g.fillOval(x, y, size, size);
 		}
 		
+		for (Nutrient n : ctrl.getNutrients()) {
+			int x = (int) n.getPosition().getX();
+			int y = (int) n.getPosition().getY();
+			g.setColor(Color.orange);
+			g.fillOval(x, y, 2, 2);;
+		}
+
 		
 	}
 
