@@ -21,9 +21,9 @@ public class Organism implements OrganismInfo, Entity {
 
 	private static final String ALPHANUMERIC_CHARACTERS_ID = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 	private static final SecureRandom SecRand = new SecureRandom();
-	
+
 	private static final int ID_LENGTH = 6;
-	
+
 	public static final double MIN_SPEED = 0.5;
 	public static final double MAX_SPEED = 5.0;
 	public static final int MIN_SIZE = 2;
@@ -92,7 +92,7 @@ public class Organism implements OrganismInfo, Entity {
 	static String randomGeneticCode() {
 		return randomId(7); // TODO
 	}
-	
+
 	/*
 	 * OrganismInfo interface
 	 */
@@ -131,7 +131,7 @@ public class Organism implements OrganismInfo, Entity {
 	public long getAge() {
 		return this.age;
 	}
-	
+
 	@Override
 	public int getSize() {
 		return this.size;
@@ -166,11 +166,37 @@ public class Organism implements OrganismInfo, Entity {
 	 * Entity interface
 	 */
 
+	/*
+	 * @Override public void update(double dt) { // TODO Auto-generated method stub
+	 * if (this.energy <= 0) alive = false; }
+	 */
+
 	@Override
 	public void update(double dt) {
-		// TODO Auto-generated method stub
-		if (this.energy <= 0)
+		if (!alive)
+			return;
+		age += dt;
+		moveNormally(dt);
+		energy -= speed * dt * 0.5;
+		if (energy <= 0) {
 			alive = false;
+		}
+		refreshState();
+	}
+
+	private void refreshState() {
+		double pct = energy / MAX_ENERGY;
+		if (pct > 0.55) {
+			state = State.HEALTHY;
+		} else if (pct > 0.25) {
+			state = State.HUNGRY;
+		} else {
+			state = State.RECOVERING;
+		}
+	}
+
+	private void moveNormally(double dt) {
+		
 	}
 
 }
