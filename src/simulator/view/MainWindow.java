@@ -3,6 +3,7 @@ package simulator.view;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -28,9 +29,14 @@ public class MainWindow extends JFrame {
 		JPanel headerPanel = new HeaderPanel(ctrl);
 		mainPanel.add(headerPanel,BorderLayout.PAGE_START); 
 		
-		JPanel contentPanel = new JPanel();
+		JPanel contentPanel = new JPanel(new BorderLayout(16,0));
+		contentPanel.setBorder(BorderFactory.createEmptyBorder(16, 16, 16, 16));
+		
 		JPanel environmentPanel = new EnvironmentPanel(ctrl);
 		JPanel infoPanel = new InformationPanel(ctrl);
+		
+		infoPanel.setPreferredSize(new Dimension(320, 10));
+		
 		contentPanel.add(environmentPanel, BorderLayout.CENTER);
 		contentPanel.add(infoPanel, BorderLayout.EAST);
 		

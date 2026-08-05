@@ -19,10 +19,20 @@ public class Organism implements OrganismInfo, Entity {
 	public static final String INVALID_SIGHT = "Invalid sight";
 	public static final String INVALID_STRENGTH = "Invalid strength";
 
-	private static final int ID_LENGTH = 6;
-
 	private static final String ALPHANUMERIC_CHARACTERS_ID = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 	private static final SecureRandom SecRand = new SecureRandom();
+	
+	private static final int ID_LENGTH = 6;
+	
+	public static final double MIN_SPEED = 0.5;
+	public static final double MAX_SPEED = 5.0;
+	public static final int MIN_SIZE = 2;
+	public static final int MAX_SIZE = 20;
+	public static final double MIN_SIGHT = 30;
+	public static final double MAX_SIGHT = 150;
+	public static final double MIN_STRENGTH = 0.5;
+	public static final double MAX_STRENGTH = 10.0;
+	public static final double MAX_ENERGY = 100.0;
 
 	private final String id;
 	private final String geneticCode;
@@ -79,6 +89,10 @@ public class Organism implements OrganismInfo, Entity {
 		return idString.toString();
 	}
 
+	static String randomGeneticCode() {
+		return randomId(7); // TODO
+	}
+	
 	/*
 	 * OrganismInfo interface
 	 */
