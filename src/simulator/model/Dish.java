@@ -79,15 +79,21 @@ public class Dish implements DishInfo {
 
 	public void advance(double dt) {
 		for (Organism o : organisms) {
-			o.update(dt);
+			List<Organism> neighbours = inRange(o);
 			o.moveWithin(dt, width, height);
 		}
 		// steer towards the average heading of the local flockmates
 	}
 
 	private List<Organism> inRange(Organism o){
-		// TODO;
-		return null;
+		List<Organism> neighbors = new ArrayList<>();
+		double radius = o.getSightRadius();
+		for (Organism other : organisms) {
+			if (other != o && o.getPosition().distance(other.getPosition()) <= radius) {
+				neighbors.add(other);
+			}
+		}
+		return neighbors;
 	}
 	/*
 	 * DishInfo interface

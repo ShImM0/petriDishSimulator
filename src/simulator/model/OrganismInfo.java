@@ -15,5 +15,7 @@ public interface OrganismInfo {
 	public Color getColor();
 	
 	public int getSize();
+	
+	public double getSightRadius();
 
 }

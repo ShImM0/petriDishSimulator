@@ -61,7 +61,7 @@ public class HeaderPanel extends JPanel {
 		this.runStopButton.addActionListener((e) -> runStop());
 
 		// Reset button
-		this.resetButton = new JButton();
+		this.resetButton = new JButton(); // TODO run after reset does not pause/run
 		this.resetButton.setToolTipText("Reset simulation");
 		this.resetButton.setIcon(loadIconScaledDefault("reset.png"));
 		this.resetButton.addActionListener((e) -> reset());

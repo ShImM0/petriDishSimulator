@@ -155,6 +155,11 @@ public class Organism implements OrganismInfo, Entity {
 	public int getSize() {
 		return this.size;
 	}
+	
+	@Override
+	public double getSightRadius() {
+		return this.sightRadius;
+	}
 
 	/*
 	 * Entity interface
@@ -164,5 +169,6 @@ public class Organism implements OrganismInfo, Entity {
 	public void update(double dt) {
 
 	}
+
 
 }
