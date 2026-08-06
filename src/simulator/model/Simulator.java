@@ -62,6 +62,10 @@ public class Simulator implements Observable<DishObserver> {
 		}
 
 	}
+	
+	public RuleWeights getRuleWeights() {
+		return this.dish.getRuleWeights();
+	}
 
 	public DishInfo getDishInfo() {
 		return this.dish;

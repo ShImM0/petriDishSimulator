@@ -6,8 +6,8 @@ import javax.swing.Timer;
 
 import simulator.model.DishInfo;
 import simulator.model.DishObserver;
-import simulator.model.Nutrient;
 import simulator.model.OrganismInfo;
+import simulator.model.RuleWeights;
 import simulator.model.Simulator;
 
 public class Controller {
@@ -79,5 +79,9 @@ public class Controller {
 	/*
 	 * Three movement rules: separation, alignment and cohesion
 	 */
+
+	public RuleWeights getRuleWeights() {
+		return sim.getRuleWeights();
+	}
 
 }

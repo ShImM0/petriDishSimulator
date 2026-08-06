@@ -13,10 +13,13 @@ public class Dish implements DishInfo {
 
 	private static final int INITIAL_ORGANISMS = 100;
 
+	private static final RuleWeights DEFAULT_WEIGHTS = new RuleWeights(1.5, 0.5, 3.0);
+	
 	private int width;
 	private int height;
 
 	private List<Organism> organisms;
+	private RuleWeights weights;
 
 	public Dish(int width, int height) {
 		if (width <= 0)
@@ -26,7 +29,8 @@ public class Dish implements DishInfo {
 
 		this.width = width;
 		this.height = height;
-		organisms = new ArrayList<>();
+		this.weights = DEFAULT_WEIGHTS;
+		this.organisms = new ArrayList<>();
 
 		for (int i = 0; i < INITIAL_ORGANISMS; i++) {
 			registerOrganism(randomOrganism());
@@ -93,6 +97,11 @@ public class Dish implements DishInfo {
 	@Override
 	public int getHeight() {
 		return this.height;
+	}
+
+	@Override
+	public RuleWeights getRuleWeights() {
+		return this.weights;
 	}
 
 }

@@ -5,14 +5,12 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.util.List;
 
 import javax.swing.SwingUtilities;
 
 import simulator.control.Controller;
 import simulator.model.DishInfo;
 import simulator.model.DishObserver;
-import simulator.model.Nutrient;
 import simulator.model.OrganismInfo;
 
 public class DishViewer extends AbstractDishViewer implements DishObserver {
