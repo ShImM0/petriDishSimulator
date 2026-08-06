@@ -39,14 +39,25 @@ public class Dish implements DishInfo {
 
 	private Organism randomOrganism() {
 		Vector2D pos = randomPoint();
-		double speed = Organism.MIN_SPEED + Utils.Rand.nextDouble() * 2.0;
-		// int size = Organism.MIN_SIZE + Utils.Rand.nextInt() * 8;
-		int size = 8;
-		double sight = 60 + Utils.Rand.nextDouble() * 60;
-		double strength = 1 + Utils.Rand.nextDouble() * 5;
+
+		// Random starting velocity
+		Vector2D velocity = new Vector2D(Utils.Rand.nextDouble() * 2 - 1, Utils.Rand.nextDouble() * 2 - 1);
+
+		int size = Organism.MIN_SIZE + Utils.Rand.nextInt(Organism.MAX_SIZE - Organism.MIN_SIZE + 1);
+
+		double maxSpeed = Organism.MIN_SPEED + Utils.Rand.nextDouble() * (Organism.MAX_SPEED - Organism.MIN_SPEED);
+
+		double maxForce = 0.1 + Utils.Rand.nextDouble() * 0.9;
+
+		double sightRadius = Organism.MIN_SIGHT + Utils.Rand.nextDouble() * (Organism.MAX_SIGHT - Organism.MIN_SIGHT);
+
+		double separationRadius = size * 2.0;
+
 		Color color = Color.getHSBColor(Utils.Rand.nextFloat(), 0.55f, 0.85f);
+		
 		String code = Organism.randomGeneticCode();
-		return new Organism(code, pos, color, size, speed, sight, strength);
+		
+		return new Organism(code, pos, velocity, color, size, maxSpeed, maxForce, sightRadius, separationRadius);
 	}
 
 	private Vector2D randomPoint() {

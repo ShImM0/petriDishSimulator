@@ -78,6 +78,7 @@ public class Organism implements OrganismInfo, Entity {
 		this.maxForce = maxForce;
 		this.sightRadius = sightRadius;
 		this.separationRadius = separationRadius;
+		this.acceleration = Vector2D.zero();
 	}
 
 	private static String randomId(int idLength) {
@@ -96,8 +97,8 @@ public class Organism implements OrganismInfo, Entity {
 	void moveWithin(double dt, double width, double height) {
 		velocity = velocity.plus(acceleration.scale(dt)).limit(maxSpeed);
 
-		double newX = pos.getX() + velocity.getX() * dt;
-		double newY = pos.getY() + velocity.getY() * dt;
+		double newX = pos.getX() + velocity.getX() * dt; // * 25.0;
+		double newY = pos.getY() + velocity.getY() * dt; // * 25.0;
 
 		double vx = velocity.getX();
 		double vy = velocity.getY();
@@ -124,7 +125,6 @@ public class Organism implements OrganismInfo, Entity {
 	/*
 	 * OrganismInfo interface
 	 */
-
 
 	@Override
 	public Vector2D getPosition() {
@@ -156,11 +156,9 @@ public class Organism implements OrganismInfo, Entity {
 		return this.size;
 	}
 
-
 	/*
 	 * Entity interface
 	 */
-
 
 	@Override
 	public void update(double dt) {

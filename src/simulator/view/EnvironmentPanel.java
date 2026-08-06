@@ -27,31 +27,31 @@ public class EnvironmentPanel extends JPanel implements DishObserver {
 		dishViewer = new DishViewer(ctrl);
 		dishViewer.setPreferredSize(new Dimension(500, 500));
 		this.add(dishViewer, BorderLayout.CENTER);
-		this.setBackground(Color.blue);
+		this.setBackground(Color.WHITE);
 	}
 
 	@Override
 	public void onRegister(double time, DishInfo dish) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
 	@Override
 	public void onReset(double time, DishInfo dish) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onOrganismAdded(double time, DishInfo dish, OrganismInfo o) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
 	@Override
 	public void onAdvance(double time, DishInfo dish, double dt) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
+	@Override
+	public void onWeightsChanged(double time, DishInfo flock) {
+		
+		
+	}
+	 // TODO remove observer?
 }

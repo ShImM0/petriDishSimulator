@@ -23,7 +23,7 @@ public final class RuleWeights {
 			throw new IllegalArgumentException(INVALID_WEIGHT.formatted(w));
 		return w;
 	}
-	
+
 	public double getSeparation() {
 		return separation;
 	}
@@ -36,5 +36,4 @@ public final class RuleWeights {
 		return cohesion;
 	}
 
-	
 }

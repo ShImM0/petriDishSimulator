@@ -7,7 +7,7 @@ public interface DishObserver {
 
 	void onReset(double time, DishInfo dish);
 
-	void onOrganismAdded(double time, DishInfo dish, OrganismInfo o);
-
 	void onAdvance(double time, DishInfo dish, double dt);
+	
+	void onWeightsChanged(double time, DishInfo flock);
 }

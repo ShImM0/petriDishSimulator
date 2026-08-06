@@ -17,8 +17,6 @@ import simulator.model.OrganismInfo;
 
 public class DishViewer extends AbstractDishViewer implements DishObserver {
 
-	private double time;
-
 	private Controller ctrl;
 
 	private Font textFont = new Font("Arial", Font.BOLD, 12);
@@ -101,16 +99,15 @@ public class DishViewer extends AbstractDishViewer implements DishObserver {
 	}
 
 	@Override
-	public void onOrganismAdded(double time, DishInfo dish, OrganismInfo o) {
-		SwingUtilities.invokeLater(() -> {
-			this.reset();
-		});
-	}
-
-	@Override
 	public void onAdvance(double time, DishInfo dish, double dt) {
 		SwingUtilities.invokeLater(() -> {
 			this.update();
 		});
+	}
+
+	@Override
+	public void onWeightsChanged(double time, DishInfo flock) {
+		// TODO Auto-generated method stub
+		
 	}
 }

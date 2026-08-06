@@ -40,15 +40,15 @@ public class InformationPanel extends JPanel implements DishObserver {
 	}
 
 	@Override
-	public void onOrganismAdded(double time, DishInfo dish, OrganismInfo o) {
+	public void onAdvance(double time, DishInfo dish, double dt) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void onAdvance(double time, DishInfo dish, double dt) {
+	public void onWeightsChanged(double time, DishInfo flock) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 }
