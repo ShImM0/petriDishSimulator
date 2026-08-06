@@ -70,7 +70,6 @@ public class Dish implements DishInfo{
 			o.moveWithin(dt, width, height);
 		}
 		
-		organisms.removeIf(o -> !o.isAlive());
 		
 		// steer towards the average heading of the local flockmates
 	}

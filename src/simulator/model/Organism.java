@@ -98,10 +98,8 @@ public class Organism implements OrganismInfo, Entity {
 	void moveWithin(double dt, double width, double height) {
 		velocity = velocity.plus(acceleration.scale(dt)).limit(maxSpeed);
 
-		double pxPerTick = speed * PIXELS_PER_SPEED_UNIT * dt;
-
-		double newX = pos.getX() + velocity.getX() * pxPerTick;
-		double newY = pos.getY() + velocity.getY() * pxPerTick;
+		double newX = pos.getX() + velocity.getX() * dt;
+		double newY = pos.getY() + velocity.getY() * dt;
 
 		double vx = velocity.getX();
 		double vy = velocity.getY();

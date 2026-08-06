@@ -57,11 +57,24 @@ public class Vector2D {
 			return new Vector2D(this);
 	}
 
-	public boolean outOfBounds() {
-		// TODO
-		return false;
+	// Limits a direction position, so that its magnitude does not exceed max
+	// To cap steering forces and speeds
+	
+	public Vector2D limit(double max) {
+		double mag = magnitude();
+		if (mag > max && mag > 0.0) {
+			return scale(max / mag);
+		}
+		return new Vector2D(this);
 	}
-
+	
+	// Angle of this vector around the origin (0,0)
+	// Uses the format atan2(double y, double x)
+	
+	public double angle() {
+		return Math.atan2(y, x);
+	}
+	
 	@Override
 	public String toString() {
 		return String.format("[%.2f, %.2f]", this.x, this.y);
