@@ -12,10 +12,10 @@ import simulator.model.DishObserver;
 import simulator.model.OrganismInfo;
 
 public class EnvironmentPanel extends JPanel implements DishObserver {
-	
+
 	private Controller ctrl;
 	private DishViewer dishViewer;
-	
+
 	public EnvironmentPanel(Controller ctrl) {
 		this.ctrl = ctrl;
 		initGUI();
@@ -25,11 +25,11 @@ public class EnvironmentPanel extends JPanel implements DishObserver {
 	private void initGUI() {
 		this.setLayout(new BorderLayout());
 		dishViewer = new DishViewer(ctrl);
-		dishViewer.setPreferredSize(new Dimension(500,500));
+		dishViewer.setPreferredSize(new Dimension(500, 500));
 		this.add(dishViewer, BorderLayout.CENTER);
 		this.setBackground(Color.blue);
 	}
-	
+
 	@Override
 	public void onRegister(double time, DishInfo dish) {
 		// TODO Auto-generated method stub

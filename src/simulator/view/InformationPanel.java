@@ -13,17 +13,17 @@ import simulator.model.OrganismInfo;
 public class InformationPanel extends JPanel implements DishObserver {
 
 	private Controller ctrl;
-	
+
 	private OrganismInfo organism;
-	
+
 	public InformationPanel(Controller ctrl) {
 		this.ctrl = ctrl;
 		initGUI();
 		ctrl.addObserver((DishObserver) this);
 	}
-	
+
 	private void initGUI() {
-		//this.setPreferredSize(new Dimension(320, 550));
+		// this.setPreferredSize(new Dimension(320, 550));
 		this.setBackground(Color.BLACK);
 	}
 

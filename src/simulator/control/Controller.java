@@ -12,12 +12,12 @@ import simulator.model.Simulator;
 
 public class Controller {
 	final static String CONTROLLER_NULL_SIMULATOR = "Simulator cannot be null in Controller constructor";
-	
+
 	private static final int TICK_MS = 30;
-	
+
 	private Simulator sim;
 	private Timer timer;
-	
+
 	private boolean running;
 
 	public Controller(Simulator sim) {
@@ -35,7 +35,7 @@ public class Controller {
 		timer.start();
 		running = true;
 	}
-	
+
 	public void pause() {
 		if (timer != null) {
 			timer.stop();
@@ -46,7 +46,7 @@ public class Controller {
 	public boolean isRunning() {
 		return running;
 	}
-	
+
 	public void reset() {
 		pause();
 		this.sim.reset();
@@ -63,22 +63,21 @@ public class Controller {
 	public void removeObserver(DishObserver obs) {
 		this.sim.removeObserver(obs);
 	}
-	
+
 	public DishInfo getDishInfo() {
 		return sim.getDishInfo();
 	}
-	
+
 	public List<OrganismInfo> getOrganisms() {
 		return sim.getOrganisms();
 	}
-	
+
 	public double getTime() {
 		return sim.getTime();
 	}
-	
+
 	/*
 	 * Three movement rules: separation, alignment and cohesion
 	 */
-	
-	
+
 }

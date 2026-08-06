@@ -7,7 +7,7 @@ import java.util.List;
 
 import simulator.misc.Utils;
 
-public class Dish implements DishInfo{
+public class Dish implements DishInfo {
 	public static final String INVALID_DISH_WIDTH = "Invalid dish width: %";
 	public static final String INVALID_DISH_HEIGHT = "Invalid dish height: %";
 
@@ -27,21 +27,20 @@ public class Dish implements DishInfo{
 		this.width = width;
 		this.height = height;
 		organisms = new ArrayList<>();
-		
+
 		for (int i = 0; i < INITIAL_ORGANISMS; i++) {
 			registerOrganism(randomOrganism());
 		}
 	}
-	
-	/* testing
-	 * 
+
+	/*
+	 * testing
 	 */
 
-	
 	private Organism randomOrganism() {
 		Vector2D pos = randomPoint();
 		double speed = Organism.MIN_SPEED + Utils.Rand.nextDouble() * 2.0;
-		//int size = Organism.MIN_SIZE + Utils.Rand.nextInt() * 8;
+		// int size = Organism.MIN_SIZE + Utils.Rand.nextInt() * 8;
 		int size = 8;
 		double sight = 60 + Utils.Rand.nextDouble() * 60;
 		double strength = 1 + Utils.Rand.nextDouble() * 5;
@@ -49,12 +48,10 @@ public class Dish implements DishInfo{
 		String code = Organism.randomGeneticCode();
 		return new Organism(code, pos, color, size, speed, sight, strength);
 	}
-	
 
 	private Vector2D randomPoint() {
 		return new Vector2D(Utils.Rand.nextDouble() * width, Utils.Rand.nextDouble() * height);
 	}
-
 
 	public void registerOrganism(Organism o) {
 		organisms.add(o);
@@ -65,12 +62,11 @@ public class Dish implements DishInfo{
 	}
 
 	public void advance(double dt) {
-		for(Organism o: organisms) {
+		for (Organism o : organisms) {
 			o.update(dt);
 			o.moveWithin(dt, width, height);
 		}
-		
-		
+
 		// steer towards the average heading of the local flockmates
 	}
 

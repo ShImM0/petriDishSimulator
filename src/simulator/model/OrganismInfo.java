@@ -16,6 +16,4 @@ public interface OrganismInfo {
 	
 	public int getSize();
 
-	public double getSight();
-
 }

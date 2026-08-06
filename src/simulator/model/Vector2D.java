@@ -18,6 +18,16 @@ public class Vector2D {
 		this.y = y;
 	}
 
+	public static Vector2D zero() {
+		return new Vector2D(0.0, 0.0);
+	}
+
+	// Creates a vector that points in the angle's direction
+
+	public static Vector2D fromAngle(double angle) {
+		return new Vector2D(Math.cos(angle), Math.sin(angle));
+	}
+
 	public double getX() {
 		return x;
 	}
@@ -59,7 +69,7 @@ public class Vector2D {
 
 	// Limits a direction position, so that its magnitude does not exceed max
 	// To cap steering forces and speeds
-	
+
 	public Vector2D limit(double max) {
 		double mag = magnitude();
 		if (mag > max && mag > 0.0) {
@@ -67,14 +77,14 @@ public class Vector2D {
 		}
 		return new Vector2D(this);
 	}
-	
+
 	// Angle of this vector around the origin (0,0)
 	// Uses the format atan2(double y, double x)
-	
+
 	public double angle() {
 		return Math.atan2(y, x);
 	}
-	
+
 	@Override
 	public String toString() {
 		return String.format("[%.2f, %.2f]", this.x, this.y);

@@ -21,8 +21,6 @@ public class Organism implements OrganismInfo, Entity {
 	private static final SecureRandom SecRand = new SecureRandom();
 	private static final int ID_LENGTH = 6;
 
-	private static final double PIXELS_PER_SPEED_UNIT = 25.0; // TODO test
-
 	public static final double MIN_SPEED = 0.5;
 	public static final double MAX_SPEED = 5.0;
 	public static final int MIN_SIZE = 2;
@@ -127,6 +125,7 @@ public class Organism implements OrganismInfo, Entity {
 	 * OrganismInfo interface
 	 */
 
+
 	@Override
 	public Vector2D getPosition() {
 		return this.pos;
@@ -144,8 +143,8 @@ public class Organism implements OrganismInfo, Entity {
 
 	@Override
 	public String getGeneticCode() {
-		return this.geneticCode;
-	};
+		return this.getGeneticCode();
+	}
 
 	@Override
 	public Color getColor() {
@@ -157,14 +156,11 @@ public class Organism implements OrganismInfo, Entity {
 		return this.size;
 	}
 
-	@Override
-	public double getSight() {
-		return this.sight;
-	}
 
 	/*
 	 * Entity interface
 	 */
+
 
 	@Override
 	public void update(double dt) {

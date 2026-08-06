@@ -47,7 +47,7 @@ public class Simulator implements Observable<DishObserver> {
 	public void reset() {
 		reset(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 	}
-	
+
 	private void reset(int width, int height) {
 		if (width <= 0)
 			throw new IllegalArgumentException(INVALID_SIMULATOR_WIDTH.formatted(width));
