@@ -11,14 +11,15 @@ public class Simulator implements Observable<DishObserver> {
 	public static final int DEFAULT_WIDTH = 500;
 	public static final int DEFAULT_HEIGHT = 500;
 
-	private List<DishObserver> observers;
+	private final int width; // Non-updateable
+	private final int height;
+
+	List<DishObserver> observers;
 	private Dish dish;
 	private double time;
 
 	public Simulator() {
-		this.dish = new Dish(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-		this.observers = new ArrayList<>();
-		this.time = 0.0;
+		this(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 	}
 
 	public Simulator(int width, int height) {
@@ -27,14 +28,16 @@ public class Simulator implements Observable<DishObserver> {
 		if (height <= 0)
 			throw new IllegalArgumentException(INVALID_SIMULATOR_HEIGHT.formatted(height));
 
+		this.width = width;
+		this.height = height;
 		this.dish = new Dish(width, height);
 		this.observers = new ArrayList<>();
 		this.time = 0.0;
 	}
 
-	public void addOrganism(Organism o) {
-		dish.registerOrganism(o);
-	}
+	/*
+	 * public void addOrganism(Organism o) { dish.registerOrganism(o); }
+	 */
 
 	public void advance(double dt) {
 		this.time += dt;
@@ -45,17 +48,7 @@ public class Simulator implements Observable<DishObserver> {
 	}
 
 	public void reset() {
-		reset(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-	}
-
-	private void reset(int width, int height) {
-		if (width <= 0)
-			throw new IllegalArgumentException(INVALID_SIMULATOR_WIDTH.formatted(width));
-		if (height <= 0)
-			throw new IllegalArgumentException(INVALID_SIMULATOR_HEIGHT.formatted(height));
-
 		this.dish = new Dish(width, height);
-		// TODO
 		this.time = 0.0;
 		for (DishObserver o : this.observers) {
 			o.onReset(time, dish);
@@ -63,6 +56,13 @@ public class Simulator implements Observable<DishObserver> {
 
 	}
 	
+	public void setRuleWeights(RuleWeights weights) {
+		dish.setRuleWeights(weights);
+		for (DishObserver o : this.observers) {
+			o.onWeightsChanged(time, dish);
+		}
+	}
+
 	public RuleWeights getRuleWeights() {
 		return this.dish.getRuleWeights();
 	}
@@ -85,7 +85,7 @@ public class Simulator implements Observable<DishObserver> {
 
 	@Override
 	public void addObserver(DishObserver obs) {
-		if (!observers.contains(obs) && obs != null) {
+		if (obs != null && !observers.contains(obs)) {
 			observers.add(obs);
 			obs.onRegister(time, dish);
 		}

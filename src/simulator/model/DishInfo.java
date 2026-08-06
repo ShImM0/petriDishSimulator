@@ -6,4 +6,6 @@ public interface DishInfo {
 	public int getHeight();
 	
 	public RuleWeights getRuleWeights();
+	
+	public void setRuleWeights(RuleWeights weights);
 }

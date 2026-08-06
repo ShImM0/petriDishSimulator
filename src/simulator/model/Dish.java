@@ -10,11 +10,12 @@ import simulator.misc.Utils;
 public class Dish implements DishInfo {
 	public static final String INVALID_DISH_WIDTH = "Invalid dish width: %";
 	public static final String INVALID_DISH_HEIGHT = "Invalid dish height: %";
+	public static final String INVALID_RULE_WEIGHTS = "Rule weights cannot be null";
 
 	private static final int INITIAL_ORGANISMS = 100;
 
 	private static final RuleWeights DEFAULT_WEIGHTS = new RuleWeights(1.5, 0.5, 3.0);
-	
+
 	private int width;
 	private int height;
 
@@ -58,9 +59,9 @@ public class Dish implements DishInfo {
 		double separationRadius = size * 2.0;
 
 		Color color = Color.getHSBColor(Utils.Rand.nextFloat(), 0.55f, 0.85f);
-		
+
 		String code = Organism.randomGeneticCode();
-		
+
 		return new Organism(code, pos, velocity, color, size, maxSpeed, maxForce, sightRadius, separationRadius);
 	}
 
@@ -81,10 +82,13 @@ public class Dish implements DishInfo {
 			o.update(dt);
 			o.moveWithin(dt, width, height);
 		}
-
 		// steer towards the average heading of the local flockmates
 	}
 
+	private List<Organism> inRange(Organism o){
+		// TODO;
+		return null;
+	}
 	/*
 	 * DishInfo interface
 	 */
@@ -102,6 +106,13 @@ public class Dish implements DishInfo {
 	@Override
 	public RuleWeights getRuleWeights() {
 		return this.weights;
+	}
+
+	@Override
+	public void setRuleWeights(RuleWeights weights) {
+		if (weights == null)
+			throw new IllegalArgumentException(INVALID_RULE_WEIGHTS);
+		this.weights = weights;
 	}
 
 }
