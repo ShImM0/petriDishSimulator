@@ -36,10 +36,6 @@ public class Simulator implements Observable<DishObserver> {
 		dish.registerOrganism(o);
 	}
 
-	public void addNutrient(Nutrient n) {
-		dish.registerNutrient(n);
-	}
-
 	public void advance(double dt) {
 		this.time += dt;
 		dish.advance(dt);
@@ -73,10 +69,6 @@ public class Simulator implements Observable<DishObserver> {
 
 	public List<OrganismInfo> getOrganisms() {
 		return Collections.unmodifiableList(dish.getOrganisms());
-	}
-	
-	public List<Nutrient> getNutrients() {
-		return Collections.unmodifiableList(dish.getNutrients());
 	}
 
 	public double getTime() {

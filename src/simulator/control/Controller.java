@@ -71,12 +71,14 @@ public class Controller {
 	public List<OrganismInfo> getOrganisms() {
 		return sim.getOrganisms();
 	}
-
-	public List<Nutrient> getNutrients() {
-		return sim.getNutrients();
-	}
 	
 	public double getTime() {
 		return sim.getTime();
 	}
+	
+	/*
+	 * Three movement rules: separation, alignment and cohesion
+	 */
+	
+	
 }

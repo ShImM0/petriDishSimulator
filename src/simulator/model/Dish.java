@@ -7,18 +7,16 @@ import java.util.List;
 
 import simulator.misc.Utils;
 
-public class Dish implements DishInfo {
+public class Dish implements DishInfo{
 	public static final String INVALID_DISH_WIDTH = "Invalid dish width: %";
 	public static final String INVALID_DISH_HEIGHT = "Invalid dish height: %";
 
 	private static final int INITIAL_ORGANISMS = 100;
-	private static final int INITIAL_NUTRIENTS = 30;
-	
+
 	private int width;
 	private int height;
 
 	private List<Organism> organisms;
-	private List<Nutrient> nutrients;
 
 	public Dish(int width, int height) {
 		if (width <= 0)
@@ -29,13 +27,9 @@ public class Dish implements DishInfo {
 		this.width = width;
 		this.height = height;
 		organisms = new ArrayList<>();
-		nutrients = new ArrayList<>();
 		
 		for (int i = 0; i < INITIAL_ORGANISMS; i++) {
 			registerOrganism(randomOrganism());
-		}
-		for (int i = 0; i < INITIAL_NUTRIENTS; i++) {
-			registerNutrient(new Nutrient(randomPoint()));
 		}
 	}
 	
@@ -66,23 +60,19 @@ public class Dish implements DishInfo {
 		organisms.add(o);
 	}
 
-	public void registerNutrient(Nutrient n) {
-		nutrients.add(n);
-	}
-
 	public List<OrganismInfo> getOrganisms() {
 		return Collections.unmodifiableList(new ArrayList<OrganismInfo>(organisms));
 	}
-	
-	public List<Nutrient> getNutrients(){
-		return Collections.unmodifiableList(nutrients);
-	}
-	
+
 	public void advance(double dt) {
 		for(Organism o: organisms) {
 			o.update(dt);
 			o.moveWithin(dt, width, height);
 		}
+		
+		organisms.removeIf(o -> !o.isAlive());
+		
+		// steer towards the average heading of the local flockmates
 	}
 
 	/*

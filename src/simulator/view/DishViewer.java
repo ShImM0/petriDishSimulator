@@ -79,14 +79,6 @@ public class DishViewer extends AbstractDishViewer implements DishObserver{
 			g.fillOval(x, y, size, size);
 		}
 		
-		for (Nutrient n : ctrl.getNutrients()) {
-			int x = (int) n.getPosition().getX();
-			int y = (int) n.getPosition().getY();
-			g.setColor(Color.orange);
-			g.fillOval(x, y, 2, 2);;
-		}
-
-		
 	}
 
 	/*
