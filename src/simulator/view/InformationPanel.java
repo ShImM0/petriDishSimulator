@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import simulator.control.Controller;
 import simulator.model.DishInfo;
@@ -16,11 +17,13 @@ import simulator.model.OrganismInfo;
 public class InformationPanel extends JPanel implements DishObserver {
 
 	private Controller ctrl;
-	
+	// TODO as StatusBar
+
 	private JLabel timeValue;
-	private JLabel boidCountValue;
-	
-	
+	private JLabel organismCountValue;
+	private JLabel averageSize;
+	private JLabel averageSightRadius; // TODO
+
 	public InformationPanel(Controller ctrl) {
 		this.ctrl = ctrl;
 		initGUI();
@@ -33,28 +36,41 @@ public class InformationPanel extends JPanel implements DishObserver {
 		this.setBorder(BorderFactory.createTitledBorder("Simulation info"));
 	}
 
+	private void update() {
+		timeValue.setText(String.format("%.2f", ctrl.getTime()));
+		organismCountValue.setText(String.valueOf(ctrl.getOrganisms().size()));
+		double avgSize = ctrl.getOrganisms().stream().mapToInt(o -> o.getSize()).average().orElse(0.0);
+		averageSize.setText(String.format("%.2f", avgSize));
+		double avgSightRadius = ctrl.getOrganisms().stream().mapToDouble(o -> o.getSightRadius()).average().orElse(0.0);
+		averageSightRadius.setText(String.format("%.2f", avgSightRadius));
+	}
+
 	@Override
 	public void onRegister(double time, DishInfo dish) {
-		// TODO Auto-generated method stub
-
+		SwingUtilities.invokeLater(() -> {
+			this.update();
+		});
 	}
 
 	@Override
 	public void onReset(double time, DishInfo dish) {
-		// TODO Auto-generated method stub
-
+		SwingUtilities.invokeLater(() -> {
+			this.update();
+		});
 	}
 
 	@Override
 	public void onAdvance(double time, DishInfo dish, double dt) {
-		// TODO Auto-generated method stub
-
+		SwingUtilities.invokeLater(() -> {
+			this.update();
+		});
 	}
 
 	@Override
 	public void onWeightsChanged(double time, DishInfo flock) {
-		// TODO Auto-generated method stub
-		
+		SwingUtilities.invokeLater(() -> {
+			this.update(); // TODO recheck if there's effect
+		});
 	}
 
 }
