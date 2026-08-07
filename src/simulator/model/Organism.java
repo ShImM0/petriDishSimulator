@@ -93,6 +93,10 @@ public class Organism implements OrganismInfo, Entity {
 	static String randomGeneticCode() {
 		return randomId(7);
 	}
+	
+	/*
+	 * Rule weights functions
+	 */
 
 	void moveWithin(double dt, double width, double height) {
 		velocity = velocity.plus(acceleration.scale(dt)).limit(maxSpeed);

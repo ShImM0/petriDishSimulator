@@ -24,7 +24,7 @@ public class MainWindow extends JFrame {
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		setContentPane(mainPanel);
 
-		this.setMinimumSize(new Dimension(800, 600));
+		this.setMinimumSize(new Dimension(800, 600)); // TODO
 
 		JPanel headerPanel = new HeaderPanel(ctrl);
 		mainPanel.add(headerPanel, BorderLayout.PAGE_START);
@@ -33,6 +33,7 @@ public class MainWindow extends JFrame {
 		contentPanel.setBorder(BorderFactory.createEmptyBorder(16, 16, 16, 16));
 
 		JPanel environmentPanel = new EnvironmentPanel(ctrl);
+		JPanel controlPanel = new ControlPanel(ctrl); // TODO
 		JPanel infoPanel = new InformationPanel(ctrl);
 
 		infoPanel.setPreferredSize(new Dimension(250, 500));

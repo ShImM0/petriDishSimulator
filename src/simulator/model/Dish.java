@@ -85,7 +85,7 @@ public class Dish implements DishInfo {
 		// steer towards the average heading of the local flockmates
 	}
 
-	private List<Organism> inRange(Organism o){
+	private List<Organism> inRange(Organism o) {
 		List<Organism> neighbors = new ArrayList<>();
 		double radius = o.getSightRadius();
 		for (Organism other : organisms) {
