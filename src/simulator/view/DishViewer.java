@@ -21,13 +21,9 @@ public class DishViewer extends AbstractDishViewer implements DishObserver {
 
 	public DishViewer(Controller ctrl) {
 		this.ctrl = ctrl;
-		initGUI();
-		ctrl.addObserver((DishObserver) this);
-	}
-
-	private void initGUI() {
-		DishInfo dish = ctrl.getDishInfo();
+		// TODO
 		setVisible(true);
+		ctrl.addObserver((DishObserver) this);
 	}
 
 	@Override
@@ -50,7 +46,7 @@ public class DishViewer extends AbstractDishViewer implements DishObserver {
 
 		int w = getWidth();
 		int h = getHeight();
-		g.setColor(Color.gray);
+		
 		g.setFont(textFont);
 		gr.setBackground(Color.WHITE);
 		gr.fillRect(0, 0, w, h); // fill vs clear
@@ -105,7 +101,6 @@ public class DishViewer extends AbstractDishViewer implements DishObserver {
 
 	@Override
 	public void onWeightsChanged(double time, DishInfo flock) {
-		// TODO Auto-generated method stub
 		
 	}
 }
