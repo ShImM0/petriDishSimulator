@@ -47,13 +47,14 @@ public class HeaderPanel extends JPanel {
 
 		time.add(new JLabel("Delta-time:"));
 		this.deltaTimeField = new JTextField();
-		this.deltaTimeField.setPreferredSize(new Dimension(80, 30));
+		this.deltaTimeField.setPreferredSize(new Dimension(60, 30));
 		this.deltaTimeField.setText(String.valueOf(0.03));
 
 		time.add(deltaTimeField);
 		right.add(time);
 
 		JPanel buttons = new JPanel(new FlowLayout());
+		
 		// Run button
 		this.runStopButton = new JButton();
 		this.runStopButton.setToolTipText("Run simulation");
@@ -112,6 +113,9 @@ public class HeaderPanel extends JPanel {
 	}
 
 	private void reset() {
+		stopped = true;
+		this.runStopButton.setToolTipText("Run simulation");
+		this.runStopButton.setIcon(loadIconScaledDefault("run.png"));
 		this.ctrl.reset();
 	}
 }
