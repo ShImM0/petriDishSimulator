@@ -84,4 +84,15 @@ public class Controller {
 		return sim.getRuleWeights();
 	}
 
+	public void setSeparationWeight(double value) {
+		sim.setRuleWeights(sim.getRuleWeights().withSeparation(value));
+	}
+
+	public void setAlignmentWeight(double value) {
+		sim.setRuleWeights(sim.getRuleWeights().withAlignment(value));
+	}
+
+	public void setCohesionWeight(double value) {
+		sim.setRuleWeights(sim.getRuleWeights().withCohesion(value));
+	}
 }

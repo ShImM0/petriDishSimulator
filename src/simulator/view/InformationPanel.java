@@ -1,8 +1,11 @@
 package simulator.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import simulator.control.Controller;
@@ -13,9 +16,11 @@ import simulator.model.OrganismInfo;
 public class InformationPanel extends JPanel implements DishObserver {
 
 	private Controller ctrl;
-
-	private OrganismInfo organism;
-
+	
+	private JLabel timeValue;
+	private JLabel boidCountValue;
+	
+	
 	public InformationPanel(Controller ctrl) {
 		this.ctrl = ctrl;
 		initGUI();
@@ -23,8 +28,9 @@ public class InformationPanel extends JPanel implements DishObserver {
 	}
 
 	private void initGUI() {
-		// this.setPreferredSize(new Dimension(320, 550));
-		this.setBackground(Color.BLACK);
+		this.setLayout(new BorderLayout());
+		this.setBackground(Color.GRAY);
+		this.setBorder(BorderFactory.createTitledBorder("Simulation info"));
 	}
 
 	@Override
