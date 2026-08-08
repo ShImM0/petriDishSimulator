@@ -2,6 +2,7 @@ package simulator.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.function.DoubleConsumer;
 
@@ -24,9 +25,9 @@ public class ControlPanel extends JPanel {
 
 	private Controller ctrl;
 
-	private JSlider separation;
-	private JSlider alignment;
-	private JSlider cohesion;
+	private JSlider separationSlider;
+	private JSlider alignmentSlider;
+	private JSlider cohesionSlider;
 
 	private JLabel separationValue;
 	private JLabel alignmentValue;
@@ -44,23 +45,34 @@ public class ControlPanel extends JPanel {
 
 		RuleWeights initial = ctrl.getRuleWeights();
 
-		JPanel rulesPanel = new JPanel(new GridLayout(3, 1, 0, 0));
+		JPanel rulesPanel = new JPanel(new GridLayout(6, 1, 0, 0));
 		rulesPanel.setOpaque(false);
 
 		separationValue = new JLabel();
 		alignmentValue = new JLabel();
 		cohesionValue = new JLabel();
+		
+		separationSlider = buildSlider(initial.getSeparation(), separationValue, ctrl::setSeparationWeight);
+		alignmentSlider = buildSlider(initial.getAlignment(), alignmentValue, ctrl::setAlignmentWeight);
+		cohesionSlider = buildSlider(initial.getCohesion(), cohesionValue, ctrl::setCohesionWeight);
 
-		separation = buildSlider(initial.getSeparation(), separationValue, ctrl::setSeparationWeight);
-		alignment = buildSlider(initial.getAlignment(), alignmentValue, ctrl::setAlignmentWeight);
-		cohesion = buildSlider(initial.getCohesion(), cohesionValue, ctrl::setCohesionWeight);
-
-		rulesPanel.add(separation);
-		rulesPanel.add(alignment);
-		rulesPanel.add(cohesion);
+		rulesPanel.add(new JLabel("Separation"));
+		rulesPanel.add(buildVisualSlider(separationSlider, separationValue));
+		rulesPanel.add(new JLabel("Alignment"));
+		rulesPanel.add(buildVisualSlider(alignmentSlider, alignmentValue));
+		rulesPanel.add(new JLabel("Cohesion"));
+		rulesPanel.add(buildVisualSlider(cohesionSlider, cohesionValue));
 
 		this.add(rulesPanel);
 	}
+	
+	private JPanel buildVisualSlider(JSlider slider, JLabel valueLabel) {
+		JPanel row = new JPanel(new BorderLayout());
+		row.add(slider, BorderLayout.WEST);
+		row.add(valueLabel, BorderLayout.EAST);
+		return row;
+	}
+
 
 	// DoubleConsumer is a functional interface with the method accept
 	// Used for operations that consume primitive double values without returning
