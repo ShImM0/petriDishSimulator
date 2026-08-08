@@ -73,9 +73,6 @@ public class Dish implements DishInfo {
 		organisms.add(o);
 	}
 
-	public List<OrganismInfo> getOrganisms() {
-		return Collections.unmodifiableList(new ArrayList<OrganismInfo>(organisms));
-	}
 
 	public void advance(double dt) {
 		for (Organism o : organisms) {
@@ -109,6 +106,11 @@ public class Dish implements DishInfo {
 		return this.height;
 	}
 
+	@Override
+	public List<OrganismInfo> getOrganisms() {
+		return Collections.unmodifiableList(new ArrayList<OrganismInfo>(organisms));
+	}
+	
 	@Override
 	public RuleWeights getRuleWeights() {
 		return this.weights;

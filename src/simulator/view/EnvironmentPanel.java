@@ -32,26 +32,22 @@ public class EnvironmentPanel extends JPanel implements DishObserver {
 
 	@Override
 	public void onRegister(double time, DishInfo dish) {
-		
 
 	}
 
 	@Override
 	public void onReset(double time, DishInfo dish) {
-		
 
 	}
 
 	@Override
 	public void onAdvance(double time, DishInfo dish, double dt) {
-		
 
 	}
 
 	@Override
 	public void onWeightsChanged(double time, DishInfo flock) {
-		
-		
+
 	}
-	 // TODO remove observer?
+	// TODO remove observer?
 }

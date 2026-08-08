@@ -36,41 +36,38 @@ public class InformationPanel extends JPanel implements DishObserver {
 		this.setBorder(BorderFactory.createTitledBorder("Simulation info"));
 	}
 
-	private void update() {
-		timeValue.setText(String.format("%.2f", ctrl.getTime()));
-		organismCountValue.setText(String.valueOf(ctrl.getOrganisms().size()));
-		double avgSize = ctrl.getOrganisms().stream().mapToInt(o -> o.getSize()).average().orElse(0.0);
+	private void update(double time, DishInfo dish) {
+		timeValue.setText(String.format("%.2f", time));
+		organismCountValue.setText(String.valueOf(dish.getOrganisms().size()));
+		double avgSize = dish.getOrganisms().stream().mapToInt(o -> o.getSize()).average().orElse(0.0);
 		averageSize.setText(String.format("%.2f", avgSize));
-		double avgSightRadius = ctrl.getOrganisms().stream().mapToDouble(o -> o.getSightRadius()).average().orElse(0.0);
+		double avgSightRadius = dish.getOrganisms().stream().mapToDouble(o -> o.getSightRadius()).average().orElse(0.0);
 		averageSightRadius.setText(String.format("%.2f", avgSightRadius));
 	}
 
 	@Override
 	public void onRegister(double time, DishInfo dish) {
 		SwingUtilities.invokeLater(() -> {
-			this.update();
+			this.update(time, dish);
 		});
 	}
 
 	@Override
 	public void onReset(double time, DishInfo dish) {
 		SwingUtilities.invokeLater(() -> {
-			this.update();
+			this.update(time, dish);
 		});
 	}
 
 	@Override
 	public void onAdvance(double time, DishInfo dish, double dt) {
 		SwingUtilities.invokeLater(() -> {
-			this.update();
+			this.update(time, dish);
 		});
 	}
 
 	@Override
 	public void onWeightsChanged(double time, DishInfo flock) {
-		SwingUtilities.invokeLater(() -> {
-			this.update(); // TODO recheck if there's effect
-		});
 	}
 
 }

@@ -64,7 +64,7 @@ public class DishViewer extends AbstractDishViewer implements DishObserver {
 	}
 
 	private void paintDish(Graphics2D g, DishInfo dish) {
-		for (OrganismInfo o : ctrl.getOrganisms()) {
+		for (OrganismInfo o : dish.getOrganisms()) {
 			g.setColor(o.getColor());
 			int size = o.getSize();
 			int x = (int) o.getPosition().getX();
