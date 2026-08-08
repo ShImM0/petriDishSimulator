@@ -13,9 +13,18 @@ public class Dish implements DishInfo {
 	public static final String INVALID_RULE_WEIGHTS = "Rule weights cannot be null";
 
 	private static final int INITIAL_ORGANISMS = 100;
+	
+	public static final double MIN_SPEED = 0.5;
+	public static final double MAX_SPEED = 5.0;
+	public static final int MIN_SIZE = 2;
+	public static final int MAX_SIZE = 20;
+	public static final double MIN_SIGHT = 30;
+	public static final double MAX_SIGHT = 150;
+	public static final double MAX_ENERGY = 100.0;
 
 	private static final RuleWeights DEFAULT_WEIGHTS = new RuleWeights(1.5, 0.5, 3.0);
-
+			
+			
 	private int width;
 	private int height;
 
@@ -48,28 +57,24 @@ public class Dish implements DishInfo {
 		// Random starting velocity
 		Vector2D velocity = new Vector2D(Utils.Rand.nextDouble() * 2 - 1, Utils.Rand.nextDouble() * 2 - 1);
 
-		int size = Organism.MIN_SIZE + Utils.Rand.nextInt(Organism.MAX_SIZE - Organism.MIN_SIZE + 1);
-
-		double maxSpeed = Organism.MIN_SPEED + Utils.Rand.nextDouble() * (Organism.MAX_SPEED - Organism.MIN_SPEED);
+		int size = MIN_SIZE + Utils.Rand.nextInt(MAX_SIZE - MIN_SIZE + 1);
 
 		double maxForce = 0.1 + Utils.Rand.nextDouble() * 0.9;
-
-		double sightRadius = Organism.MIN_SIGHT + Utils.Rand.nextDouble() * (Organism.MAX_SIGHT - Organism.MIN_SIGHT);
-
+		
 		double separationRadius = size * 2.0;
 
 		Color color = Color.getHSBColor(Utils.Rand.nextFloat(), 0.55f, 0.85f);
 
 		String code = Organism.randomGeneticCode();
 
-		return new Organism(code, pos, velocity, color, size, maxSpeed, maxForce, sightRadius, separationRadius);
+		return new Organism(code, pos, velocity, color, size, MAX_SPEED, maxForce, MAX_SIGHT, separationRadius);
 	}
 
 	private Vector2D randomPoint() {
 		return new Vector2D(Utils.Rand.nextDouble() * width, Utils.Rand.nextDouble() * height);
 	}
 
-	public void registerOrganism(Organism o) {
+	public void registerOrganism(Organism o) { // TODO better for refactoring
 		organisms.add(o);
 	}
 

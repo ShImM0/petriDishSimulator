@@ -21,16 +21,6 @@ public class Organism implements OrganismInfo, Entity {
 	private static final SecureRandom SecRand = new SecureRandom();
 	private static final int ID_LENGTH = 6;
 
-	public static final double MIN_SPEED = 0.5;
-	public static final double MAX_SPEED = 5.0;
-	public static final int MIN_SIZE = 2;
-	public static final int MAX_SIZE = 20;
-	public static final double MIN_SIGHT = 30;
-	public static final double MAX_SIGHT = 150;
-	public static final double MIN_STRENGTH = 0.5;
-	public static final double MAX_STRENGTH = 10.0;
-	public static final double MAX_ENERGY = 100.0;
-
 	// Visual Representation
 	private final String id;
 	private final String geneticCode; // TODO color according to genetic code, factory
@@ -101,8 +91,8 @@ public class Organism implements OrganismInfo, Entity {
 	void moveWithin(double dt, double width, double height) {
 		velocity = velocity.plus(acceleration.scale(dt)).limit(maxSpeed);
 
-		double newX = pos.getX() + velocity.getX() * dt; // * 25.0;
-		double newY = pos.getY() + velocity.getY() * dt; // * 25.0;
+		double newX = pos.getX() + velocity.getX() * dt * 25.0;
+		double newY = pos.getY() + velocity.getY() * dt * 25.0;
 
 		double vx = velocity.getX();
 		double vy = velocity.getY();

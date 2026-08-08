@@ -1,5 +1,6 @@
 package simulator.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.function.DoubleConsumer;
@@ -37,13 +38,13 @@ public class ControlPanel extends JPanel {
 	}
 
 	private void initGUI() {
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.setLayout(new BorderLayout());
+		this.setBackground(Color.GRAY);
 		this.setBorder(BorderFactory.createTitledBorder("Rule weights"));
 
 		RuleWeights initial = ctrl.getRuleWeights();
 
-		// TODO try Box Layout Y axis
-		JPanel rulesPanel = new JPanel(new GridLayout(3, 1, 0, 8));
+		JPanel rulesPanel = new JPanel(new GridLayout(3, 1, 0, 0));
 		rulesPanel.setOpaque(false);
 
 		separationValue = new JLabel();

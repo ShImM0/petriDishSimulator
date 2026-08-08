@@ -3,6 +3,7 @@ package simulator.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -16,7 +17,6 @@ import simulator.model.OrganismInfo;
 
 public class InformationPanel extends JPanel implements DishObserver {
 
-	private Controller ctrl;
 	// TODO as StatusBar
 
 	private JLabel timeValue;
@@ -25,7 +25,6 @@ public class InformationPanel extends JPanel implements DishObserver {
 	private JLabel averageSightRadius; // TODO
 
 	public InformationPanel(Controller ctrl) {
-		this.ctrl = ctrl;
 		initGUI();
 		ctrl.addObserver((DishObserver) this);
 	}
@@ -34,6 +33,26 @@ public class InformationPanel extends JPanel implements DishObserver {
 		this.setLayout(new BorderLayout());
 		this.setBackground(Color.GRAY);
 		this.setBorder(BorderFactory.createTitledBorder("Simulation info"));
+		
+		JPanel grid = new JPanel(new GridLayout(4, 2, 0,0));
+		
+		timeValue = new JLabel("0.00");
+		organismCountValue = new JLabel("0");
+		averageSize = new JLabel ("0.00");
+		averageSightRadius = new JLabel ("0.00");
+		
+		// TODO Add style to labels
+		
+		grid.add(new JLabel("Time: "));
+		grid.add(this.timeValue);
+		grid.add(new JLabel("Population size: ")); // TODO remove fixed values?
+		grid.add(this.organismCountValue);
+		grid.add(new JLabel("Average size: "));
+		grid.add(this.averageSize);
+		grid.add(new JLabel("Average Sight Radius: "));
+		grid.add(this.averageSightRadius);
+		
+		this.add(grid);
 	}
 
 	private void update(double time, DishInfo dish) {
