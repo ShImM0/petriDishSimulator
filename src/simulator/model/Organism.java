@@ -2,6 +2,7 @@ package simulator.model;
 
 import java.awt.Color;
 import java.security.SecureRandom;
+import java.util.List;
 import java.util.Random;
 
 import simulator.misc.Utils;
@@ -83,10 +84,53 @@ public class Organism implements OrganismInfo, Entity {
 	static String randomGeneticCode() {
 		return randomId(7);
 	}
-	
+
 	/*
 	 * Rule weights functions
 	 */
+
+	void computeAcceleration(List<Organism> neighbors, RuleWeights weights) {
+		Vector2D separation = separation(neighbors);
+		Vector2D alignment = alignment(neighbors);
+		Vector2D cohesion = cohesion(neighbors);
+
+	}
+
+	private static final double DESIRED_SEPARATION = 5.0;
+
+	private Vector2D separation(List<Organism> neighbors) {
+		Vector2D steer = Vector2D.zero();
+		int count = 0;
+
+		for (Organism other : neighbors) {
+			double d = this.pos.distance(other.getPosition());
+			if (d > 0 && d < DESIRED_SEPARATION) {
+				// vector pointing away from neighbor, weighted inversely by distance
+				Vector2D diff = this.pos.subtract(other.getPosition()).direction().scale(1.0 / d);
+				steer = steer.plus(diff);
+				count++;
+			}
+		}
+
+		if (count > 0) {
+			steer = steer.scale(1.0 / count);
+		}
+
+		if (steer.magnitude() > 0) {
+			// Reynolds: steering = desired - velocity
+			steer = steer.direction().scale(maxSpeed).subtract(this.velocity).limit(maxForce);
+		}
+
+		return steer;
+	}
+
+	private Vector2D alignment(List<Organism> neighbors) {
+		return null;
+	}
+
+	private Vector2D cohesion(List<Organism> neighbors) {
+		return null;
+	}
 
 	void moveWithin(double dt, double width, double height) {
 		velocity = velocity.plus(acceleration.scale(dt)).limit(maxSpeed);
@@ -149,7 +193,7 @@ public class Organism implements OrganismInfo, Entity {
 	public int getSize() {
 		return this.size;
 	}
-	
+
 	@Override
 	public double getSightRadius() {
 		return this.sightRadius;
@@ -163,6 +207,5 @@ public class Organism implements OrganismInfo, Entity {
 	public void update(double dt) {
 
 	}
-
 
 }

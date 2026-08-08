@@ -82,6 +82,7 @@ public class Dish implements DishInfo {
 	public void advance(double dt) {
 		for (Organism o : organisms) {
 			List<Organism> neighbours = inRange(o);
+			// calculate movement according to situation
 			o.moveWithin(dt, width, height);
 		}
 		// steer towards the average heading of the local flockmates
