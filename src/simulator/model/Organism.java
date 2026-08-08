@@ -97,6 +97,7 @@ public class Organism implements OrganismInfo, Entity {
 	}
 
 	private static final double DESIRED_SEPARATION = 5.0;
+	private static final double NEIGHBOR_RADIUS = 50.0;
 
 	private Vector2D separation(List<Organism> neighbors) {
 		Vector2D steer = Vector2D.zero();
@@ -125,11 +126,45 @@ public class Organism implements OrganismInfo, Entity {
 	}
 
 	private Vector2D alignment(List<Organism> neighbors) {
-		return null;
+		Vector2D sum = Vector2D.zero();
+		int count = 0;
+
+		for (Organism other : neighbors) {
+			double d = this.pos.distance(other.getPosition()); // re-check?
+			if (d > 0 && d < NEIGHBOR_RADIUS) {
+				sum = sum.plus(other.getVelocity());
+				count++;
+			}
+		}
+
+		if (count > 0) {
+			sum = sum.scale(1.0 / count).direction().scale(maxSpeed);
+			return sum.subtract(this.velocity).limit(maxForce);
+		}
+
+		return Vector2D.zero();
+
 	}
 
 	private Vector2D cohesion(List<Organism> neighbors) {
-		return null;
+		Vector2D sum = Vector2D.zero();
+		int count = 0;
+
+		for (Organism other : neighbors) {
+			double d = this.pos.distance(other.getPosition());
+			if (d > 0 && d < NEIGHBOR_RADIUS) {
+				sum = sum.plus(other.getPosition());
+				count++;
+			}
+		}
+
+		if (count > 0) {
+			Vector2D target = sum.scale(1.0 / count);
+			Vector2D desired = target.subtract(this.pos).direction().scale(maxSpeed);
+			return desired.subtract(this.velocity).limit(maxForce);
+		}
+
+		return Vector2D.zero();
 	}
 
 	void moveWithin(double dt, double width, double height) {
