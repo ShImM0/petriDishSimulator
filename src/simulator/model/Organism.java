@@ -93,6 +93,11 @@ public class Organism implements OrganismInfo, Entity {
 		Vector2D separation = separation(neighbors);
 		Vector2D alignment = alignment(neighbors);
 		Vector2D cohesion = cohesion(neighbors);
+		
+		Vector2D steer = separation.scale(weights.getSeparation()).plus(alignment.scale(weights.getAlignment()))
+				.plus(cohesion.scale(weights.getCohesion()));
+
+		this.acceleration = steer.limit(maxForce);
 
 	}
 
