@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.geom.Ellipse2D;
 
 import javax.swing.SwingUtilities;
 
@@ -21,7 +22,6 @@ public class DishViewer extends AbstractDishViewer implements DishObserver {
 
 	public DishViewer(Controller ctrl) {
 		this.ctrl = ctrl;
-		// TODO
 		setVisible(true);
 		ctrl.addObserver((DishObserver) this);
 	}
@@ -57,19 +57,22 @@ public class DishViewer extends AbstractDishViewer implements DishObserver {
 			double sy = h / (double) dish.getHeight();
 			Graphics2D cg = (Graphics2D) g.create();
 			cg.scale(sx, sy);
+			cg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 			paintDish(cg, dish);
 			cg.dispose();
 		}
-		g.dispose();
 	}
 
+	// Using exact coordinates removes trembling
 	private void paintDish(Graphics2D g, DishInfo dish) {
-		for (OrganismInfo o : dish.getOrganisms()) {
+		for (OrganismInfo o : dish.getOrganisms()) { 
+			double x = o.getPosition().getX();
+			double y = o.getPosition().getY();
+			double r = o.getSize() / 2.0;
+
 			g.setColor(o.getColor());
-			int size = o.getSize();
-			int x = (int) o.getPosition().getX();
-			int y = (int) o.getPosition().getY();
-			g.fillOval(x, y, size, size);
+			Ellipse2D body = new Ellipse2D.Double(x - r, y - r, r * 2, r * 2);
+			g.fill(body);
 		}
 
 	}
@@ -106,7 +109,7 @@ public class DishViewer extends AbstractDishViewer implements DishObserver {
 
 	@Override
 	public void onSettingsChanged(double time, DishInfo dish) {
-		// TODO Auto-generated method stub
+
 		
 	}
 }

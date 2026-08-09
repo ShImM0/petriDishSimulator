@@ -62,11 +62,11 @@ public class ControlPanel extends JPanel {
 		cohesionSlider = buildSlider(initial.getCohesion(), cohesionValue, ctrl::setCohesionWeight);
 
 		rulesPanel.add(new JLabel("Separation"));
-		rulesPanel.add(buildVisualSlider(separationSlider, separationValue));
+		rulesPanel.add(labeledSlider(separationSlider, separationValue));
 		rulesPanel.add(new JLabel("Alignment"));
-		rulesPanel.add(buildVisualSlider(alignmentSlider, alignmentValue));
+		rulesPanel.add(labeledSlider(alignmentSlider, alignmentValue));
 		rulesPanel.add(new JLabel("Cohesion"));
-		rulesPanel.add(buildVisualSlider(cohesionSlider, cohesionValue));
+		rulesPanel.add(labeledSlider(cohesionSlider, cohesionValue));
 
 		this.add(rulesPanel, BorderLayout.NORTH);
 		
@@ -74,30 +74,28 @@ public class ControlPanel extends JPanel {
 		togglesPanel.setBorder(BorderFactory.createTitledBorder("Rule weights"));
 		togglesPanel.setBackground(Color.GRAY);
 		
-		discriminationCheck = buildVisualCheckBox("Discrimination", ctrl.isDiscriminationEnabled(),
+		discriminationCheck = buildCheckBox("Discrimination", ctrl.isDiscriminationEnabled(),
 				ctrl::setDiscriminationEnabled);
-		wrapCheck = buildVisualCheckBox("Wrap", ctrl.isWrapEnabled(), ctrl::setWrapEnabled);
+		wrapCheck = buildCheckBox("Wrap", ctrl.isWrapEnabled(), ctrl::setWrapEnabled);
 
 		togglesPanel.add(discriminationCheck);
 		togglesPanel.add(wrapCheck);
 		this.add(togglesPanel, BorderLayout.SOUTH);
 	}
 	
-	private JPanel buildVisualSlider(JSlider slider, JLabel valueLabel) {
+	private JPanel labeledSlider(JSlider slider, JLabel valueLabel) {
 		JPanel row = new JPanel(new BorderLayout());
 		row.add(slider, BorderLayout.WEST);
 		row.add(valueLabel, BorderLayout.EAST);
 		return row;
 	}
 	
-	private JCheckBox buildVisualCheckBox(String label, boolean initial, Consumer<Boolean> onChange) {
+	private JCheckBox buildCheckBox(String label, boolean initial, Consumer<Boolean> onChange) {
 		JCheckBox box = new JCheckBox(label, initial);
 		box.setAlignmentX(LEFT_ALIGNMENT);
 		box.addActionListener(e -> onChange.accept(box.isSelected()));
 		return box;
 	}
-
-
 
 	// DoubleConsumer is a functional interface with the method accept
 	// Used for operations that consume primitive double values without returning
