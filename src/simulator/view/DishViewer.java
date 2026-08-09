@@ -18,8 +18,6 @@ public class DishViewer extends AbstractDishViewer implements DishObserver {
 
 	private Controller ctrl;
 
-	private Font textFont = new Font("Arial", Font.BOLD, 12);
-
 	public DishViewer(Controller ctrl) {
 		this.ctrl = ctrl;
 		setVisible(true);
@@ -41,14 +39,11 @@ public class DishViewer extends AbstractDishViewer implements DishObserver {
 		super.paintComponent(g);
 		Graphics2D gr = (Graphics2D) g;
 		gr.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		// gr.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
-		// RenderingHints.VALUE_TEXT_ANTIALIAS_ON); TODO
 
 		int w = getWidth();
 		int h = getHeight();
-		
-		g.setFont(textFont);
-		gr.setBackground(Color.WHITE);
+
+		// gr.setBackground(Color.WHITE); doesn't work
 		gr.fillRect(0, 0, w, h); // fill vs clear
 
 		DishInfo dish = ctrl.getDishInfo();
@@ -65,7 +60,7 @@ public class DishViewer extends AbstractDishViewer implements DishObserver {
 
 	// Using exact coordinates removes trembling
 	private void paintDish(Graphics2D g, DishInfo dish) {
-		for (OrganismInfo o : dish.getOrganisms()) { 
+		for (OrganismInfo o : dish.getOrganisms()) {
 			double x = o.getPosition().getX();
 			double y = o.getPosition().getY();
 			double r = o.getSize() / 2.0;
@@ -74,7 +69,6 @@ public class DishViewer extends AbstractDishViewer implements DishObserver {
 			Ellipse2D body = new Ellipse2D.Double(x - r, y - r, r * 2, r * 2);
 			g.fill(body);
 		}
-
 	}
 
 	/*
@@ -104,12 +98,11 @@ public class DishViewer extends AbstractDishViewer implements DishObserver {
 
 	@Override
 	public void onWeightsChanged(double time, DishInfo flock) {
-		
+
 	}
 
 	@Override
 	public void onSettingsChanged(double time, DishInfo dish) {
 
-		
 	}
 }

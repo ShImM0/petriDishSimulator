@@ -43,15 +43,16 @@ public class ControlPanel extends JPanel {
 	}
 
 	private void initGUI() {
-		this.setLayout(new BorderLayout());
-		this.setBackground(Color.GRAY);
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.setBackground(Theme.SIDEBAR_BG);
+		this.setOpaque(true);
 
 		RuleWeights initial = ctrl.getRuleWeights();
 
 		JPanel rulesPanel = new JPanel(new GridLayout(6, 1, 0, 0));
 		rulesPanel.setBorder(BorderFactory.createTitledBorder("Rule weights"));
 		rulesPanel.setOpaque(false);
-		rulesPanel.setBackground(Color.GRAY);
+		rulesPanel.setBackground(Theme.SIDEBAR_BG);
 
 		separationValue = new JLabel();
 		alignmentValue = new JLabel();

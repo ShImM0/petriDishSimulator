@@ -31,21 +31,32 @@ public class HeaderPanel extends JPanel {
 
 	private void initGUI() {
 		this.setPreferredSize(new Dimension(800, 50));
+		this.setBackground(Theme.HEADER_BG);
 		setLayout(new BorderLayout());
 
+		// LEFT
 		JPanel left = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		left.setOpaque(false);
 		JPanel titlePanel = new JPanel();
 		titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.X_AXIS));
+		titlePanel.setOpaque(false);
 
 		JLabel title = new JLabel("Petri Dish Simulator");
 		title.setFont(Theme.FONT_TITLE);
+		title.setForeground(Theme.HEADER_TEXT);
+		title.setAlignmentX(LEFT_ALIGNMENT);
 		titlePanel.add(title);
 		left.add(titlePanel);
-
+		
+		// RIGHT
 		JPanel right = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		right.setOpaque(false);
 		JPanel time = new JPanel(new FlowLayout());
-
-		time.add(new JLabel("Delta-time:"));
+		time.setOpaque(false);
+		JLabel dtLabel = new JLabel("Delta-time:");
+		dtLabel.setForeground(Theme.HEADER_SUBTEXT);
+		dtLabel.setFont(Theme.HEADER_LABEL);
+		time.add(dtLabel);
 		this.deltaTimeField = new JTextField();
 		this.deltaTimeField.setPreferredSize(new Dimension(60, 30));
 		this.deltaTimeField.setText(String.valueOf(0.03));
@@ -54,7 +65,7 @@ public class HeaderPanel extends JPanel {
 		right.add(time);
 
 		JPanel buttons = new JPanel(new FlowLayout());
-		
+		buttons.setOpaque(false);
 		// Run button
 		this.runStopButton = new JButton();
 		this.runStopButton.setToolTipText("Run simulation");
