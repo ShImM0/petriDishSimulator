@@ -17,8 +17,6 @@ import simulator.model.OrganismInfo;
 
 public class InformationPanel extends JPanel implements DishObserver {
 
-	// TODO as StatusBar
-
 	private JLabel timeValue;
 	private JLabel organismCountValue;
 	private JLabel averageSize;
@@ -45,7 +43,7 @@ public class InformationPanel extends JPanel implements DishObserver {
 		
 		grid.add(new JLabel("Time: "));
 		grid.add(this.timeValue);
-		grid.add(new JLabel("Population size: ")); // TODO remove fixed values?
+		grid.add(new JLabel("Population size: "));
 		grid.add(this.organismCountValue);
 		grid.add(new JLabel("Average size: "));
 		grid.add(this.averageSize);

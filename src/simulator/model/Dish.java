@@ -12,7 +12,7 @@ public class Dish implements DishInfo {
 	public static final String INVALID_DISH_HEIGHT = "Invalid dish height: %";
 	public static final String INVALID_RULE_WEIGHTS = "Rule weights cannot be null";
 
-	private static final int INITIAL_ORGANISMS = 100;
+	private static final int INITIAL_ORGANISMS = 200;
 	
 	private static final int MIN_SIZE = 3;
 	private static final int MAX_SIZE = 20;
