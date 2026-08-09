@@ -9,7 +9,7 @@ import simulator.misc.Utils;
 
 public class Organism implements OrganismInfo, Entity {
 
-	public static final String INVALID_GENETIC_CODE = "Invalid genetic code";
+	public static final String INVALID_SPECIES = "Invalid species";
 	public static final String INVALID_POSITION = "Invalid position";
 	public static final String INVALID_VELOCITY = "Invalid velocity";
 	public static final String INVALID_SIZE = "Invalid size";
@@ -39,11 +39,11 @@ public class Organism implements OrganismInfo, Entity {
 	private double sightRadius;
 	private double separationRadius;
 
-	public Organism(Species species, Vector2D pos, Vector2D velocity, int size, double maxSpeed,
-			double maxForce, double sightRadius, double separationRadius) {
+	public Organism(Species species, Vector2D pos, Vector2D velocity, int size, double maxSpeed, double maxForce,
+			double sightRadius, double separationRadius) {
 
 		if (species == null)
-			throw new IllegalArgumentException(INVALID_GENETIC_CODE);
+			throw new IllegalArgumentException(INVALID_SPECIES);
 		if (pos == null)
 			throw new IllegalArgumentException(INVALID_POSITION);
 		if (velocity == null)
@@ -60,7 +60,7 @@ public class Organism implements OrganismInfo, Entity {
 			throw new IllegalArgumentException(INVALID_SEPARATION_RADIUS);
 
 		this.id = randomId(ID_LENGTH);
-		this.species =species;
+		this.species = species;
 		this.color = species.getColor();
 		this.pos = pos;
 		this.velocity = velocity;
@@ -93,7 +93,7 @@ public class Organism implements OrganismInfo, Entity {
 		Vector2D separation = separation(neighbors);
 		Vector2D alignment = alignment(neighbors);
 		Vector2D cohesion = cohesion(neighbors);
-		
+
 		Vector2D steer = separation.scale(weights.getSeparation()).plus(alignment.scale(weights.getAlignment()))
 				.plus(cohesion.scale(weights.getCohesion()));
 
@@ -101,16 +101,14 @@ public class Organism implements OrganismInfo, Entity {
 
 	}
 
-	private static final double DESIRED_SEPARATION = 5.0;
-	private static final double NEIGHBOR_RADIUS = 5.0;
-
+	// Neighbors already filtered by radius, lower bound
 	private Vector2D separation(List<Organism> neighbors) {
 		Vector2D steer = Vector2D.zero();
 		int count = 0;
 
 		for (Organism other : neighbors) {
 			double d = this.pos.distance(other.getPosition());
-			if (d > 0 && d < DESIRED_SEPARATION) {
+			if (d > 0 && d < separationRadius) {
 				// vector pointing away from neighbor, weighted inversely by distance
 				Vector2D diff = this.pos.subtract(other.getPosition()).direction().scale(1.0 / d);
 				steer = steer.plus(diff);
@@ -135,11 +133,8 @@ public class Organism implements OrganismInfo, Entity {
 		int count = 0;
 
 		for (Organism other : neighbors) {
-			double d = this.pos.distance(other.getPosition()); // re-check?
-			if (d > 0 && d < NEIGHBOR_RADIUS) {
-				sum = sum.plus(other.getVelocity());
-				count++;
-			}
+			sum = sum.plus(other.getVelocity());
+			count++;
 		}
 
 		if (count > 0) {
@@ -156,11 +151,8 @@ public class Organism implements OrganismInfo, Entity {
 		int count = 0;
 
 		for (Organism other : neighbors) {
-			double d = this.pos.distance(other.getPosition());
-			if (d > 0 && d < NEIGHBOR_RADIUS) {
-				sum = sum.plus(other.getPosition());
-				count++;
-			}
+			sum = sum.plus(other.getPosition());
+			count++;
 		}
 
 		if (count > 0) {
@@ -172,34 +164,45 @@ public class Organism implements OrganismInfo, Entity {
 		return Vector2D.zero();
 	}
 
-	void moveWithin(double dt, double width, double height) {
+	void moveWithin(double dt, double width, double height, boolean wrap) {
 		velocity = velocity.plus(acceleration.scale(dt)).limit(maxSpeed);
 
-		double newX = pos.getX() + velocity.getX() * dt * 25.0;
-		double newY = pos.getY() + velocity.getY() * dt * 25.0;
+		double newX = pos.getX() + velocity.getX() * dt;
+		double newY = pos.getY() + velocity.getY() * dt;
 
-		double vx = velocity.getX();
-		double vy = velocity.getY();
+		if (wrap) {
+			newX = wrapCoordinate(newX, width);
+			newY = wrapCoordinate(newY, height);
+		} else {
+			double vx = velocity.getX();
+			double vy = velocity.getY();
 
-		if (newX - size < 0) {
-			newX = size;
-			vx = Math.abs(vx);
-		} else if (newX + size > width) {
-			newX = width - size;
-			vx = -Math.abs(vx);
+			if (newX - size < 0) {
+				newX = size;
+				vx = Math.abs(vx);
+			} else if (newX + size > width) {
+				newX = width - size;
+				vx = -Math.abs(vx);
+			}
+			if (newY - size < 0) {
+				newY = size;
+				vy = Math.abs(vy);
+			} else if (newY + size > height) {
+				newY = height - size;
+				vy = -Math.abs(vy);
+			}
+
+			velocity = new Vector2D(vx, vy);
 		}
-		if (newY - size < 0) {
-			newY = size;
-			vy = Math.abs(vy);
-		} else if (newY + size > height) {
-			newY = height - size;
-			vy = -Math.abs(vy);
-		}
 
-		velocity = new Vector2D(vx, vy);
 		pos = new Vector2D(newX, newY);
 	}
 
+	private static double wrapCoordinate(double value, double max) {
+		return ((value % max) + max) % max;
+	}
+	
+	
 	/*
 	 * OrganismInfo interface
 	 */
@@ -223,7 +226,7 @@ public class Organism implements OrganismInfo, Entity {
 	public String getGeneticCode() {
 		return this.species.getGeneticCode();
 	}
-	
+
 	@Override
 	public Color getColor() {
 		return this.color;

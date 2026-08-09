@@ -66,6 +66,28 @@ public class Simulator implements Observable<DishObserver> {
 	public RuleWeights getRuleWeights() {
 		return this.dish.getRuleWeights();
 	}
+	
+	public void setDiscriminationEnabled(boolean enabled) {
+		dish.setDiscriminationEnabled(enabled);
+		for (DishObserver o : this.observers) {
+			o.onSettingsChanged(time, dish);
+		}
+	}
+
+	public boolean isDiscriminationEnabled() {
+		return this.dish.getDiscriminationEnabled();
+	}
+
+	public void setWrapEnabled(boolean enabled) {
+		dish.setWrapEnabled(enabled);
+		for (DishObserver o : this.observers) {
+			o.onSettingsChanged(time, dish);
+		}
+	}
+
+	public boolean isWrapEnabled() {
+		return this.dish.getWrapEnabled();
+	}
 
 	public DishInfo getDishInfo() {
 		return this.dish;

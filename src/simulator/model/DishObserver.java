@@ -10,4 +10,6 @@ public interface DishObserver {
 	void onAdvance(double time, DishInfo dish, double dt);
 	
 	void onWeightsChanged(double time, DishInfo flock);
+	
+	void onSettingsChanged(double time, DishInfo dish);
 }

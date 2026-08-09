@@ -89,4 +89,10 @@ public class InformationPanel extends JPanel implements DishObserver {
 	public void onWeightsChanged(double time, DishInfo flock) {
 	}
 
+	@Override
+	public void onSettingsChanged(double time, DishInfo dish) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

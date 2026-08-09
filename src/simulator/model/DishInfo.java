@@ -13,4 +13,11 @@ public interface DishInfo {
 	
 	public void setRuleWeights(RuleWeights weights);
 
+	public boolean getDiscriminationEnabled();
+
+	public void setDiscriminationEnabled(boolean enabled);
+	
+	public boolean getWrapEnabled();
+
+	public void setWrapEnabled(boolean enabled);
 }

@@ -49,4 +49,10 @@ public class EnvironmentPanel extends JPanel implements DishObserver {
 
 	}
 	// TODO remove observer?
+
+	@Override
+	public void onSettingsChanged(double time, DishInfo dish) {
+		// TODO Auto-generated method stub
+		
+	}
 }

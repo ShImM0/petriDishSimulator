@@ -65,11 +65,6 @@ public class Dish implements DishInfo {
 
 		double maxSpeed = MIN_SPEED + Utils.Rand.nextDouble() * (MAX_SPEED - MIN_SPEED);
 		double angle = Utils.Rand.nextDouble() * Math.PI * 2;
-		// Start already moving at a meaningful fraction of this organism's own
-		// max speed, instead of a tiny/near-zero random vector: an organism
-		// that starts almost stationary gets "kicked" up to max speed on its
-		// very first tick once any steering force applies, which reads as a
-		// sudden jump rather than smooth motion.
 		Vector2D velocity = Vector2D.fromAngle(angle).scale(maxSpeed * (0.4 + Utils.Rand.nextDouble() * 0.4));
 
 		int size = MIN_SIZE + Utils.Rand.nextInt(MAX_SIZE - MIN_SIZE + 1);
@@ -102,7 +97,7 @@ public class Dish implements DishInfo {
 			o.computeAcceleration(neighbours, weights);
 		}
 		for(Organism o: organisms) {
-			o.moveWithin(dt, width, height);
+			o.moveWithin(dt, width, height, wrapEnabled);
 		}
 		// steer towards the average heading of the local flockmates
 	}
@@ -111,7 +106,11 @@ public class Dish implements DishInfo {
 		List<Organism> neighbors = new ArrayList<>();
 		double radius = o.getSightRadius();
 		for (Organism other : organisms) {
-			if (other != o && o.getPosition().distance(other.getPosition()) <= radius) {
+			if (other == o)
+				continue;
+			if (discriminationEnabled && !other.getGeneticCode().equals(o.getGeneticCode()))
+				continue;
+			if (o.getPosition().distance(other.getPosition()) <= radius) {
 				neighbors.add(other);
 			}
 		}
@@ -147,6 +146,26 @@ public class Dish implements DishInfo {
 		if (weights == null)
 			throw new IllegalArgumentException(INVALID_RULE_WEIGHTS);
 		this.weights = weights;
+	}
+	
+	@Override
+	public boolean getDiscriminationEnabled() {
+		return this.discriminationEnabled;
+	}
+
+	@Override
+	public void setDiscriminationEnabled(boolean enabled) {
+		this.discriminationEnabled = enabled;
+	}
+
+	@Override
+	public boolean getWrapEnabled() {
+		return this.wrapEnabled;
+	}
+
+	@Override
+	public void setWrapEnabled(boolean enabled) {
+		this.wrapEnabled = enabled;
 	}
 
 }

@@ -95,4 +95,25 @@ public class Controller {
 	public void setCohesionWeight(double value) {
 		sim.setRuleWeights(sim.getRuleWeights().withCohesion(value));
 	}
+	
+	/*
+	 * Discrimination (flock only with matching genetic code) and Wrap
+	 * (wrap around edges vs. bounce off them) toggles.
+	 */
+
+	public boolean isDiscriminationEnabled() {
+		return sim.isDiscriminationEnabled();
+	}
+
+	public void setDiscriminationEnabled(boolean enabled) {
+		sim.setDiscriminationEnabled(enabled);
+	}
+
+	public boolean isWrapEnabled() {
+		return sim.isWrapEnabled();
+	}
+
+	public void setWrapEnabled(boolean enabled) {
+		sim.setWrapEnabled(enabled);
+	}
 }
