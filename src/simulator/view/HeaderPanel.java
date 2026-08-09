@@ -32,13 +32,13 @@ public class HeaderPanel extends JPanel {
 	private void initGUI() {
 		this.setPreferredSize(new Dimension(800, 50));
 		setLayout(new BorderLayout());
-		setBackground(Color.DARK_GRAY);
 
 		JPanel left = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JPanel titlePanel = new JPanel();
 		titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.X_AXIS));
 
 		JLabel title = new JLabel("Petri Dish Simulator");
+		title.setFont(Theme.FONT_TITLE);
 		titlePanel.add(title);
 		left.add(titlePanel);
 

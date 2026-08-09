@@ -22,6 +22,7 @@ public class MainWindow extends JFrame {
 	private void initGUI() {
 
 		JPanel mainPanel = new JPanel(new BorderLayout());
+		mainPanel.setBackground(Theme.APP_BG);
 		setContentPane(mainPanel);
 
 		this.setMinimumSize(new Dimension(800, 600)); // TODO
@@ -30,6 +31,7 @@ public class MainWindow extends JFrame {
 		mainPanel.add(headerPanel, BorderLayout.PAGE_START);
 
 		JPanel contentPanel = new JPanel(new BorderLayout(16, 0));
+		contentPanel.setBackground(Theme.APP_BG);
 		contentPanel.setBorder(BorderFactory.createEmptyBorder(16, 16, 16, 16));
 
 		JPanel environmentPanel = new EnvironmentPanel(ctrl);

@@ -5,18 +5,11 @@ import java.awt.Font;
 
 public final class Theme {
 
-	/*
-	 * public static final Color HEADER_BG = public static final Color HEADER_TEXT
-	 * public static final Color SUBHEADER_TEXT
-	 */
+	public static final Color APP_BG = new Color(238, 240, 243); // default in Windows
+	
+	public static final Color HEADER_BG = new Color(32, 31, 29);
 
-	public static final Color TEXT_PRIMARY = new Color(0x31, 0x42, 0x54);
-	public static final Color TEXT_SECONDARY = new Color(0x108, 0x117, 0x125);
-
-	public static final Color APP_BG = Color.WHITE;
-	public static final Color PANEL_BG = Color.WHITE;
-
-	// public static final Font FONT_TITLE
-	public static final Font FONT_TITLE = new Font("SansSerif", Font.BOLD, 16);
+	public static final Font FONT_TITLE = new Font("Arial", Font.PLAIN, 15);
+	
 
 }
