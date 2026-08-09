@@ -4,10 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.util.function.Consumer;
 import java.util.function.DoubleConsumer;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
@@ -21,7 +23,6 @@ public class ControlPanel extends JPanel {
 	private static final int SLIDER_SCALE = 100;
 	private static final int SLIDER_MIN = (int) (RuleWeights.MIN_WEIGHT * SLIDER_SCALE);
 	private static final int SLIDER_MAX = (int) (RuleWeights.MAX_WEIGHT * SLIDER_SCALE);
-	// TODO to each their own max
 
 	private Controller ctrl;
 
@@ -32,6 +33,9 @@ public class ControlPanel extends JPanel {
 	private JLabel separationValue;
 	private JLabel alignmentValue;
 	private JLabel cohesionValue;
+	
+	private JCheckBox discriminationCheck;
+	private JCheckBox wrapCheck;
 
 	public ControlPanel(Controller ctrl) {
 		this.ctrl = ctrl;
@@ -41,12 +45,13 @@ public class ControlPanel extends JPanel {
 	private void initGUI() {
 		this.setLayout(new BorderLayout());
 		this.setBackground(Color.GRAY);
-		this.setBorder(BorderFactory.createTitledBorder("Rule weights"));
 
 		RuleWeights initial = ctrl.getRuleWeights();
 
 		JPanel rulesPanel = new JPanel(new GridLayout(6, 1, 0, 0));
+		rulesPanel.setBorder(BorderFactory.createTitledBorder("Rule weights"));
 		rulesPanel.setOpaque(false);
+		rulesPanel.setBackground(Color.GRAY);
 
 		separationValue = new JLabel();
 		alignmentValue = new JLabel();
@@ -63,7 +68,19 @@ public class ControlPanel extends JPanel {
 		rulesPanel.add(new JLabel("Cohesion"));
 		rulesPanel.add(buildVisualSlider(cohesionSlider, cohesionValue));
 
-		this.add(rulesPanel);
+		this.add(rulesPanel, BorderLayout.NORTH);
+		
+		JPanel togglesPanel = new JPanel(new GridLayout(2,1,0,0));
+		togglesPanel.setBorder(BorderFactory.createTitledBorder("Rule weights"));
+		togglesPanel.setBackground(Color.GRAY);
+		
+		discriminationCheck = buildVisualCheckBox("Discrimination", ctrl.isDiscriminationEnabled(),
+				ctrl::setDiscriminationEnabled);
+		wrapCheck = buildVisualCheckBox("Wrap", ctrl.isWrapEnabled(), ctrl::setWrapEnabled);
+
+		togglesPanel.add(discriminationCheck);
+		togglesPanel.add(wrapCheck);
+		this.add(togglesPanel, BorderLayout.SOUTH);
 	}
 	
 	private JPanel buildVisualSlider(JSlider slider, JLabel valueLabel) {
@@ -72,6 +89,14 @@ public class ControlPanel extends JPanel {
 		row.add(valueLabel, BorderLayout.EAST);
 		return row;
 	}
+	
+	private JCheckBox buildVisualCheckBox(String label, boolean initial, Consumer<Boolean> onChange) {
+		JCheckBox box = new JCheckBox(label, initial);
+		box.setAlignmentX(LEFT_ALIGNMENT);
+		box.addActionListener(e -> onChange.accept(box.isSelected()));
+		return box;
+	}
+
 
 
 	// DoubleConsumer is a functional interface with the method accept
