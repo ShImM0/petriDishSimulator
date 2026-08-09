@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 import simulator.control.Controller;
 import simulator.model.DishInfo;
 import simulator.model.DishObserver;
-import simulator.model.OrganismInfo;
 
 public class EnvironmentPanel extends JPanel implements DishObserver {
 

@@ -24,7 +24,7 @@ public class Organism implements OrganismInfo, Entity {
 
 	// Visual Representation
 	private final String id;
-	private final String geneticCode; // TODO color according to genetic code, factory
+	private final Species species;
 	private final Color color;
 	private int size;
 
@@ -39,10 +39,10 @@ public class Organism implements OrganismInfo, Entity {
 	private double sightRadius;
 	private double separationRadius;
 
-	public Organism(String geneticCode, Vector2D pos, Vector2D velocity, Color color, int size, double maxSpeed,
+	public Organism(Species species, Vector2D pos, Vector2D velocity, int size, double maxSpeed,
 			double maxForce, double sightRadius, double separationRadius) {
 
-		if (geneticCode == null || geneticCode.isBlank())
+		if (species == null)
 			throw new IllegalArgumentException(INVALID_GENETIC_CODE);
 		if (pos == null)
 			throw new IllegalArgumentException(INVALID_POSITION);
@@ -60,10 +60,10 @@ public class Organism implements OrganismInfo, Entity {
 			throw new IllegalArgumentException(INVALID_SEPARATION_RADIUS);
 
 		this.id = randomId(ID_LENGTH);
-		this.geneticCode = geneticCode;
+		this.species =species;
+		this.color = species.getColor();
 		this.pos = pos;
 		this.velocity = velocity;
-		this.color = color;
 		this.size = size;
 		this.maxSpeed = maxSpeed;
 		this.maxForce = maxForce;
@@ -102,7 +102,7 @@ public class Organism implements OrganismInfo, Entity {
 	}
 
 	private static final double DESIRED_SEPARATION = 5.0;
-	private static final double NEIGHBOR_RADIUS = 50.0;
+	private static final double NEIGHBOR_RADIUS = 5.0;
 
 	private Vector2D separation(List<Organism> neighbors) {
 		Vector2D steer = Vector2D.zero();
@@ -221,9 +221,9 @@ public class Organism implements OrganismInfo, Entity {
 
 	@Override
 	public String getGeneticCode() {
-		return this.getGeneticCode();
+		return this.species.getGeneticCode();
 	}
-
+	
 	@Override
 	public Color getColor() {
 		return this.color;
@@ -237,6 +237,11 @@ public class Organism implements OrganismInfo, Entity {
 	@Override
 	public double getSightRadius() {
 		return this.sightRadius;
+	}
+
+	@Override
+	public double getSeparationRadius() {
+		return this.separationRadius;
 	}
 
 	/*

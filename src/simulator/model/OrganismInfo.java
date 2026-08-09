@@ -17,5 +17,7 @@ public interface OrganismInfo {
 	public int getSize();
 	
 	public double getSightRadius();
+	
+	public double getSeparationRadius();
 
 }
