@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -32,20 +33,27 @@ public class HeaderPanel extends JPanel {
 	private void initGUI() {
 		this.setPreferredSize(new Dimension(800, 50));
 		this.setBackground(Theme.HEADER_BG);
+		this.setBorder(BorderFactory.createEmptyBorder(0, 16, 0, 16));
 		setLayout(new BorderLayout());
 
 		// LEFT
 		JPanel left = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		left.setOpaque(false);
 		JPanel titlePanel = new JPanel();
-		titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.X_AXIS));
+		titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.Y_AXIS));
 		titlePanel.setOpaque(false);
 
 		JLabel title = new JLabel("Petri Dish Simulator");
 		title.setFont(Theme.FONT_TITLE);
 		title.setForeground(Theme.HEADER_TEXT);
 		title.setAlignmentX(LEFT_ALIGNMENT);
+		JLabel subtitle = new JLabel("Boids Simulator \u2022 SEPARATION / ALIGNMENT / COHESION");
+		subtitle.setFont(Theme.FONT_SUBTITLE);
+		subtitle.setForeground(Theme.HEADER_SUBTEXT);
+		subtitle.setAlignmentX(LEFT_ALIGNMENT);
+		
 		titlePanel.add(title);
+		titlePanel.add(subtitle);
 		left.add(titlePanel);
 		
 		// RIGHT
@@ -73,7 +81,7 @@ public class HeaderPanel extends JPanel {
 		this.runStopButton.addActionListener((e) -> runStop());
 
 		// Reset button
-		this.resetButton = new JButton(); // TODO run after reset does not pause/run
+		this.resetButton = new JButton();
 		this.resetButton.setToolTipText("Reset simulation");
 		this.resetButton.setIcon(loadIconScaledDefault("reset.png"));
 		this.resetButton.addActionListener((e) -> reset());

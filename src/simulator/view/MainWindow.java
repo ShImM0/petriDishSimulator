@@ -24,6 +24,7 @@ public class MainWindow extends JFrame {
 
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		mainPanel.setBackground(Theme.APP_BG);
+		mainPanel.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
 		setContentPane(mainPanel);
 
 		this.setMinimumSize(new Dimension(800, 600)); // TODO
@@ -47,7 +48,7 @@ public class MainWindow extends JFrame {
 		sidePanel.add(infoPanel);
 
 		contentPanel.add(environmentPanel, BorderLayout.CENTER);
-		contentPanel.add(sidePanel, BorderLayout.EAST);
+		contentPanel.add(sidePanel, BorderLayout.WEST);
 
 		mainPanel.add(contentPanel, BorderLayout.CENTER);
 
