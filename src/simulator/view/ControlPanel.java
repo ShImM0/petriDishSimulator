@@ -13,12 +13,14 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.JTextArea;
+import javax.swing.border.BevelBorder;
 import javax.swing.event.ChangeListener;
 
 import simulator.control.Controller;
 import simulator.model.RuleWeights;
 
-public class ControlPanel extends JPanel {
+public class ControlPanel extends JPanel{
 
 	private static final int SLIDER_SCALE = 100;
 	private static final int SLIDER_MIN = (int) (RuleWeights.MIN_WEIGHT * SLIDER_SCALE);
@@ -39,18 +41,25 @@ public class ControlPanel extends JPanel {
 
 	public ControlPanel(Controller ctrl) {
 		this.ctrl = ctrl;
+		this.setBorder(new RoundedBorder(Theme.RADIUS_PANEL));
 		initGUI();
 	}
 
 	private void initGUI() {
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.setLayout(new BorderLayout());
 		this.setBackground(Theme.SIDEBAR_BG);
-		this.setOpaque(true);
 
 		RuleWeights initial = ctrl.getRuleWeights();
-
+		JPanel rulesDescription = new JPanel();
+		rulesDescription.setLayout(new BoxLayout(rulesDescription, BoxLayout.Y_AXIS));
+		rulesDescription.add(ruleDescription("Separation","Steering to avoid crowding neighbours"));
+		rulesDescription.add(ruleDescription("Alignment","Sterring towards the average heading of neighbours"));
+		rulesDescription.add(ruleDescription("Cohesion","Steering to move toward the average position of neighbors"));
+		
+		this.add(rulesDescription, BorderLayout.NORTH);
+		
 		JPanel rulesPanel = new JPanel(new GridLayout(6, 1, 0, 0));
-		rulesPanel.setBorder(BorderFactory.createTitledBorder("Rule weights"));
+		//rulesPanel.setBorder(BorderFactory.createTitledBorder("Rule weights"));
 		rulesPanel.setOpaque(false);
 		rulesPanel.setBackground(Theme.SIDEBAR_BG);
 
@@ -69,10 +78,10 @@ public class ControlPanel extends JPanel {
 		rulesPanel.add(new JLabel("Cohesion"));
 		rulesPanel.add(labeledSlider(cohesionSlider, cohesionValue));
 
-		this.add(rulesPanel, BorderLayout.NORTH);
+		this.add(rulesPanel, BorderLayout.CENTER);
 		
 		JPanel togglesPanel = new JPanel(new GridLayout(2,1,0,0));
-		togglesPanel.setBorder(BorderFactory.createTitledBorder("Rule weights"));
+		//togglesPanel.setBorder(BorderFactory.createTitledBorder("Simulation options"));
 		togglesPanel.setBackground(Color.GRAY);
 		
 		discriminationCheck = buildCheckBox("Discrimination", ctrl.isDiscriminationEnabled(),
@@ -81,12 +90,38 @@ public class ControlPanel extends JPanel {
 
 		togglesPanel.add(discriminationCheck);
 		togglesPanel.add(wrapCheck);
+		
 		this.add(togglesPanel, BorderLayout.SOUTH);
+	}
+	private JPanel ruleDescription(String title, String body) {
+	    JPanel panel = new JPanel();
+	    panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+	    panel.setOpaque(false);
+	    panel.setAlignmentX(LEFT_ALIGNMENT);
+
+	    JLabel titleLabel = new JLabel(title);
+	    titleLabel.setForeground(Theme.SIDEBAR_TEXT);
+	    titleLabel.setFont(Theme.FONT_RULE_TITLE);
+	    titleLabel.setAlignmentX(LEFT_ALIGNMENT);
+
+	    JLabel bodyLabel = new JLabel(
+	        "<html><div style='width:180px;'>" + body + "</div></html>"
+	    );
+	    bodyLabel.setForeground(Theme.SIDEBAR_SUBTEXT);
+	    bodyLabel.setFont(Theme.FONT_RULE_BODY);
+	    bodyLabel.setAlignmentX(LEFT_ALIGNMENT);
+
+	    panel.add(titleLabel);
+	    panel.add(bodyLabel);
+
+	    return panel;
 	}
 	
 	private JPanel labeledSlider(JSlider slider, JLabel valueLabel) {
 		JPanel row = new JPanel(new BorderLayout());
-		row.add(slider, BorderLayout.WEST);
+		row.setOpaque(false);
+		
+		row.add(slider, BorderLayout.CENTER);
 		row.add(valueLabel, BorderLayout.EAST);
 		return row;
 	}

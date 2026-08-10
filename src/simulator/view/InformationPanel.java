@@ -23,14 +23,15 @@ public class InformationPanel extends JPanel implements DishObserver {
 	private JLabel averageSightRadius; // TODO
 
 	public InformationPanel(Controller ctrl) {
+		this.setBorder(new RoundedBorder(Theme.RADIUS_PANEL));
 		initGUI();
 		ctrl.addObserver((DishObserver) this);
 	}
 
 	private void initGUI() {
 		this.setLayout(new BorderLayout());
-		this.setBackground(Color.GRAY);
-		this.setBorder(BorderFactory.createTitledBorder("Simulation info"));
+		this.setBackground(Theme.SIDEBAR_BG);
+		//this.setBorder(BorderFactory.createTitledBorder("Simulation info"));
 		
 		JPanel grid = new JPanel(new GridLayout(4, 2, 0,0));
 		
@@ -85,12 +86,12 @@ public class InformationPanel extends JPanel implements DishObserver {
 
 	@Override
 	public void onWeightsChanged(double time, DishInfo flock) {
+		
 	}
 
 	@Override
 	public void onSettingsChanged(double time, DishInfo dish) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 }
