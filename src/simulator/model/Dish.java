@@ -56,9 +56,12 @@ public class Dish implements DishInfo {
 		}
 	}
 
-	/*
-	 * testing
-	 */
+	
+	public Organism addRandomOrganism() {
+		Organism o = randomOrganism();
+		organisms.add(o);
+		return o;
+	}
 
 	private Organism randomOrganism() {
 		Vector2D pos = randomPoint();

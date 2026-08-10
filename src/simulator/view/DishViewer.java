@@ -61,16 +61,20 @@ public class DishViewer extends AbstractDishViewer implements DishObserver {
 	// Using exact coordinates removes trembling
 	private void paintDish(Graphics2D g, DishInfo dish) {
 		for (OrganismInfo o : dish.getOrganisms()) {
-			double x = o.getPosition().getX();
-			double y = o.getPosition().getY();
-			double r = o.getSize() / 2.0;
-
-			g.setColor(o.getColor());
-			Ellipse2D body = new Ellipse2D.Double(x - r, y - r, r * 2, r * 2);
-			g.fill(body);
+			paintOrganism(g, o);
 		}
 	}
 
+	private void paintOrganism(Graphics2D g, OrganismInfo o) {
+		double x = o.getPosition().getX();
+		double y = o.getPosition().getY();
+		double r = o.getSize() / 2.0;
+
+		g.setColor(o.getColor());
+		Ellipse2D body = new Ellipse2D.Double(x - r, y - r, r * 2, r * 2);
+		g.fill(body);
+	}
+	
 	/*
 	 * DishObserver interface
 	 */
@@ -95,6 +99,13 @@ public class DishViewer extends AbstractDishViewer implements DishObserver {
 			this.update();
 		});
 	}
+	
+	@Override
+	public void onOrganismAdded(double time, DishInfo dish, OrganismInfo org) {
+		SwingUtilities.invokeLater(() -> {
+			this.update();
+		});
+	}
 
 	@Override
 	public void onWeightsChanged(double time, DishInfo flock) {
@@ -105,4 +116,5 @@ public class DishViewer extends AbstractDishViewer implements DishObserver {
 	public void onSettingsChanged(double time, DishInfo dish) {
 
 	}
+
 }

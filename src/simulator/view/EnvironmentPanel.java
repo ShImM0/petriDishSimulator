@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import simulator.control.Controller;
 import simulator.model.DishInfo;
 import simulator.model.DishObserver;
+import simulator.model.OrganismInfo;
 
 public class EnvironmentPanel extends JPanel implements DishObserver {
 
@@ -44,6 +45,12 @@ public class EnvironmentPanel extends JPanel implements DishObserver {
 	public void onAdvance(double time, DishInfo dish, double dt) {
 
 	}
+	
+	
+	@Override
+	public void onOrganismAdded(double time, DishInfo dish, OrganismInfo org) {
+		
+	}
 
 	@Override
 	public void onWeightsChanged(double time, DishInfo flock) {
@@ -55,4 +62,5 @@ public class EnvironmentPanel extends JPanel implements DishObserver {
 		
 		
 	}
+
 }

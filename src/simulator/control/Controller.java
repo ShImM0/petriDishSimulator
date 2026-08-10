@@ -55,6 +55,10 @@ public class Controller {
 	public void advance(double dt) {
 		this.sim.advance(dt);
 	}
+	
+	public void addOrganism() {
+		this.sim.addOrganism();
+	}
 
 	public void addObserver(DishObserver obs) {
 		this.sim.addObserver(obs);

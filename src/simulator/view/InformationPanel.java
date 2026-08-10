@@ -119,6 +119,11 @@ public class InformationPanel extends JPanel implements DishObserver {
 	}
 
 	@Override
+	public void onOrganismAdded(double time, DishInfo dish, OrganismInfo org) {
+		
+	}
+	
+	@Override
 	public void onWeightsChanged(double time, DishInfo flock) {
 
 	}
@@ -131,5 +136,6 @@ public class InformationPanel extends JPanel implements DishObserver {
 	private String format(double num) {
 		return String.format("%.2f", num);
 	}
+
 
 }

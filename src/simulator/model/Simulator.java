@@ -56,6 +56,22 @@ public class Simulator implements Observable<DishObserver> {
 
 	}
 	
+	public void addOrganism(Organism o) {
+		dish.registerOrganism(o);
+		notifyOrganismAdded(o);
+	}
+	
+	public void addOrganism() {
+		Organism o = dish.addRandomOrganism();
+		notifyOrganismAdded(o);
+	}
+
+	private void notifyOrganismAdded(Organism o) {
+		for (DishObserver ob : new ArrayList<>(observers)) {
+			ob.onOrganismAdded(time, dish, o);
+		}
+	}
+	
 	public void setRuleWeights(RuleWeights weights) {
 		dish.setRuleWeights(weights);
 		for (DishObserver o : this.observers) {

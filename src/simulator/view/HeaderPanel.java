@@ -23,7 +23,7 @@ import simulator.model.DishObserver;
 public class HeaderPanel extends JPanel{
 
 	private Controller ctrl;
-	private JButton runStopButton, resetButton;
+	private JButton addButton, runStopButton, resetButton;
 	private JTextField deltaTimeField;
 	private boolean stopped;
 
@@ -77,6 +77,13 @@ public class HeaderPanel extends JPanel{
 
 		JPanel buttons = new JPanel(new FlowLayout());
 		buttons.setOpaque(false);
+		
+		// Add button
+		this.addButton = new JButton();
+		this.addButton.setToolTipText("Add an organism");
+		this.addButton.setIcon(loadIconScaledDefault("run.png"));
+		this.addButton.addActionListener((e) -> ctrl.addOrganism());
+		
 		// Run button
 		this.runStopButton = new JButton();
 		this.runStopButton.setToolTipText("Run simulation");
@@ -89,6 +96,7 @@ public class HeaderPanel extends JPanel{
 		this.resetButton.setIcon(loadIconScaledDefault("reset.png"));
 		this.resetButton.addActionListener((e) -> reset());
 
+		buttons.add(addButton);
 		buttons.add(runStopButton);
 		buttons.add(resetButton);
 
