@@ -13,11 +13,14 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 import icons.ICONS;
 import simulator.control.Controller;
+import simulator.model.DishInfo;
+import simulator.model.DishObserver;
 
-public class HeaderPanel extends JPanel {
+public class HeaderPanel extends JPanel{
 
 	private Controller ctrl;
 	private JButton runStopButton, resetButton;
@@ -109,6 +112,27 @@ public class HeaderPanel extends JPanel {
 		return null;
 	}
 
+	private JLabel buildTime(String text) {
+		JLabel label = new JLabel(text) {
+			@Override
+			protected void paintComponent(java.awt.Graphics g) {
+				java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();
+				g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING,
+						java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
+				g2.setColor(Theme.HEADER_BG);
+				g2.fillRoundRect(0, 0, getWidth(), getHeight(), 5, 5);
+				g2.dispose();
+				super.paintComponent(g);
+			}
+		};
+		label.setForeground(Theme.HEADER_TEXT);
+		label.setFont(Theme.HEADER_LABEL);
+		label.setBorder(BorderFactory.createEmptyBorder(6, 14, 6, 14));
+		label.setOpaque(false);
+		return label;
+	}
+	
+	
 	private void runStop() {
 		stopped = !stopped;
 		if (stopped) {
@@ -137,4 +161,5 @@ public class HeaderPanel extends JPanel {
 		this.runStopButton.setIcon(loadIconScaledDefault("run.png"));
 		this.ctrl.reset();
 	}
+
 }

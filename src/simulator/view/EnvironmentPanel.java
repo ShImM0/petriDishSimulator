@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import simulator.control.Controller;
@@ -22,7 +23,7 @@ public class EnvironmentPanel extends JPanel implements DishObserver {
 	}
 
 	private void initGUI() {
-		this.setLayout(new BorderLayout());
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		dishViewer = new DishViewer(ctrl);
 		dishViewer.setPreferredSize(new Dimension(500, 500));
 		this.add(dishViewer, BorderLayout.CENTER);
