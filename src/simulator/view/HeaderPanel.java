@@ -81,7 +81,7 @@ public class HeaderPanel extends JPanel{
 		// Add button
 		this.addButton = new JButton();
 		this.addButton.setToolTipText("Add an organism");
-		this.addButton.setIcon(loadIconScaledDefault("run.png"));
+		this.addButton.setIcon(loadIconScaledDefault("add.png"));
 		this.addButton.addActionListener((e) -> ctrl.addOrganism());
 		
 		// Run button
@@ -118,26 +118,6 @@ public class HeaderPanel extends JPanel{
 			npe.printStackTrace(); // TODO;
 		}
 		return null;
-	}
-
-	private JLabel buildTime(String text) {
-		JLabel label = new JLabel(text) {
-			@Override
-			protected void paintComponent(java.awt.Graphics g) {
-				java.awt.Graphics2D g2 = (java.awt.Graphics2D) g.create();
-				g2.setRenderingHint(java.awt.RenderingHints.KEY_ANTIALIASING,
-						java.awt.RenderingHints.VALUE_ANTIALIAS_ON);
-				g2.setColor(Theme.HEADER_BG);
-				g2.fillRoundRect(0, 0, getWidth(), getHeight(), 5, 5);
-				g2.dispose();
-				super.paintComponent(g);
-			}
-		};
-		label.setForeground(Theme.HEADER_TEXT);
-		label.setFont(Theme.HEADER_LABEL);
-		label.setBorder(BorderFactory.createEmptyBorder(6, 14, 6, 14));
-		label.setOpaque(false);
-		return label;
 	}
 	
 	

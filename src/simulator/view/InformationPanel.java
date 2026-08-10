@@ -120,7 +120,9 @@ public class InformationPanel extends JPanel implements DishObserver {
 
 	@Override
 	public void onOrganismAdded(double time, DishInfo dish, OrganismInfo org) {
-		
+		SwingUtilities.invokeLater(() -> {
+			this.update(time, dish); // updates even if the simulation is not running
+		});
 	}
 	
 	@Override
