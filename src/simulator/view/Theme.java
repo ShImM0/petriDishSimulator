@@ -20,9 +20,9 @@ public final class Theme {
 	public static final Font FONT_TITLE = new Font("Arial", Font.BOLD, 18);
 	public static final Font FONT_SUBTITLE = new Font("Arial", Font.BOLD, 12);
 	public static final Font HEADER_LABEL = new Font("Arial", Font.BOLD, 12);
-	public static final Font SIDE_TITLE = new Font("Arial", Font.BOLD, 12);
-	public static final Font FONT_RULE_TITLE = new Font("Arial", Font.BOLD, 15);
-	public static final Font FONT_RULE_BODY = new Font("Arial", Font.PLAIN, 12);
+	public static final Font FONT_RULE_TITLE = new Font("Arial", Font.BOLD, 13);
+	public static final Font FONT_RULE_BODY = new Font("Arial", Font.BOLD, 11);
+	public static final Font FONT_SIDE_LABEL = new Font("Arial", Font.PLAIN, 12);
 	
 	public static final int RADIUS_PANEL = 8;
 }

@@ -8,6 +8,7 @@ import java.util.function.Consumer;
 import java.util.function.DoubleConsumer;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -52,13 +53,13 @@ public class ControlPanel extends JPanel{
 		RuleWeights initial = ctrl.getRuleWeights();
 		JPanel rulesDescription = new JPanel();
 		rulesDescription.setLayout(new BoxLayout(rulesDescription, BoxLayout.Y_AXIS));
-		rulesDescription.add(ruleDescription("Separation","Steering to avoid crowding neighbours"));
-		rulesDescription.add(ruleDescription("Alignment","Sterring towards the average heading of neighbours"));
+	    rulesDescription.setBackground(Theme.SIDEBAR_BG);
+		rulesDescription.add(ruleDescription("Separation","Steering to avoid crowding neighbors"));
+		rulesDescription.add(ruleDescription("Alignment","Steering towards the average heading of neighbors"));
 		rulesDescription.add(ruleDescription("Cohesion","Steering to move toward the average position of neighbors"));
 		
 		this.add(rulesDescription, BorderLayout.NORTH);
-		
-		JPanel rulesPanel = new JPanel(new GridLayout(6, 1, 0, 0));
+		JPanel rulesPanel = new JPanel(new GridLayout(3, 1, 0, 12));
 		//rulesPanel.setBorder(BorderFactory.createTitledBorder("Rule weights"));
 		rulesPanel.setOpaque(false);
 		rulesPanel.setBackground(Theme.SIDEBAR_BG);
@@ -71,12 +72,9 @@ public class ControlPanel extends JPanel{
 		alignmentSlider = buildSlider(initial.getAlignment(), alignmentValue, ctrl::setAlignmentWeight);
 		cohesionSlider = buildSlider(initial.getCohesion(), cohesionValue, ctrl::setCohesionWeight);
 
-		rulesPanel.add(new JLabel("Separation"));
-		rulesPanel.add(labeledSlider(separationSlider, separationValue));
-		rulesPanel.add(new JLabel("Alignment"));
-		rulesPanel.add(labeledSlider(alignmentSlider, alignmentValue));
-		rulesPanel.add(new JLabel("Cohesion"));
-		rulesPanel.add(labeledSlider(cohesionSlider, cohesionValue));
+		rulesPanel.add(labeledSlider("Separation", separationSlider, separationValue));
+		rulesPanel.add(labeledSlider("Alignment", alignmentSlider, alignmentValue));
+		rulesPanel.add(labeledSlider("Cohesion", cohesionSlider, cohesionValue));
 
 		this.add(rulesPanel, BorderLayout.CENTER);
 		
@@ -117,10 +115,20 @@ public class ControlPanel extends JPanel{
 	    return panel;
 	}
 	
-	private JPanel labeledSlider(JSlider slider, JLabel valueLabel) {
+	private JPanel labeledSlider(String name, JSlider slider, JLabel valueLabel) {
 		JPanel row = new JPanel(new BorderLayout());
 		row.setOpaque(false);
 		
+		JLabel nameLabel = new JLabel(name);
+		nameLabel.setForeground(Theme.SIDEBAR_TEXT);;
+		nameLabel.setFont(Theme.FONT_RULE_TITLE);
+		
+		slider.setBackground(Theme.SIDEBAR_BG);
+		
+		valueLabel.setFont(Theme.FONT_SIDE_LABEL);
+		valueLabel.setForeground(Theme.SIDEBAR_TEXT);
+		
+		row.add(nameLabel, BorderLayout.NORTH);
 		row.add(slider, BorderLayout.CENTER);
 		row.add(valueLabel, BorderLayout.EAST);
 		return row;
@@ -128,6 +136,9 @@ public class ControlPanel extends JPanel{
 	
 	private JCheckBox buildCheckBox(String label, boolean initial, Consumer<Boolean> onChange) {
 		JCheckBox box = new JCheckBox(label, initial);
+		box.setFont(Theme.FONT_SIDE_LABEL);
+		box.setForeground(Theme.SIDEBAR_TEXT);
+		box.setBackground(Theme.SIDEBAR_BG);
 		box.setAlignmentX(LEFT_ALIGNMENT);
 		box.addActionListener(e -> onChange.accept(box.isSelected()));
 		return box;
