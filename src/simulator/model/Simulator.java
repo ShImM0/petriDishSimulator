@@ -55,12 +55,12 @@ public class Simulator implements Observable<DishObserver> {
 		}
 
 	}
-	
+
 	public void addOrganism(Organism o) {
 		dish.registerOrganism(o);
 		notifyOrganismAdded(o);
 	}
-	
+
 	public void addOrganism() {
 		Organism o = dish.addRandomOrganism();
 		notifyOrganismAdded(o);
@@ -71,7 +71,7 @@ public class Simulator implements Observable<DishObserver> {
 			ob.onOrganismAdded(time, dish, o);
 		}
 	}
-	
+
 	public void setRuleWeights(RuleWeights weights) {
 		dish.setRuleWeights(weights);
 		for (DishObserver o : this.observers) {
@@ -82,7 +82,7 @@ public class Simulator implements Observable<DishObserver> {
 	public RuleWeights getRuleWeights() {
 		return this.dish.getRuleWeights();
 	}
-	
+
 	public void setDiscriminationEnabled(boolean enabled) {
 		dish.setDiscriminationEnabled(enabled);
 		for (DishObserver o : this.observers) {

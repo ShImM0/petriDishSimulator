@@ -13,22 +13,22 @@ public class Dish implements DishInfo {
 	public static final String INVALID_RULE_WEIGHTS = "Rule weights cannot be null";
 
 	private static final int INITIAL_ORGANISMS = 200;
-	
+
 	private static final int MIN_SIZE = 3;
 	private static final int MAX_SIZE = 20;
-	
+
 	private static final double MIN_SPEED = 25.0;
-	private  static final double MAX_SPEED = 75.0;
-	
+	private static final double MAX_SPEED = 75.0;
+
 	public static final double MIN_SIGHT = 25.0;
 	public static final double MAX_SIGHT = 125.0;
-	
+
 	// Proportional for each organism
 	private static final double MIN_FORCE_TO_SPEED_RATIO = 2.5;
 	private static final double MAX_FORCE_TO_SPEED_RATIO = 4.0;
 
-	private static final RuleWeights DEFAULT_WEIGHTS = new RuleWeights(1.5, 0.5, 0.5);	
-			
+	private static final RuleWeights DEFAULT_WEIGHTS = new RuleWeights(1.5, 0.5, 0.5);
+
 	private int width;
 	private int height;
 
@@ -37,7 +37,7 @@ public class Dish implements DishInfo {
 
 	private boolean discriminationEnabled;
 	private boolean wrapEnabled;
-	
+
 	public Dish(int width, int height) {
 		if (width <= 0)
 			throw new IllegalArgumentException(INVALID_DISH_WIDTH.formatted(width));
@@ -56,7 +56,6 @@ public class Dish implements DishInfo {
 		}
 	}
 
-	
 	public Organism addRandomOrganism() {
 		Organism o = randomOrganism();
 		organisms.add(o);
@@ -92,14 +91,13 @@ public class Dish implements DishInfo {
 		organisms.add(o);
 	}
 
-
 	public void advance(double dt) {
 		for (Organism o : organisms) {
 			List<Organism> neighbours = inRange(o);
 			// calculate movement according to situation
 			o.computeAcceleration(neighbours, weights);
 		}
-		for(Organism o: organisms) {
+		for (Organism o : organisms) {
 			o.moveWithin(dt, width, height, wrapEnabled);
 		}
 		// steer towards the average heading of the local flockmates
@@ -119,7 +117,7 @@ public class Dish implements DishInfo {
 		}
 		return neighbors;
 	}
-	
+
 	/*
 	 * DishInfo interface
 	 */
@@ -138,7 +136,7 @@ public class Dish implements DishInfo {
 	public List<OrganismInfo> getOrganisms() {
 		return Collections.unmodifiableList(new ArrayList<OrganismInfo>(organisms));
 	}
-	
+
 	@Override
 	public RuleWeights getRuleWeights() {
 		return this.weights;
@@ -150,7 +148,7 @@ public class Dish implements DishInfo {
 			throw new IllegalArgumentException(INVALID_RULE_WEIGHTS);
 		this.weights = weights;
 	}
-	
+
 	@Override
 	public boolean getDiscriminationEnabled() {
 		return this.discriminationEnabled;

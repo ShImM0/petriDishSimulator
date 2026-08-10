@@ -45,11 +45,10 @@ public class EnvironmentPanel extends JPanel implements DishObserver {
 	public void onAdvance(double time, DishInfo dish, double dt) {
 
 	}
-	
-	
+
 	@Override
 	public void onOrganismAdded(double time, DishInfo dish, OrganismInfo org) {
-		
+
 	}
 
 	@Override
@@ -59,8 +58,7 @@ public class EnvironmentPanel extends JPanel implements DishObserver {
 
 	@Override
 	public void onSettingsChanged(double time, DishInfo dish) {
-		
-		
+
 	}
 
 }

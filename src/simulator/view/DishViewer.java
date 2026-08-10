@@ -74,7 +74,7 @@ public class DishViewer extends AbstractDishViewer implements DishObserver {
 		Ellipse2D body = new Ellipse2D.Double(x - r, y - r, r * 2, r * 2);
 		g.fill(body);
 	}
-	
+
 	/*
 	 * DishObserver interface
 	 */
@@ -99,7 +99,7 @@ public class DishViewer extends AbstractDishViewer implements DishObserver {
 			this.update();
 		});
 	}
-	
+
 	@Override
 	public void onOrganismAdded(double time, DishInfo dish, OrganismInfo org) {
 		SwingUtilities.invokeLater(() -> {

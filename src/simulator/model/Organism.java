@@ -201,8 +201,7 @@ public class Organism implements OrganismInfo, Entity {
 	private static double wrapCoordinate(double value, double max) {
 		return ((value % max) + max) % max;
 	}
-	
-	
+
 	/*
 	 * OrganismInfo interface
 	 */

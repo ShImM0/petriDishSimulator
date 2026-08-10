@@ -35,7 +35,7 @@ public final class RuleWeights {
 	public double getCohesion() {
 		return cohesion;
 	}
-	
+
 	public RuleWeights withSeparation(double v) {
 		return new RuleWeights(v, alignment, cohesion);
 	}

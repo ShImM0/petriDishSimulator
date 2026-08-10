@@ -55,7 +55,7 @@ public class Controller {
 	public void advance(double dt) {
 		this.sim.advance(dt);
 	}
-	
+
 	public void addOrganism() {
 		this.sim.addOrganism();
 	}
@@ -99,10 +99,10 @@ public class Controller {
 	public void setCohesionWeight(double value) {
 		sim.setRuleWeights(sim.getRuleWeights().withCohesion(value));
 	}
-	
+
 	/*
-	 * Discrimination (flock only with matching genetic code) and Wrap
-	 * (wrap around edges vs. bounce off them) toggles.
+	 * Discrimination (flock only with matching genetic code) and Wrap (wrap around
+	 * edges vs. bounce off them) toggles.
 	 */
 
 	public boolean isDiscriminationEnabled() {

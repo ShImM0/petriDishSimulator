@@ -20,7 +20,7 @@ import simulator.control.Controller;
 import simulator.model.DishInfo;
 import simulator.model.DishObserver;
 
-public class HeaderPanel extends JPanel{
+public class HeaderPanel extends JPanel {
 
 	private Controller ctrl;
 	private JButton addButton, runStopButton, resetButton;
@@ -54,11 +54,11 @@ public class HeaderPanel extends JPanel{
 		subtitle.setFont(Theme.FONT_SUBTITLE);
 		subtitle.setForeground(Theme.HEADER_SUBTEXT);
 		subtitle.setAlignmentX(LEFT_ALIGNMENT);
-		
+
 		titlePanel.add(title);
 		titlePanel.add(subtitle);
 		left.add(titlePanel);
-		
+
 		// RIGHT
 		JPanel right = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		right.setOpaque(false);
@@ -77,13 +77,13 @@ public class HeaderPanel extends JPanel{
 
 		JPanel buttons = new JPanel(new FlowLayout());
 		buttons.setOpaque(false);
-		
+
 		// Add button
 		this.addButton = new JButton();
 		this.addButton.setToolTipText("Add an organism");
 		this.addButton.setIcon(loadIconScaledDefault("add.png"));
 		this.addButton.addActionListener((e) -> ctrl.addOrganism());
-		
+
 		// Run button
 		this.runStopButton = new JButton();
 		this.runStopButton.setToolTipText("Run simulation");
@@ -119,8 +119,7 @@ public class HeaderPanel extends JPanel{
 		}
 		return null;
 	}
-	
-	
+
 	private void runStop() {
 		stopped = !stopped;
 		if (stopped) {

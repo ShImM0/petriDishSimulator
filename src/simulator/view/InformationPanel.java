@@ -33,7 +33,7 @@ public class InformationPanel extends JPanel implements DishObserver {
 	private void initGUI() {
 		this.setLayout(new BorderLayout());
 		this.setBackground(Theme.SIDEBAR_BG);
-		
+
 		JPanel grid = new JPanel(new GridLayout(6, 2, 8, 4));
 		grid.setOpaque(false);
 
@@ -50,7 +50,7 @@ public class InformationPanel extends JPanel implements DishObserver {
 		styleValueLabel(averageSize);
 		styleValueLabel(averageSpeed);
 		styleValueLabel(averageSightRadius);
-		
+
 		grid.add(nameLabel("Time: "));
 		grid.add(this.time);
 		grid.add(nameLabel("Population size: "));
@@ -66,7 +66,7 @@ public class InformationPanel extends JPanel implements DishObserver {
 
 		this.add(grid);
 	}
-	
+
 	private JLabel nameLabel(String labelName) {
 		JLabel label = new JLabel(labelName);
 		label.setForeground(Theme.SIDEBAR_TEXT);
@@ -78,15 +78,16 @@ public class InformationPanel extends JPanel implements DishObserver {
 		label.setForeground(Theme.SIDEBAR_SUBTEXT);
 		label.setFont(Theme.FONT_SIDE_LABEL);
 	}
-	
+
 	private void update(double time, DishInfo dish) {
 		this.time.setText(format(time));
 		organismCountValue.setText(String.valueOf(dish.getOrganisms().size()));
 
-		distinctSpecies.setText(String.valueOf(dish.getOrganisms().stream().map(o -> o.getGeneticCode()).distinct().count()));
+		distinctSpecies
+				.setText(String.valueOf(dish.getOrganisms().stream().map(o -> o.getGeneticCode()).distinct().count()));
 
 		double avgSize = dish.getOrganisms().stream().mapToInt(o -> o.getSize()).average().orElse(0.0);
-		averageSize.setText(format( avgSize));
+		averageSize.setText(format(avgSize));
 
 		double avgSpeed = dish.getOrganisms().stream().mapToDouble(o -> o.getVelocity().magnitude()).average()
 				.orElse(0.0);
@@ -124,7 +125,7 @@ public class InformationPanel extends JPanel implements DishObserver {
 			this.update(time, dish); // updates even if the simulation is not running
 		});
 	}
-	
+
 	@Override
 	public void onWeightsChanged(double time, DishInfo flock) {
 
@@ -134,10 +135,9 @@ public class InformationPanel extends JPanel implements DishObserver {
 	public void onSettingsChanged(double time, DishInfo dish) {
 
 	}
-	
+
 	private String format(double num) {
 		return String.format("%.2f", num);
 	}
-
 
 }

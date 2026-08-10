@@ -13,11 +13,11 @@ public interface OrganismInfo {
 	public String getGeneticCode();
 
 	public Color getColor();
-	
+
 	public int getSize();
-	
+
 	public double getSightRadius();
-	
+
 	public double getSeparationRadius();
 
 }
