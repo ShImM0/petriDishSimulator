@@ -13,6 +13,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
 import javax.swing.JSlider;
 import javax.swing.JTextArea;
 import javax.swing.border.BevelBorder;
@@ -47,22 +48,25 @@ public class ControlPanel extends JPanel{
 	}
 
 	private void initGUI() {
-		this.setLayout(new BorderLayout());
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setBackground(Theme.SIDEBAR_BG);
 
 		RuleWeights initial = ctrl.getRuleWeights();
 		JPanel rulesDescription = new JPanel();
 		rulesDescription.setLayout(new BoxLayout(rulesDescription, BoxLayout.Y_AXIS));
 	    rulesDescription.setBackground(Theme.SIDEBAR_BG);
+	    rulesDescription.setAlignmentX(LEFT_ALIGNMENT);
 		rulesDescription.add(ruleDescription("Separation","Steering to avoid crowding neighbors"));
 		rulesDescription.add(ruleDescription("Alignment","Steering towards the average heading of neighbors"));
 		rulesDescription.add(ruleDescription("Cohesion","Steering to move toward the average position of neighbors"));
 		
-		this.add(rulesDescription, BorderLayout.NORTH);
+		this.add(rulesDescription);
+		this.add(separator(12));
+		
 		JPanel rulesPanel = new JPanel(new GridLayout(3, 1, 0, 12));
-		//rulesPanel.setBorder(BorderFactory.createTitledBorder("Rule weights"));
 		rulesPanel.setOpaque(false);
 		rulesPanel.setBackground(Theme.SIDEBAR_BG);
+		rulesPanel.setAlignmentX(LEFT_ALIGNMENT);
 
 		separationValue = new JLabel();
 		alignmentValue = new JLabel();
@@ -76,11 +80,12 @@ public class ControlPanel extends JPanel{
 		rulesPanel.add(labeledSlider("Alignment", alignmentSlider, alignmentValue));
 		rulesPanel.add(labeledSlider("Cohesion", cohesionSlider, cohesionValue));
 
-		this.add(rulesPanel, BorderLayout.CENTER);
+		this.add(rulesPanel);
+		this.add(separator(12));
 		
 		JPanel togglesPanel = new JPanel(new GridLayout(2,1,0,0));
-		//togglesPanel.setBorder(BorderFactory.createTitledBorder("Simulation options"));
-		togglesPanel.setBackground(Color.GRAY);
+		togglesPanel.setBackground(Theme.SIDEBAR_BG);
+		togglesPanel.setAlignmentX(LEFT_ALIGNMENT);
 		
 		discriminationCheck = buildCheckBox("Discrimination", ctrl.isDiscriminationEnabled(),
 				ctrl::setDiscriminationEnabled);
@@ -89,11 +94,12 @@ public class ControlPanel extends JPanel{
 		togglesPanel.add(discriminationCheck);
 		togglesPanel.add(wrapCheck);
 		
-		this.add(togglesPanel, BorderLayout.SOUTH);
+		this.add(togglesPanel);
 	}
 	private JPanel ruleDescription(String title, String body) {
 	    JPanel panel = new JPanel();
 	    panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.setBorder(BorderFactory.createEmptyBorder(4, 0, 8, 0));
 	    panel.setOpaque(false);
 	    panel.setAlignmentX(LEFT_ALIGNMENT);
 
@@ -120,7 +126,7 @@ public class ControlPanel extends JPanel{
 		row.setOpaque(false);
 		
 		JLabel nameLabel = new JLabel(name);
-		nameLabel.setForeground(Theme.SIDEBAR_TEXT);;
+		nameLabel.setForeground(Theme.SIDEBAR_TEXT);
 		nameLabel.setFont(Theme.FONT_RULE_TITLE);
 		
 		slider.setBackground(Theme.SIDEBAR_BG);
@@ -131,6 +137,7 @@ public class ControlPanel extends JPanel{
 		row.add(nameLabel, BorderLayout.NORTH);
 		row.add(slider, BorderLayout.CENTER);
 		row.add(valueLabel, BorderLayout.EAST);
+		
 		return row;
 	}
 	
@@ -142,6 +149,14 @@ public class ControlPanel extends JPanel{
 		box.setAlignmentX(LEFT_ALIGNMENT);
 		box.addActionListener(e -> onChange.accept(box.isSelected()));
 		return box;
+	}
+	
+	private JPanel separator(int height) {
+		JPanel spacer = new JPanel();
+		spacer.setOpaque(false);
+		spacer.setPreferredSize(new Dimension(1, height));
+		spacer.setMaximumSize(new Dimension(Short.MAX_VALUE, height));
+		return spacer;
 	}
 
 	// DoubleConsumer is a functional interface with the method accept
