@@ -12,7 +12,7 @@ import simulator.model.DishInfo;
 import simulator.model.DishObserver;
 import simulator.model.OrganismInfo;
 
-public class EnvironmentPanel extends JPanel implements DishObserver {
+public class EnvironmentPanel extends JPanel{
 
 	private Controller ctrl;
 	private DishViewer dishViewer;
@@ -20,7 +20,6 @@ public class EnvironmentPanel extends JPanel implements DishObserver {
 	public EnvironmentPanel(Controller ctrl) {
 		this.ctrl = ctrl;
 		initGUI();
-		ctrl.addObserver((DishObserver) this);
 	}
 
 	private void initGUI() {
@@ -29,36 +28,6 @@ public class EnvironmentPanel extends JPanel implements DishObserver {
 		dishViewer.setPreferredSize(new Dimension(500, 500));
 		this.add(dishViewer, BorderLayout.CENTER);
 		this.setBackground(Theme.CANVAS_BG);
-	}
-
-	@Override
-	public void onRegister(double time, DishInfo dish) {
-
-	}
-
-	@Override
-	public void onReset(double time, DishInfo dish) {
-
-	}
-
-	@Override
-	public void onAdvance(double time, DishInfo dish, double dt) {
-
-	}
-
-	@Override
-	public void onOrganismAdded(double time, DishInfo dish, OrganismInfo org) {
-
-	}
-
-	@Override
-	public void onWeightsChanged(double time, DishInfo flock) {
-
-	}
-
-	@Override
-	public void onSettingsChanged(double time, DishInfo dish) {
-
 	}
 
 }

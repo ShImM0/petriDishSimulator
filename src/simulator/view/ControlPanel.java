@@ -27,6 +27,8 @@ public class ControlPanel extends JPanel {
 	private static final int SLIDER_SCALE = 100;
 	private static final int SLIDER_MIN = (int) (RuleWeights.MIN_WEIGHT * SLIDER_SCALE);
 	private static final int SLIDER_MAX = (int) (RuleWeights.MAX_WEIGHT * SLIDER_SCALE);
+	
+	private static final int SECTION_SPACING = 12;
 
 	private Controller ctrl;
 
@@ -51,15 +53,32 @@ public class ControlPanel extends JPanel {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setBackground(Theme.SIDEBAR_BG);
 
-		RuleWeights initial = ctrl.getRuleWeights();
 		this.add(rulesDescriptionPanel()); // Textual description
-		this.add(separator(12));
+		this.add(separator(SECTION_SPACING));
 
-		JPanel rulesPanel = new JPanel(new GridLayout(3, 1, 0, 12));
+
+		this.add(rulesPanel()); // Visual sliders
+		this.add(separator(SECTION_SPACING));
+
+
+		this.add(togglesPanel());
+	}
+
+	private JPanel rulesDescriptionPanel() {
+		JPanel rulesDescription = createVerticalPanel();
+		rulesDescription.add(ruleDescription("Separation", "Steering to avoid crowding neighbors"));
+		rulesDescription.add(ruleDescription("Alignment", "Steering towards the average heading of neighbors"));
+		rulesDescription.add(ruleDescription("Cohesion", "Steering to move toward the average position of neighbors"));
+
+		return rulesDescription;
+	}
+	
+	private JPanel rulesPanel() {
+		JPanel rulesPanel = new JPanel(new GridLayout(3, 1, 0, SECTION_SPACING));
 		rulesPanel.setOpaque(false);
-		rulesPanel.setBackground(Theme.SIDEBAR_BG);
 		rulesPanel.setAlignmentX(LEFT_ALIGNMENT);
-
+		RuleWeights initial = ctrl.getRuleWeights();
+		
 		separationValue = new JLabel();
 		alignmentValue = new JLabel();
 		cohesionValue = new JLabel();
@@ -71,10 +90,11 @@ public class ControlPanel extends JPanel {
 		rulesPanel.add(labeledSlider("Separation", separationSlider, separationValue));
 		rulesPanel.add(labeledSlider("Alignment", alignmentSlider, alignmentValue));
 		rulesPanel.add(labeledSlider("Cohesion", cohesionSlider, cohesionValue));
-
-		this.add(rulesPanel);
-		this.add(separator(12));
-
+		
+		return rulesPanel;
+	}
+	
+	private JPanel togglesPanel() {
 		JPanel togglesPanel = new JPanel(new GridLayout(2, 1, 0, 0));
 		togglesPanel.setBackground(Theme.SIDEBAR_BG);
 		togglesPanel.setAlignmentX(LEFT_ALIGNMENT);
@@ -85,17 +105,8 @@ public class ControlPanel extends JPanel {
 
 		togglesPanel.add(discriminationCheck);
 		togglesPanel.add(wrapCheck);
-
-		this.add(togglesPanel);
-	}
-
-	private JPanel rulesDescriptionPanel() {
-		JPanel rulesDescription = createVerticalPanel();
-		rulesDescription.add(ruleDescription("Separation", "Steering to avoid crowding neighbors"));
-		rulesDescription.add(ruleDescription("Alignment", "Steering towards the average heading of neighbors"));
-		rulesDescription.add(ruleDescription("Cohesion", "Steering to move toward the average position of neighbors"));
-
-		return rulesDescription;
+		
+		return togglesPanel;
 	}
 
 	private JPanel createVerticalPanel() {
