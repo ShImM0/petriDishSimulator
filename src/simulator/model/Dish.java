@@ -67,7 +67,7 @@ public class Dish implements DishInfo {
 
 		double maxSpeed = MIN_SPEED + Utils.Rand.nextDouble() * (MAX_SPEED - MIN_SPEED);
 		double angle = Utils.Rand.nextDouble() * Math.PI * 2;
-		Vector2D velocity = Vector2D.fromAngle(angle).scale(maxSpeed * (0.4 + Utils.Rand.nextDouble() * 0.4));
+		Vector2D velocity = Vector2D.fromAngle(angle).scale(maxSpeed * (0.3 + Utils.Rand.nextDouble() * 0.4));
 
 		int size = MIN_SIZE + Utils.Rand.nextInt(MAX_SIZE - MIN_SIZE + 1);
 

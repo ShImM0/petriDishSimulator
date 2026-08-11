@@ -115,36 +115,36 @@ public class HeaderPanel extends JPanel {
 		}
 		return null;
 	}
-	
+
 	private JButton createButton(String icon, String tooltip) {
-	    JButton button = new JButton();
-	    button.setToolTipText(tooltip);
-	    button.setIcon(loadIconScaledDefault(icon));
+		JButton button = new JButton();
+		button.setToolTipText(tooltip);
+		button.setIcon(loadIconScaledDefault(icon));
 
-	    button.setPreferredSize(new Dimension(40, 40));
-	    button.setMinimumSize(new Dimension(40, 40));
-	    button.setMaximumSize(new Dimension(40, 40));
+		button.setPreferredSize(new Dimension(40, 40));
+		button.setMinimumSize(new Dimension(40, 40));
+		button.setMaximumSize(new Dimension(40, 40));
 
-	    button.setContentAreaFilled(false);
-	    button.setBorderPainted(false);
-	    button.setFocusPainted(false);
-	    button.setOpaque(false);
+		button.setContentAreaFilled(false);
+		button.setBorderPainted(false);
+		button.setFocusPainted(false);
+		button.setOpaque(false);
 
-	    // Hover effect
-	    button.addMouseListener(new MouseAdapter() {
-	        @Override
-	        public void mouseEntered(MouseEvent e) {
-	            button.setContentAreaFilled(true);
-	            button.setBackground(Theme.HEADER_BUTTON_SHADOW);
-	        }
+		// Hover effect
+		button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				button.setContentAreaFilled(true);
+				button.setBackground(Theme.HEADER_BUTTON_SHADOW);
+			}
 
-	        @Override
-	        public void mouseExited(MouseEvent e) {
-	            button.setContentAreaFilled(false);
-	        }
-	    });
+			@Override
+			public void mouseExited(MouseEvent e) {
+				button.setContentAreaFilled(false);
+			}
+		});
 
-	    return button;
+		return button;
 	}
 
 	private void runStop() {
