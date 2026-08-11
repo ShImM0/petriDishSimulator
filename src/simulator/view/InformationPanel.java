@@ -25,12 +25,12 @@ public class InformationPanel extends JPanel implements DishObserver {
 	private JLabel averageSightRadius;
 
 	public InformationPanel(Controller ctrl) {
-		this.setBorder(new RoundedBorder(Theme.RADIUS_PANEL));
 		initGUI();
 		ctrl.addObserver((DishObserver) this);
 	}
 
 	private void initGUI() {
+		this.setBorder(new RoundedBorder(Theme.RADIUS_PANEL));
 		this.setLayout(new BorderLayout());
 		this.setBackground(Theme.SIDEBAR_BG);
 

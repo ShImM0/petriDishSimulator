@@ -43,24 +43,16 @@ public class ControlPanel extends JPanel {
 
 	public ControlPanel(Controller ctrl) {
 		this.ctrl = ctrl;
-		this.setBorder(new RoundedBorder(Theme.RADIUS_PANEL));
 		initGUI();
 	}
 
 	private void initGUI() {
+		this.setBorder(new RoundedBorder(Theme.RADIUS_PANEL));
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setBackground(Theme.SIDEBAR_BG);
 
 		RuleWeights initial = ctrl.getRuleWeights();
-		JPanel rulesDescription = new JPanel();
-		rulesDescription.setLayout(new BoxLayout(rulesDescription, BoxLayout.Y_AXIS));
-		rulesDescription.setBackground(Theme.SIDEBAR_BG);
-		rulesDescription.setAlignmentX(LEFT_ALIGNMENT);
-		rulesDescription.add(ruleDescription("Separation", "Steering to avoid crowding neighbors"));
-		rulesDescription.add(ruleDescription("Alignment", "Steering towards the average heading of neighbors"));
-		rulesDescription.add(ruleDescription("Cohesion", "Steering to move toward the average position of neighbors"));
-
-		this.add(rulesDescription);
+		this.add(rulesDescriptionPanel()); // Textual description
 		this.add(separator(12));
 
 		JPanel rulesPanel = new JPanel(new GridLayout(3, 1, 0, 12));
@@ -97,6 +89,27 @@ public class ControlPanel extends JPanel {
 		this.add(togglesPanel);
 	}
 
+	private JPanel rulesDescriptionPanel() {
+		JPanel rulesDescription = createVerticalPanel();
+		rulesDescription.add(ruleDescription("Separation", "Steering to avoid crowding neighbors"));
+		rulesDescription.add(ruleDescription("Alignment", "Steering towards the average heading of neighbors"));
+		rulesDescription.add(ruleDescription("Cohesion", "Steering to move toward the average position of neighbors"));
+
+		return rulesDescription;
+	}
+
+	private JPanel createVerticalPanel() {
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		panel.setOpaque(false);
+		panel.setAlignmentX(LEFT_ALIGNMENT);
+		return panel;
+	}
+
+	/*
+	 * Build components
+	 */
+	
 	private JPanel ruleDescription(String title, String body) {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
