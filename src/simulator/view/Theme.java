@@ -10,6 +10,7 @@ public final class Theme {
 	public static final Color HEADER_BG = Color.GRAY;
 	public static final Color HEADER_TEXT = Color.BLACK;
 	public static final Color HEADER_SUBTEXT = Color.DARK_GRAY;
+	public static final Color HEADER_BUTTON_SHADOW = Color.LIGHT_GRAY;
 
 	public static final Color SIDEBAR_BG = Color.LIGHT_GRAY;
 	public static final Color SIDEBAR_TEXT = Color.DARK_GRAY;;

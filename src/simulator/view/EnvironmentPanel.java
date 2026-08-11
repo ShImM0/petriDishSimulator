@@ -28,7 +28,7 @@ public class EnvironmentPanel extends JPanel implements DishObserver {
 		dishViewer = new DishViewer(ctrl);
 		dishViewer.setPreferredSize(new Dimension(500, 500));
 		this.add(dishViewer, BorderLayout.CENTER);
-		this.setBackground(Color.WHITE);
+		this.setOpaque(true);
 	}
 
 	@Override
