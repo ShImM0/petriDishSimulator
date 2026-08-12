@@ -1,7 +1,5 @@
 package simulator.view;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -42,9 +40,9 @@ public class DishViewer extends AbstractDishViewer implements DishObserver {
 
 		int w = getWidth();
 		int h = getHeight();
-
-		gr.setBackground(Theme.CANVAS_BG);
-		gr.fillRect(0, 0, w, h); // fill vs clear
+		
+		gr.setColor(Theme.CANVAS_BG); // setBackground does not have the same effect
+		gr.fillRect(0, 0, w, h);
 
 		DishInfo dish = ctrl.getDishInfo();
 		if (w > 0 && h > 0 && dish.getWidth() > 0 && dish.getHeight() > 0) {

@@ -35,10 +35,6 @@ public class Simulator implements Observable<DishObserver> {
 		this.time = 0.0;
 	}
 
-	/*
-	 * public void addOrganism(Organism o) { dish.registerOrganism(o); }
-	 */
-
 	public void advance(double dt) {
 		this.time += dt;
 		dish.advance(dt);

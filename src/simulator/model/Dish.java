@@ -87,7 +87,7 @@ public class Dish implements DishInfo {
 		return new Vector2D(Utils.Rand.nextDouble() * width, Utils.Rand.nextDouble() * height);
 	}
 
-	public void registerOrganism(Organism o) { // TODO better for refactoring
+	public void registerOrganism(Organism o) { // better for refactoring
 		organisms.add(o);
 	}
 

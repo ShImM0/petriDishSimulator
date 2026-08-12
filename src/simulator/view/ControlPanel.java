@@ -96,7 +96,7 @@ public class ControlPanel extends JPanel {
 	
 	private JPanel togglesPanel() {
 		JPanel togglesPanel = new JPanel(new GridLayout(2, 1, 0, 0));
-		togglesPanel.setBackground(Theme.SIDEBAR_BG);
+		togglesPanel.setOpaque(false);
 		togglesPanel.setAlignmentX(LEFT_ALIGNMENT);
 
 		discriminationCheck = buildCheckBox("Discrimination", ctrl.isDiscriminationEnabled(),
