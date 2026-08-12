@@ -3,7 +3,10 @@ package simulator.view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
+import java.awt.RenderingHints;
 import java.util.function.Consumer;
 import java.util.function.DoubleConsumer;
 
@@ -22,12 +25,12 @@ import javax.swing.event.ChangeListener;
 import simulator.control.Controller;
 import simulator.model.RuleWeights;
 
-public class ControlPanel extends JPanel {
+public class ControlPanel extends RoundedPanel {
 
 	private static final int SLIDER_SCALE = 100;
 	private static final int SLIDER_MIN = (int) (RuleWeights.MIN_WEIGHT * SLIDER_SCALE);
 	private static final int SLIDER_MAX = (int) (RuleWeights.MAX_WEIGHT * SLIDER_SCALE);
-	
+
 	private static final int SECTION_SPACING = 12;
 
 	private Controller ctrl;
@@ -44,22 +47,20 @@ public class ControlPanel extends JPanel {
 	private JCheckBox wrapCheck;
 
 	public ControlPanel(Controller ctrl) {
+		super(Theme.RADIUS_PANEL, Theme.SIDEBAR_BG);
 		this.ctrl = ctrl;
 		initGUI();
 	}
 
 	private void initGUI() {
-		this.setBorder(new RoundedBorder(Theme.RADIUS_PANEL));
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setBackground(Theme.SIDEBAR_BG);
 
 		this.add(rulesDescriptionPanel()); // Textual description
 		this.add(separator(SECTION_SPACING));
 
-
 		this.add(rulesPanel()); // Visual sliders
 		this.add(separator(SECTION_SPACING));
-
 
 		this.add(togglesPanel());
 	}
@@ -72,13 +73,13 @@ public class ControlPanel extends JPanel {
 
 		return rulesDescription;
 	}
-	
+
 	private JPanel rulesPanel() {
 		JPanel rulesPanel = new JPanel(new GridLayout(3, 1, 0, SECTION_SPACING));
 		rulesPanel.setOpaque(false);
 		rulesPanel.setAlignmentX(LEFT_ALIGNMENT);
 		RuleWeights initial = ctrl.getRuleWeights();
-		
+
 		separationValue = new JLabel();
 		alignmentValue = new JLabel();
 		cohesionValue = new JLabel();
@@ -90,10 +91,10 @@ public class ControlPanel extends JPanel {
 		rulesPanel.add(labeledSlider("Separation", separationSlider, separationValue));
 		rulesPanel.add(labeledSlider("Alignment", alignmentSlider, alignmentValue));
 		rulesPanel.add(labeledSlider("Cohesion", cohesionSlider, cohesionValue));
-		
+
 		return rulesPanel;
 	}
-	
+
 	private JPanel togglesPanel() {
 		JPanel togglesPanel = new JPanel(new GridLayout(2, 1, 0, 0));
 		togglesPanel.setOpaque(false);
@@ -105,7 +106,7 @@ public class ControlPanel extends JPanel {
 
 		togglesPanel.add(discriminationCheck);
 		togglesPanel.add(wrapCheck);
-		
+
 		return togglesPanel;
 	}
 
@@ -120,7 +121,7 @@ public class ControlPanel extends JPanel {
 	/*
 	 * Build components
 	 */
-	
+
 	private JPanel ruleDescription(String title, String body) {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));

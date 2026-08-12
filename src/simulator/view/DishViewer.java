@@ -40,7 +40,7 @@ public class DishViewer extends AbstractDishViewer implements DishObserver {
 
 		int w = getWidth();
 		int h = getHeight();
-		
+
 		gr.setColor(Theme.CANVAS_BG); // setBackground does not have the same effect
 		gr.fillRect(0, 0, w, h);
 

@@ -15,7 +15,7 @@ import simulator.model.DishInfo;
 import simulator.model.DishObserver;
 import simulator.model.OrganismInfo;
 
-public class InformationPanel extends JPanel implements DishObserver {
+public class InformationPanel extends RoundedPanel implements DishObserver {
 
 	private JLabel time;
 	private JLabel organismCountValue;
@@ -25,12 +25,12 @@ public class InformationPanel extends JPanel implements DishObserver {
 	private JLabel averageSightRadius;
 
 	public InformationPanel(Controller ctrl) {
+		super(Theme.RADIUS_PANEL, Theme.SIDEBAR_BG);
 		initGUI();
 		ctrl.addObserver((DishObserver) this);
 	}
 
 	private void initGUI() {
-		this.setBorder(new RoundedBorder(Theme.RADIUS_PANEL));
 		this.setLayout(new BorderLayout());
 		this.setBackground(Theme.SIDEBAR_BG);
 
