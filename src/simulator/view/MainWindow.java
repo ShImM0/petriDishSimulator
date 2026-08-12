@@ -2,9 +2,12 @@ package simulator.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -12,6 +15,7 @@ import simulator.control.Controller;
 
 public class MainWindow extends JFrame {
 
+	private static final int SIDEBAR_WIDTH = 300;
 	private Controller ctrl;
 
 	public MainWindow(Controller ctrl) {
@@ -27,7 +31,7 @@ public class MainWindow extends JFrame {
 		mainPanel.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
 		setContentPane(mainPanel);
 
-		this.setMinimumSize(new Dimension(800, 600));
+		this.setMinimumSize(new Dimension(800, 700));
 
 		JPanel headerPanel = new HeaderPanel(ctrl);
 		mainPanel.add(headerPanel, BorderLayout.PAGE_START);
@@ -39,12 +43,18 @@ public class MainWindow extends JFrame {
 		JPanel environmentPanel = new EnvironmentPanel(ctrl);
 
 		JPanel sidePanel = new JPanel();
-		sidePanel.setPreferredSize(new Dimension(250, 500));
+		sidePanel.setLayout(new BoxLayout(sidePanel, BoxLayout.Y_AXIS));
+		sidePanel.setPreferredSize(new Dimension(SIDEBAR_WIDTH, 1));
 
 		JPanel controlPanel = new ControlPanel(ctrl);
+		controlPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+		controlPanel.setMaximumSize(new Dimension(SIDEBAR_WIDTH, Integer.MAX_VALUE)); // max space, aligned left
 		JPanel infoPanel = new InformationPanel(ctrl);
+		infoPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+		infoPanel.setMaximumSize(new Dimension(SIDEBAR_WIDTH, Integer.MAX_VALUE));
 
 		sidePanel.add(controlPanel);
+		sidePanel.add(Box.createVerticalStrut(12));
 		sidePanel.add(infoPanel);
 
 		contentPanel.add(environmentPanel, BorderLayout.CENTER);

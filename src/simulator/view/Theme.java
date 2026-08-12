@@ -15,7 +15,7 @@ public final class Theme {
 	public static final Color SIDEBAR_BG = Color.LIGHT_GRAY;
 	public static final Color SIDEBAR_TEXT = Color.DARK_GRAY;;
 	public static final Color SIDEBAR_SUBTEXT = Color.GRAY;
-	public static final Color CANVAS_BG = Color.WHITE;
+	public static final Color CANVAS_BG = new Color(242, 240, 239);
 	public static final Color CARD_BG = Color.BLACK;
 
 	public static final Font FONT_TITLE = new Font("Arial", Font.BOLD, 18);
