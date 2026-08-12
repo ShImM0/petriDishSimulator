@@ -19,13 +19,17 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JSlider;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 import javax.swing.border.BevelBorder;
 import javax.swing.event.ChangeListener;
 
 import simulator.control.Controller;
+import simulator.model.DishInfo;
+import simulator.model.DishObserver;
+import simulator.model.OrganismInfo;
 import simulator.model.RuleWeights;
 
-public class ControlPanel extends RoundedPanel {
+public class ControlPanel extends RoundedPanel implements DishObserver{
 
 	private static final int SLIDER_SCALE = 100;
 	private static final int SLIDER_MIN = (int) (RuleWeights.MIN_WEIGHT * SLIDER_SCALE);
@@ -50,6 +54,7 @@ public class ControlPanel extends RoundedPanel {
 		super(Theme.RADIUS_PANEL, Theme.SIDEBAR_BG);
 		this.ctrl = ctrl;
 		initGUI();
+		ctrl.addObserver((DishObserver) this);
 	}
 
 	private void initGUI() {
@@ -201,5 +206,68 @@ public class ControlPanel extends RoundedPanel {
 
 	private static String format(double value) {
 		return String.format("%.2f", value);
+	}
+
+	private void update(DishInfo dish) {
+	    RuleWeights weights = dish.getRuleWeights();
+	    setSliderValue(separationSlider, separationValue, weights.getSeparation());
+	    setSliderValue(alignmentSlider, alignmentValue, weights.getAlignment());
+	    setSliderValue(cohesionSlider, cohesionValue, weights.getCohesion());
+	    
+	    setCheckBoxValue(discriminationCheck, ctrl.isDiscriminationEnabled());
+	    setCheckBoxValue(wrapCheck, ctrl.isWrapEnabled());
+	}
+
+	private void setSliderValue(JSlider slider, JLabel valueLabel, double value) {
+	    int sliderValue = (int) Math.round(value * SLIDER_SCALE);
+	    if (slider.getValue() != sliderValue) {
+	        slider.setValue(sliderValue);
+	    }
+	    valueLabel.setText(format(value));
+	}
+	
+	private void setCheckBoxValue(JCheckBox checkBox, boolean value) {
+	    if (checkBox.isSelected() != value) {
+	        checkBox.setSelected(value);
+	    }
+	}
+	
+	/*
+	 * DishObserver interface
+	 */
+	
+	@Override
+	public void onRegister(double time, DishInfo dish) {
+		
+	}
+
+	@Override
+	public void onReset(double time, DishInfo dish) {
+		SwingUtilities.invokeLater(() -> {
+			this.update(dish);
+		});
+		
+	}
+
+	@Override
+	public void onAdvance(double time, DishInfo dish, double dt) {
+
+	}
+
+	@Override
+	public void onOrganismAdded(double time, DishInfo dish, OrganismInfo org) {
+		
+	}
+	
+	// Updating when weights change or toggles change is redundant
+	// Would be important if there were other components from where it's possible to update these values
+	@Override
+	public void onWeightsChanged(double time, DishInfo dish) {
+		
+	}
+
+	@Override
+	public void onSettingsChanged(double time, DishInfo dish) {
+
 	}
 }

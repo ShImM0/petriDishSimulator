@@ -23,7 +23,7 @@ public class Organism implements OrganismInfo, Entity {
 	private static final int ID_LENGTH = 6;
 
 	// Visual Representation
-	private final String id;
+	private final String id; // Possible ampliation to see a organism's properties
 	private final Species species;
 	private final Color color;
 	private int size;
