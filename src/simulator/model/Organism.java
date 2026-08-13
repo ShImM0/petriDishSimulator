@@ -248,8 +248,8 @@ public class Organism implements OrganismInfo, Entity {
 	 */
 
 	@Override
-	public void update(double dt) {
-
+	public void update(double dt) { // for future extensions
+		
 	}
 
 }
