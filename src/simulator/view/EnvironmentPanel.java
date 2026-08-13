@@ -1,17 +1,12 @@
 package simulator.view;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 
-import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import simulator.control.Controller;
-import simulator.model.DishInfo;
-import simulator.model.DishObserver;
-import simulator.model.OrganismInfo;
 
 public class EnvironmentPanel extends JPanel {
 

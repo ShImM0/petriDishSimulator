@@ -1,6 +1,5 @@
 package simulator.model;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,8 +7,8 @@ import java.util.List;
 import simulator.misc.Utils;
 
 public class Dish implements DishInfo {
-	public static final String INVALID_DISH_WIDTH = "Invalid dish width: %";
-	public static final String INVALID_DISH_HEIGHT = "Invalid dish height: %";
+	public static final String INVALID_DISH_WIDTH = "Invalid dish width: %d";
+	public static final String INVALID_DISH_HEIGHT = "Invalid dish height: %d";
 	public static final String INVALID_RULE_WEIGHTS = "Rule weights cannot be null";
 
 	private static final int INITIAL_ORGANISMS = 200;
@@ -58,7 +57,7 @@ public class Dish implements DishInfo {
 
 	public Organism addRandomOrganism() {
 		Organism o = randomOrganism();
-		organisms.add(o);
+		registerOrganism(o);
 		return o;
 	}
 

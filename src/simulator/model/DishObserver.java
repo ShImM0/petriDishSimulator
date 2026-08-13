@@ -1,7 +1,5 @@
 package simulator.model;
 
-import java.util.List;
-
 public interface DishObserver {
 	void onRegister(double time, DishInfo dish);
 

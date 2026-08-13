@@ -4,10 +4,6 @@ public class Vector2D {
 	private final double x;
 	private final double y;
 
-	public Vector2D() {
-		x = y = 0.0;
-	}
-
 	public Vector2D(Vector2D v) {
 		this.x = v.x;
 		this.y = v.y;

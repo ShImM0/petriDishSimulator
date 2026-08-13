@@ -3,9 +3,6 @@ package simulator.model;
 import java.awt.Color;
 import java.security.SecureRandom;
 import java.util.List;
-import java.util.Random;
-
-import simulator.misc.Utils;
 
 public class Organism implements OrganismInfo, Entity {
 
