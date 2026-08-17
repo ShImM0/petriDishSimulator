@@ -35,17 +35,6 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>3.4.2</version>
-        <configuration>
-          <archive>
-            <manifest>
-              <mainClass>simulator.launcher.Main</mainClass>
-            </manifest>
-          </archive>
-        </configuration>
-      </plugin>
     </plugins>
     <sourceDirectory>src</sourceDirectory>
   </build>
