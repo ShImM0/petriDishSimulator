@@ -22,4 +22,16 @@
     export DISPLAY=$(ip route | awk '/default/ {print $3}'):0.0
     echo $DISPLAY
     ```
+6. Check if the X server is working (a pop-up window should appear)
+    ```bash
+    sudo apt install x11-apps
+    xclock
+    ```
+7. Run the Docker container
+    ```bash
+    docker run -it \
+        --network=host \
+        -e DISPLAY="$DISPLAY" \
+        shimm0/petridishsimulator
+    ```
 
