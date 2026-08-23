@@ -5,7 +5,7 @@
 ## Installation
 # Windows
 
-1. Install VcXsrv from this [link](https://vcxsrv.com/) using the step-by-step installation instructions provided
+1. Install VcXsrv from this [link](https://vcxsrv.com/) using the step-by-step installation instructions provided (GitHub-> download from Releases)
 
 2. Install WSL in Powershell and check that the version is the version 2
     ```bash
