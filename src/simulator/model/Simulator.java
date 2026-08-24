@@ -57,7 +57,7 @@ public class Simulator implements Observable<DishObserver> {
 		notifyOrganismAdded(o);
 	}
 
-	public void addOrganism() {
+	public void addRandomOrganism() {
 		Organism o = dish.addRandomOrganism();
 		notifyOrganismAdded(o);
 	}
