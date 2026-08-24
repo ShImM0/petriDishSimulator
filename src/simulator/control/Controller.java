@@ -57,7 +57,7 @@ public class Controller {
 	}
 
 	public void addOrganism() {
-		this.sim.addOrganism();
+		this.sim.addRandomOrganism();
 	}
 
 	public void addObserver(DishObserver obs) {
