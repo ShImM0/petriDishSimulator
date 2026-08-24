@@ -6,6 +6,8 @@ This project is a Java application packaged and distributed as a Docker image. I
 
 **Model repository** : [petriDishSimulatorMODEL](https://github.com/ShImM0/petriDishSimulatorMODEL)
 
+![Petri Dish Simulator Demo](simulatordemo.png)
+
 ## Table of Contents
 
 - [Project Structure](#project-structure)
