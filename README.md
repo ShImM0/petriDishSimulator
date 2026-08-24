@@ -10,6 +10,7 @@ This project is a Java application packaged and distributed as a Docker image. I
 
 - [Project Structure](#project-structure)
 - [Model](#model)
+- [Extension](#extension)
 - [Installation](#installation)
     - [Windows/WSL](#windowwsl)
     - [Linux](#linux)
@@ -37,6 +38,10 @@ This project is a Java application packaged and distributed as a Docker image. I
 The simulation model is maintained in a separate repository: [petriDishSimulatorMODEL](https://github.com/ShImM0/petriDishSimulatorMODEL)
 
 This repository cointains the design model used by this project, separating model from code.
+
+## Extension
+- [ ] Add an organism selection feature, allowing the user to click on an specific organism and displaying atributes such as speed, genetic code or id.
+- [ ] Add Builder-based factories to build species, specifying certain attributes for organisms, such as halo width or speed limits
 
 ## Installation
 
@@ -148,7 +153,7 @@ This repository cointains the design model used by this project, separating mode
 
 5. Run the Docker container.
 
-    ```
+    ```bash
     docker run --rm \
         -v /tmp/.X11-unix:/tmp/.X11-unix \
         -e DISPLAY=$DISPLAY \
