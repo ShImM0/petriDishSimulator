@@ -86,7 +86,7 @@ public class Simulator implements Observable<DishObserver> {
 		}
 	}
 
-	public boolean isDiscriminationEnabled() {
+	public boolean getDiscriminationEnabled() {
 		return this.dish.getDiscriminationEnabled();
 	}
 
@@ -97,7 +97,7 @@ public class Simulator implements Observable<DishObserver> {
 		}
 	}
 
-	public boolean isWrapEnabled() {
+	public boolean getWrapEnabled() {
 		return this.dish.getWrapEnabled();
 	}
 

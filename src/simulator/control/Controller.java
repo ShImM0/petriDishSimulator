@@ -106,7 +106,7 @@ public class Controller {
 	 */
 
 	public boolean isDiscriminationEnabled() {
-		return sim.isDiscriminationEnabled();
+		return sim.getDiscriminationEnabled();
 	}
 
 	public void setDiscriminationEnabled(boolean enabled) {
@@ -114,7 +114,7 @@ public class Controller {
 	}
 
 	public boolean isWrapEnabled() {
-		return sim.isWrapEnabled();
+		return sim.getWrapEnabled();
 	}
 
 	public void setWrapEnabled(boolean enabled) {
