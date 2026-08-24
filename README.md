@@ -67,3 +67,35 @@
         shimm0/petridishsimulator
     ```
 
+# Linux
+
+1. Install docker using the according package manager or this [link](https://docs.docker.com/engine/install)
+    ```bash
+    sudo pacman -S docker
+    sudo snap install docker
+    ```
+
+2. If needed, set the default docker context
+    ```bash
+    docker context show
+    docker context use default
+    ```
+
+3. Install xhost to add host names allowed to connect to the X server (already present in WSL)
+    ```bash
+    sudo pacman -s xorg-xhost
+    sudo apt install xhost
+    ```
+
+4. Allow docker to connect to the X server 
+    ```bash
+    xhost +local:docker
+    ```
+
+5. Run the Docker container
+    ```
+    docker run --rm -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY shimm0/petridishsimulator
+    ```
+
+
+
