@@ -24,7 +24,7 @@ public class RuleWeightsTest {
 		assertEquals(RuleWeights.MAX_WEIGHT, w.getAlignment());
 		assertEquals(RuleWeights.MAX_WEIGHT, w.getCohesion());
 	}
-	
+
 	@Test
 	void storesAllThreeWeights() {
 		RuleWeights w = new RuleWeights(1.0, 2.0, 3.0);
@@ -32,7 +32,7 @@ public class RuleWeightsTest {
 		assertEquals(2.0, w.getAlignment());
 		assertEquals(3.0, w.getCohesion());
 	}
-	
+
 	@ParameterizedTest
 	@ValueSource(doubles = { -0.01, -5.0, 5.01, 100.0, Double.NaN })
 	void rejectsOutOfRangeSeparation(double bad) {
@@ -50,7 +50,7 @@ public class RuleWeightsTest {
 	void rejectsOutOfRangeCohesion(double bad) {
 		assertThrows(IllegalArgumentException.class, () -> new RuleWeights(1.0, 1.0, bad));
 	}
-	
+
 	@Test
 	void withSeparationOnlyChangesSeparation() {
 		RuleWeights original = new RuleWeights(1.0, 2.0, 3.0);
@@ -71,7 +71,7 @@ public class RuleWeightsTest {
 		assertEquals(1.0, updated.getSeparation());
 		assertEquals(4.0, updated.getAlignment());
 		assertEquals(3.0, updated.getCohesion());
-		
+
 		assertEquals(2.0, original.getAlignment());
 	}
 
@@ -83,7 +83,7 @@ public class RuleWeightsTest {
 		assertEquals(1.0, updated.getSeparation());
 		assertEquals(2.0, updated.getAlignment());
 		assertEquals(4.0, updated.getCohesion());
-		
+
 		assertEquals(3.0, original.getCohesion());
 	}
 
