@@ -1,7 +1,9 @@
 package simulator.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -71,4 +73,26 @@ class OrganismTest {
 		assertEquals(10, o.getSightRadius());
 		assertEquals(5, o.getSeparationRadius());
 	}
+	
+	@Test
+	void idIsSixAlphanumericCharacters() {
+		Organism o = defaultOrganism(Vector2D.zero(), Vector2D.zero());
+		assertTrue(o.getId().matches("[0-9A-Za-z]{6}"));
+	}
+
+	@Test
+	void distinctOrganismsGetDistinctIds() {
+		Organism a = defaultOrganism(Vector2D.zero(), Vector2D.zero());
+		Organism b = defaultOrganism(Vector2D.zero(), Vector2D.zero());
+		assertNotEquals(a.getId(),b.getId());
+	}
+
+	@Test
+	void geneticCodeAndColorComeFromSpecies() {
+		Organism o = new Organism(Species.GAMMA, Vector2D.zero(), Vector2D.zero(), 5, 10, 10, 10, 5);
+		assertEquals(Species.GAMMA.getGeneticCode(), o.getGeneticCode());
+		assertEquals(Species.GAMMA.getColor(), o.getColor());
+	}
+	
+	
 }

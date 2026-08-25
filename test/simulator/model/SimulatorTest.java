@@ -45,5 +45,11 @@ public class SimulatorTest {
 		assertEquals(0.0, simulator.getTime());
 	}
 	
+	@Test
+	void addNullObserverHasNoEffect() {
+		simulator.addObserver(null);
+		assertEquals(0, simulator.observers.size());
+	}
+
 	
 }
