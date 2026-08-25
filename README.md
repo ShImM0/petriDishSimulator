@@ -1,6 +1,6 @@
 # petriDishSimulator
 
-This project is a Java application packaged and distributed as a Docker image. It consists of a Boids-based simulator of flocking creatures, inspired by organisms found in a Petri dish.
+This project is a Java application packaged and distributed as a Docker image. It consists of a [Boids](https://www.red3d.com/cwr/boids/)-based simulator of flocking creatures, inspired by organisms found in a Petri dish.
 
 **Docker Image** : `shimm0/petridishsimulator`
 
@@ -48,7 +48,7 @@ This repository cointains the design model used by this project, separating mode
 
 ## Dockerization
 
-This is the process I used to dockerize this Java GUI application with a `pom.xml`.
+This is the process I used to dockerize this Java GUI application with a `pom.xml`, applying this [guide](https://learnwell.medium.com/how-to-dockerize-a-java-gui-application-bce560abf62a) to my project.
 
 1. Clone the project.
 
