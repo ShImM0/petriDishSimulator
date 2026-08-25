@@ -14,6 +14,9 @@ RUN microdnf install -y \
 WORKDIR /apps
 COPY . /apps
 
+# Run tests explicitly
+RUN mvn clean test
+
 # Compile each module and clear compile files
 RUN mvn clean install
 
